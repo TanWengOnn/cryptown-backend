@@ -1,5 +1,6 @@
 const { queryDb }= require("../db_config/db")
 
+// Get Crypto List
 const getCryptoList = async (req, res) => {
 
     // insert into (userid, username, email, password) values ('1', )
@@ -10,10 +11,21 @@ const getCryptoList = async (req, res) => {
     let result = await queryDb(query)
 
     // send a json response
-    res.json({mssg: "GET Cryto Lists from docker", result: result})
+    res.status(200).json({mssg: "GET Cryto Lists from docker", result: result})
+}
+
+// Get Crypto Details
+const getCryptoDetails = async (req, res) => {
+    const { cryptoId } = req.body
+    
+
+
+    // send a json response
+    res.status(200).json({mssg: "POST Cryto Detail from docker", result: cryptoId})
 }
 
 
 module.exports = {
-    getCryptoList
+    getCryptoList,
+    getCryptoDetails
 }

@@ -5,27 +5,30 @@ const express = require("express")
 const https = require("https");
 const fs = require("fs");
 
+const helmet = require("helmet")
 const cors = require("cors")
 const csrf = require("csurf")
 
 const cryptoRoutes = require("./routes/crypto")
 const exchangeRoutes = require("./routes/exchange")
 const newsRoutes = require("./routes/news")
+const userRoutes = require("./routes/user")
+
 
 
 const app = express()
 
 // Setting up https
 let server = https.createServer({
-    key: fs.readFileSync("key.pem"),
-    cert: fs.readFileSync("cert.pem"),
+    key: fs.readFileSync("./certs/key.pem"),
+    cert: fs.readFileSync("./certs/cert.pem"),
   },app)
 
 
 app.use(cors({
     origin: 'http://localhost:3000'
 }))
-
+app.use(helmet())
 app.use(express.json())
 
 // const csrfProtection = csrf({
@@ -33,7 +36,7 @@ app.use(express.json())
 // })
 // app.use(csrfProtection)
 
-// app.get('/cryptown/api/getCSRFToken', (req, res) => {
+// app.get('/api/getCSRFToken', (req, res) => {
 //     res.json({ CSRFtoken: req.CSRFToken() })
 // })
 
@@ -42,11 +45,14 @@ app.use((req, res, next) => {
     next()
 })
 
-app.use('/cryptown/api/crypto', cryptoRoutes) 
+// Default api route
+app.use('/api/user', userRoutes) 
 
-app.use('/cryptown/api/exchange', exchangeRoutes) 
+app.use('/api/crypto', cryptoRoutes) 
 
-app.use('/cryptown/api/news', newsRoutes) 
+app.use('/api/exchange', exchangeRoutes) 
+
+app.use('/api/news', newsRoutes) 
 
 
 

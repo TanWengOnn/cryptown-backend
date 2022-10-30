@@ -14,6 +14,7 @@ const exchangeRoutes = require("./routes/exchange")
 const newsRoutes = require("./routes/news")
 const userRoutes = require("./routes/user")
 const favouriteRoutes = require("./routes/favourite")
+const postRoutes = require("./routes/post")
 
 
 
@@ -57,6 +58,9 @@ app.use('/api/crypto', cryptoRoutes)
 app.use('/api/exchange', exchangeRoutes) 
 
 app.use('/api/news', newsRoutes) 
+
+app.use('/api/post', postRoutes) 
+
 
 
 

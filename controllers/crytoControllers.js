@@ -18,8 +18,6 @@ const getCryptoList = async (req, res) => {
 const getCryptoDetails = async (req, res) => {
     const { cryptoId } = req.body
     
-
-
     // send a json response
     res.status(200).json({mssg: "POST Cryto Detail from docker", result: cryptoId})
 }

@@ -13,6 +13,8 @@ const cryptoRoutes = require("./routes/crypto")
 const exchangeRoutes = require("./routes/exchange")
 const newsRoutes = require("./routes/news")
 const userRoutes = require("./routes/user")
+const favouriteRoutes = require("./routes/favourite")
+
 
 
 
@@ -47,6 +49,8 @@ app.use((req, res, next) => {
 
 // Default api route
 app.use('/api/user', userRoutes) 
+
+app.use('/api/favourite', favouriteRoutes) 
 
 app.use('/api/crypto', cryptoRoutes) 
 

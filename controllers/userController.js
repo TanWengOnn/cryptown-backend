@@ -1,6 +1,7 @@
 const { queryDb }= require("../db_config/db")
 const jwt = require("jsonwebtoken")
-const { login, signup } = require("./authentication/authentication")
+const { login, signup, profile, updateProfile } = require("./user/userFunctions")
+
 
 const createToken = (userId) => {
                 //    payload   secret              expiration time
@@ -14,7 +15,7 @@ const loginUser = async (req, res) => {
     try {
         let user = await login(email, password)
 
-        let userJwt = createToken(user[0]["userid"])
+        let userJwt = createToken(user["userid"])
 
         // send a json response
         res.status(200).json({
@@ -70,7 +71,58 @@ const signupUser = async (req, res) => {
     
 }
 
+
+const profileUser = async (req, res) => { 
+    const userId  = req.userId
+
+    try {
+        let user = await profile(userId)
+    
+        // send a json response
+        res.status(200).json({
+            mssg: "Get Profile Successful", 
+            userId,
+            email: user["email"],
+            username: user["username"]
+        })
+    } catch (error) {
+        res.status(400).json({
+            mssg: "Get Profile Failed", 
+            error: error.message
+        })
+    }
+
+}
+
+
+const updateUser = async (req, res) => { 
+    const userId = req.userId
+    const { username, password, confirm_password } = req.body
+
+    try {
+        let user = await updateProfile(userId, username, password, confirm_password)
+        // send a json response
+        res.status(200).json({
+            mssg: "Update Profile Successful", 
+            userId,
+            email: user["email"],
+            username: user["username"],
+            // remove the bottom key,it is for testing only 
+            user
+        })
+    } catch (error) {
+        res.status(400).json({
+            mssg: "Update Profile Failed", 
+            error: error.message
+        })
+    }
+}
+
+
+
 module.exports = {
     loginUser,
-    signupUser
+    signupUser,
+    profileUser,
+    updateUser
 }

@@ -1,5 +1,5 @@
 const { queryDb }= require("../../db_config/db")
-const jwt = require("jsonwebtoken")
+// const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt") 
 const validator = require("validator")
 const { v4: uuidv4 } = require('uuid');
@@ -38,7 +38,6 @@ const login = async function (email, password) {
       }
 
     let user = await queryDb(checkUser)
-    console.log(user)
 
     if (user["result"].length === 0) {
         throw Error('Incorrect Email or Password')
@@ -47,13 +46,11 @@ const login = async function (email, password) {
     const match = await bcrypt.compare(password, user["result"][0]["password"])
 
     if (!match) {
-        throw Error('Incorrect Email or password')
+        throw Error('Incorrect password')
     }
 
-    return user["result"]
+    return user["result"][0]
 }
-
-
 
 
 // Signup Function
@@ -69,7 +66,7 @@ const signup = async function (email, username, password, confirm_password) {
     }
 
     // check if password is requirement is met
-    if (validator.isStrongPassword(password, password_requirement)) {
+    if (!validator.isStrongPassword(password, password_requirement)) {
         throw Error("Password is too weak")
     }
 
@@ -114,7 +111,82 @@ const signup = async function (email, username, password, confirm_password) {
     return true
 }
 
+
+const profile = async function(userId) {
+    let query = {
+        text: "select * from cryptown.users where userid=$1",
+        values: [userId]
+    }
+
+    let user = await queryDb(query)
+
+    if (user["result"].length === 0) {
+        throw Error('User does not exist')
+    }
+
+
+
+    return user["result"][0]
+}
+
+
+const updateProfile = async function(userId, username, password, confirm_password) {
+
+    // check if new password requirement is met
+    if (!validator.isStrongPassword(password, password_requirement)) {
+        throw Error("Password is too weak")
+    }
+
+    // check if new password and confirm password is the same
+    if (password !== confirm_password) {
+        throw Error("Password not the same")
+    }
+
+    // escape username 
+    let escapedUsername = validator.escape(username)
+
+    // Hashing new password
+    const salt = await bcrypt.genSalt(10)
+    const passHash = await bcrypt.hash(password, salt)
+
+    // SQL Query for conditional update
+    // Reference: https://medium.com/developer-rants/conditional-update-in-postgresql-a27ddb5dd35 
+    let update = {
+        text: 
+        `
+            update cryptown.users set 
+                username=coalesce(nullif($1,''), username), 
+                password=coalesce(nullif($2,''), password) 
+            where userid=$3;
+        `,
+        values: [escapedUsername, passHash, userId]
+    }
+
+    let updateUser = await queryDb(update)
+
+    if (updateUser["error"] !== undefined) {
+        throw Error('Profile Update Failed')
+    }
+
+    let getUpdatedUser = {
+        text: "select * from cryptown.users where userid=$1",
+        values: [userId]
+    }
+
+    let user = await queryDb(getUpdatedUser)
+
+    if (user["result"].length === 0) {
+        throw Error('User does not exist')
+    }
+
+
+    return user["result"][0]
+}
+
+
 module.exports = {
     login,
-    signup
+    signup,
+    profile,
+    updateProfile
 }

@@ -23,7 +23,9 @@ const requireAuth = async (req, res, next)  =>  {
         }
 
         let output = await queryDb(query)
-        req.user = output["result"][0]["userid"]
+        // req.user = output["result"][0]["userid"]
+        req.userId = output["result"][0]["userid"]
+        
         next()
 
     } catch (error) {

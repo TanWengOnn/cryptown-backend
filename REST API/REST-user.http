@@ -1,0 +1,37 @@
+
+##-------------Login/Register-------------##
+POST https://localhost:5000/api/user/login
+content-type: application/json
+
+{
+    "email": "test4@gmail.com",
+    "password": "Password@12345"
+}
+
+###
+POST https://localhost:5000/api/user/signup
+content-type: application/json
+
+{
+    "email": "test4@gmail.com",
+    "username": "test4",
+    "password": "Password@12345",
+    "confirm_password": "Password@12345"
+}
+
+##-------------Profile/Update-------------##
+###
+GET https://localhost:5000/api/user/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3NjNhZGY3OC00NzY3LTQ4OTQtYTE0ZC0yNTMyYzQyYWM2ZTIiLCJpYXQiOjE2NjcxMTk5MjAsImV4cCI6MTY2NzIwNjMyMH0.9i1dDqV79R6W-TT8-meGwFtmdPnZLzUD1xbGA7WF1lc
+
+###
+
+PATCH https://localhost:5000/api/user/update
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3NjNhZGY3OC00NzY3LTQ4OTQtYTE0ZC0yNTMyYzQyYWM2ZTIiLCJpYXQiOjE2NjcxMTk5MjAsImV4cCI6MTY2NzIwNjMyMH0.9i1dDqV79R6W-TT8-meGwFtmdPnZLzUD1xbGA7WF1lc
+content-type: application/json
+
+{
+    "username": "Test3",
+    "password": "Password@12345",
+    "confirm_password": "Password@12345"
+}

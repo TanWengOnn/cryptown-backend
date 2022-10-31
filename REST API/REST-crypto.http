@@ -1,0 +1,17 @@
+// Get Crypto List
+GET https://localhost:5000/api/crypto/cryptoList
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmZjQ1NjMzOC1iOWQ2LTQ1M2UtYmI5YS1lMDIyMzdjODY2MzUiLCJpYXQiOjE2NjcwNDIyNjksImV4cCI6MTY2NzEyODY2OX0.mIhlxT3_Us6GKoCeCKKROoCMwmwXanagHZ-lkLH5-eQ
+
+###
+// Get Crypto Detail
+POST https://localhost:5000/api/crypto/cryptoDetail
+content-type: application/json
+
+{
+    "cryptoId": "test"
+}
+
+###
+
+
+

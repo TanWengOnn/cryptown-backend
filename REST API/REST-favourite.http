@@ -1,0 +1,23 @@
+##-------------Favourite-------------##
+###
+GET https://localhost:5000/api/favourite/favourite-list
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3YzljNTliNS03YjdjLTQ3YmYtYTUzYi02ZGMxNTUzYTA0MTUiLCJpYXQiOjE2NjcxMjQ1OTksImV4cCI6MTY2NzIxMDk5OX0.Rf6sHGe7HPKupBwNBny7iukNH5MsLOioXKlIItnFa1w
+
+
+###
+POST https://localhost:5000/api/favourite/favourite-add
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3YzljNTliNS03YjdjLTQ3YmYtYTUzYi02ZGMxNTUzYTA0MTUiLCJpYXQiOjE2NjcxMjQ1OTksImV4cCI6MTY2NzIxMDk5OX0.Rf6sHGe7HPKupBwNBny7iukNH5MsLOioXKlIItnFa1w
+content-type: application/json
+
+{
+    "coinName": "bitcoin"
+}
+
+###
+DELETE https://localhost:5000/api/favourite/favourite-delete
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNjEyZTE1My1hMTlkLTRjYTYtODcxOC1mY2UyMGRkYTA5MjIiLCJpYXQiOjE2NjcxMjA4MDIsImV4cCI6MTY2NzIwNzIwMn0.TfTVrxDw46W67yqv7yvhlT8W4Hz9-zzzzVrGGemHpDg
+content-type: application/json
+
+{
+    "favId": ""
+}

@@ -1,7 +1,9 @@
 const express = require("express")
 const {
     getCryptoList,
-    getCryptoDetails
+    getCryptoDetails,
+    getCryptoCharts,
+    getCryptoChartsYearly
 } = require("../controllers/crytoControllers")
 const requireAuth = require('../middleware/requireAuth')
 
@@ -14,6 +16,13 @@ router.get('/cryptoList', getCryptoList)
 
 // POST Crypto Details
 router.post('/cryptoDetail', getCryptoDetails)
+
+// POST Crypto Charts
+router.post('/cryptoChart', getCryptoCharts)
+
+// POST Crypto Charts Yearly
+router.post('/cryptoChartYearly', getCryptoChartsYearly)
+
 
 
 module.exports = router

@@ -1,6 +1,6 @@
 const { queryDb }= require("../db_config/db")
 const jwt = require("jsonwebtoken")
-const { login, signup, profile, updateProfile } = require("./user/userFunctions")
+const { login, signup, profile, updateProfile } = require("./functions/userFunctions")
 
 
 const createToken = (userId) => {

@@ -112,8 +112,8 @@ const Addfavourite = async function(userId, coinName) {
     }
 
     let checkCoinName = {
-        text: "select * from cryptown.favourite where coinname=$1;",
-        values: [coinName]
+        text: "select * from cryptown.favourite where coinname=$1 and userid=$2;",
+        values: [coinName, userId]
       }
 
     let checkCoinNameOuput = await queryDb(checkCoinName)

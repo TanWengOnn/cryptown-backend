@@ -1,16 +1,16 @@
 ##-------------Favourite-------------##
 ###
 GET https://localhost:5000/api/favourite/favourite-list
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3YzljNTliNS03YjdjLTQ3YmYtYTUzYi02ZGMxNTUzYTA0MTUiLCJpYXQiOjE2NjcxMjQ1OTksImV4cCI6MTY2NzIxMDk5OX0.Rf6sHGe7HPKupBwNBny7iukNH5MsLOioXKlIItnFa1w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5OTM5MDc2NC0wMzM2LTQ4ZDEtYjk0MC01MTQ1MDU5MmI1ZTciLCJpYXQiOjE2NjcyMTA4MDUsImV4cCI6MTY2NzI5NzIwNX0.S-CA8VpJ-3-vL5BMAeSFukPHm31XOx1jXWOFsm68jOM
 
 
 ###
 POST https://localhost:5000/api/favourite/favourite-add
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI3YzljNTliNS03YjdjLTQ3YmYtYTUzYi02ZGMxNTUzYTA0MTUiLCJpYXQiOjE2NjcxMjQ1OTksImV4cCI6MTY2NzIxMDk5OX0.Rf6sHGe7HPKupBwNBny7iukNH5MsLOioXKlIItnFa1w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5OTM5MDc2NC0wMzM2LTQ4ZDEtYjk0MC01MTQ1MDU5MmI1ZTciLCJpYXQiOjE2NjcyMTA4MDUsImV4cCI6MTY2NzI5NzIwNX0.S-CA8VpJ-3-vL5BMAeSFukPHm31XOx1jXWOFsm68jOM
 content-type: application/json
 
 {
-    "coinName": "bitcoin"
+    "coinName": "ETH"
 }
 
 ###

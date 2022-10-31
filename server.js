@@ -17,8 +17,6 @@ const favouriteRoutes = require("./routes/favourite")
 const postRoutes = require("./routes/post")
 
 
-
-
 const app = express()
 
 // Setting up https

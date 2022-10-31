@@ -1,14 +1,24 @@
 // Get Crypto List
 GET https://localhost:5000/api/crypto/cryptoList
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmZjQ1NjMzOC1iOWQ2LTQ1M2UtYmI5YS1lMDIyMzdjODY2MzUiLCJpYXQiOjE2NjcwNDIyNjksImV4cCI6MTY2NzEyODY2OX0.mIhlxT3_Us6GKoCeCKKROoCMwmwXanagHZ-lkLH5-eQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5OTM5MDc2NC0wMzM2LTQ4ZDEtYjk0MC01MTQ1MDU5MmI1ZTciLCJpYXQiOjE2NjcyMTA4MDUsImV4cCI6MTY2NzI5NzIwNX0.S-CA8VpJ-3-vL5BMAeSFukPHm31XOx1jXWOFsm68jOM
 
 ###
 // Get Crypto Detail
 POST https://localhost:5000/api/crypto/cryptoDetail
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5OTM5MDc2NC0wMzM2LTQ4ZDEtYjk0MC01MTQ1MDU5MmI1ZTciLCJpYXQiOjE2NjcyMTA4MDUsImV4cCI6MTY2NzI5NzIwNX0.S-CA8VpJ-3-vL5BMAeSFukPHm31XOx1jXWOFsm68jOM
 content-type: application/json
 
 {
-    "cryptoId": "test"
+    "cryptoId": "bitcoin"
+}
+
+###
+POST https://localhost:5000/api/crypto/cryptoChartYearly
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5OTM5MDc2NC0wMzM2LTQ4ZDEtYjk0MC01MTQ1MDU5MmI1ZTciLCJpYXQiOjE2NjcyMTA4MDUsImV4cCI6MTY2NzI5NzIwNX0.S-CA8VpJ-3-vL5BMAeSFukPHm31XOx1jXWOFsm68jOM
+content-type: application/json
+
+{
+    "cryptoId": "bitcoin"
 }
 
 ###

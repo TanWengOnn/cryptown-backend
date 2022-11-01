@@ -4,7 +4,7 @@ POST https://localhost:5000/api/user/login
 content-type: application/json
 
 {
-    "email": "test5@gmail.com",
+    "email": "test6@gmail.com",
     "password": "Password@12345"
 }
 
@@ -13,8 +13,8 @@ POST https://localhost:5000/api/user/signup
 content-type: application/json
 
 {
-    "email": "test5@gmail.com",
-    "username": "test5",
+    "email": "test7@gmail.com",
+    "username": "test7",
     "password": "Password@12345",
     "confirm_password": "Password@12345"
 }
@@ -22,16 +22,16 @@ content-type: application/json
 ##-------------Profile/Update-------------##
 ###
 GET https://localhost:5000/api/user/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5OTM5MDc2NC0wMzM2LTQ4ZDEtYjk0MC01MTQ1MDU5MmI1ZTciLCJpYXQiOjE2NjcyMTA0ODEsImV4cCI6MTY2NzI5Njg4MX0.DVNO8rn6EiDRZCEIgvbOzbhfFaGqwCGsqzXOkLvcmlo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiMDNkYzIxNS05NTBjLTQzOTYtYWM5MC1iY2IyODQ3MjFmOWMiLCJpYXQiOjE2NjcyNjk1MDMsImV4cCI6MTY2NzM1NTkwM30.RLRuM44WLfFqKGmVWZ7YMTJt8XWaS_qxo19Ipa7nO-Q
 
 ###
 
 PATCH https://localhost:5000/api/user/update
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5OTM5MDc2NC0wMzM2LTQ4ZDEtYjk0MC01MTQ1MDU5MmI1ZTciLCJpYXQiOjE2NjcyMTA0ODEsImV4cCI6MTY2NzI5Njg4MX0.DVNO8rn6EiDRZCEIgvbOzbhfFaGqwCGsqzXOkLvcmlo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiMDNkYzIxNS05NTBjLTQzOTYtYWM5MC1iY2IyODQ3MjFmOWMiLCJpYXQiOjE2NjcyNjk1MDMsImV4cCI6MTY2NzM1NTkwM30.RLRuM44WLfFqKGmVWZ7YMTJt8XWaS_qxo19Ipa7nO-Q
 content-type: application/json
 
 {
-    "username": "Test5",
+    "username": "Test6",
     "password": "Password@12345",
     "confirm_password": "Password@12345"
 }

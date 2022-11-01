@@ -8,6 +8,7 @@ const getCrypto = async () => {
 
     results["data"].forEach((data) => {
         let obj = {}
+        obj["crytoId"] = data["id"]
         obj["symbol"] = data["symbol"]
         obj["name"] = data["name"]
         obj["current_price"] = data["current_price"]

@@ -3,13 +3,13 @@ const {
     getCryptoList,
     getCryptoDetails,
     getCryptoCharts,
-    getCryptoChartsYearly
+    getCryptoChartsMax
 } = require("../controllers/crytoControllers")
 const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
 
-router.use(requireAuth)
+// router.use(requireAuth)
 
 // GET Crypto List
 router.get('/cryptoList', getCryptoList)
@@ -20,8 +20,8 @@ router.post('/cryptoDetail', getCryptoDetails)
 // POST Crypto Charts
 router.post('/cryptoChart', getCryptoCharts)
 
-// POST Crypto Charts Yearly
-router.post('/cryptoChartYearly', getCryptoChartsYearly)
+// POST Crypto Charts Max
+router.post('/cryptoChartMax', getCryptoChartsMax)
 
 
 

@@ -13,7 +13,7 @@ content-type: application/json
 }
 
 ###
-POST https://localhost:5000/api/crypto/cryptoChartYearly
+POST https://localhost:5000/api/crypto/cryptoChartMax
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5OTM5MDc2NC0wMzM2LTQ4ZDEtYjk0MC01MTQ1MDU5MmI1ZTciLCJpYXQiOjE2NjcyMTA4MDUsImV4cCI6MTY2NzI5NzIwNX0.S-CA8VpJ-3-vL5BMAeSFukPHm31XOx1jXWOFsm68jOM
 content-type: application/json
 

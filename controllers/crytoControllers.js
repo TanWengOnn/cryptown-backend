@@ -4,7 +4,7 @@
 const {
     getCrypto,
     getCryptoDetail,
-    getCryptoChartYearly,
+    getCryptoChartMax,
 } = require("./functions/cryptoFunctions")
 
 // Get Crypto List
@@ -43,11 +43,11 @@ const getCryptoCharts = async (req, res) => {
 
 }
 
-const getCryptoChartsYearly = async (req, res) => {
+const getCryptoChartsMax = async (req, res) => {
     const { cryptoId } = req.body
 
     try {
-        let cryptoChart = await getCryptoChartYearly(cryptoId)
+        let cryptoChart = await getCryptoChartMax(cryptoId)
         // send a json response
         res.status(200).json({mssg: "POST Cryto yearly chart", cryptoChart})
     } catch (error) {
@@ -170,5 +170,5 @@ module.exports = {
     getCryptoList,
     getCryptoDetails,
     getCryptoCharts,
-    getCryptoChartsYearly
+    getCryptoChartsMax
 }

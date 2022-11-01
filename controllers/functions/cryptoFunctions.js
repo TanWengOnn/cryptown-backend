@@ -79,7 +79,7 @@ const getCryptoDetail = async (cryptoId) => {
 }
 
 
-const getCryptoChartYearly = async (cryptoId) => {
+const getCryptoChartMax = async (cryptoId) => {
     try {
         let escaped_cryptoId = validator.escape(cryptoId)
         let get_usd_chart = await axios.get(`https://api.coingecko.com/api/v3/coins/${escaped_cryptoId}/market_chart?vs_currency=usd&days=max&interval=daily`)
@@ -112,5 +112,5 @@ const skipInterval = (arr, interval) => {
 module.exports = {
     getCrypto,
     getCryptoDetail,
-    getCryptoChartYearly,
+    getCryptoChartMax,
 }

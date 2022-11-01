@@ -9,7 +9,7 @@ const requireAuth = require('../middleware/requireAuth')
 const router = express.Router()
 
 // Require authentication 
-router.use(requireAuth)
+// router.use(requireAuth)
 
 // Get user favourite list
 router.get('/favourite-list', favouriteList)

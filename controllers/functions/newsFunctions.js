@@ -6,7 +6,7 @@ const getBingNews = async () => {
         params: {q: 'cryptocurrency', count: '16', freshness: 'Day', textFormat: 'Raw', safeSearch: 'Off'},
         headers: {
             'X-BingApis-SDK': 'true',
-            'X-RapidAPI-Key': 'dc2e7b7a61mshc0cca24ec5733ffp1f5bc6jsn4348c7cec194',
+            'X-RapidAPI-Key': process.env.BING_NEWS_TOKEN,
             'X-RapidAPI-Host': 'bing-news-search1.p.rapidapi.com'
         }
         })

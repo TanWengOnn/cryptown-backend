@@ -1,3 +1,11 @@
-GET https://localhost:5000/api/post
+GET https://localhost:5000/api/post/getPosts
 
 ###
+
+POST https://localhost:5000/api/post/addPost
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiMDNkYzIxNS05NTBjLTQzOTYtYWM5MC1iY2IyODQ3MjFmOWMiLCJpYXQiOjE2NjczNTQxMjEsImV4cCI6MTY2NzQ0MDUyMX0.gnctDvRWZPkDbkOnGkBA6pxVHXsixIRppq-qbYu463s
+content-type: application/json
+
+{
+    "post": "This is a API test post 4 with special characters <>'!!!"
+}   

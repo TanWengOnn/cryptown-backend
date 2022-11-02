@@ -11,7 +11,7 @@ const requireAuth = require('../middleware/requireAuth')
 
 const router = express.Router()
 
-router.use(requireAuth)
+// router.use(requireAuth)
 
 // GET Crypto List
 router.get('/cryptoList', getCryptoList)

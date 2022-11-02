@@ -37,10 +37,10 @@ const favouriteList = async (req, res) => {
 
 const favouriteAdd = async (req, res) => {
     const userId = req.userId
-    const { coinName } = req.body
+    const { cryptoId } = req.body
 
     try {
-        await Addfavourite(userId, coinName)
+        await Addfavourite(userId, cryptoId)
         res.status(200).json({
             mssg: "Add to favourite successful", 
         })

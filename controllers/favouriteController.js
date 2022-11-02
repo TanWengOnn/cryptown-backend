@@ -37,10 +37,11 @@ const favouriteList = async (req, res) => {
 
 const favouriteAdd = async (req, res) => {
     const userId = req.userId
-    const { coinName } = req.body
+    const { cryptoId } = req.body
+    console.log(req.body)
 
     try {
-        await Addfavourite(userId, coinName)
+        await Addfavourite(userId, cryptoId)
         res.status(200).json({
             mssg: "Add to favourite successful", 
         })
@@ -105,7 +106,7 @@ const Addfavourite = async function(userId, coinName) {
     }
 
     let user = await queryDb(checkUser)
-    console.log(userId)
+    // console.log(coinName)
 
     if (user["result"].length === 0) {
         throw Error('User does not exist')

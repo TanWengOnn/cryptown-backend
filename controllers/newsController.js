@@ -1,13 +1,18 @@
-const { queryDb }= require("../db_config/db")
+const { getBingNews } = require("./functions/newsFunctions")
 
 const getNewsList = async (req, res) => {
-    let query = {
-        text: 'select * from cryptown.users',
-      }
-    let result = await queryDb(query)
-
-    // send a json response
-    res.json({mssg: "GET News Lists from docker", result: result})
+    
+    try {
+        let news = await getBingNews()
+        // send a json response
+        res.status(400).json({mssg: "GET News Lists successful", news})
+    } catch (error) {
+        res.status(400).json({
+            mssg: "Failed to get news list", 
+            error: error.message
+        })
+    } 
+    
 }
 
 

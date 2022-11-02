@@ -14,6 +14,8 @@ const getCrypto = async () => {
         obj["current_price"] = data["current_price"]
         obj["market_cap"] = data["market_cap"]
         obj["market_cap_rank"] = data["market_cap_rank"]
+        obj["image"] = data["image"]
+
 
         arr.push(obj)
     })
@@ -88,14 +90,11 @@ const getCryptoChartMax = async (cryptoId) => {
         let usd_chart_arr = get_usd_chart["data"]["prices"]
 
         let filtered_usd_chart_arr = skipInterval(usd_chart_arr, 183)
-        console.log("USD:", filtered_usd_chart_arr)
         return filtered_usd_chart_arr
     } catch (error) {
         // console.log(error.message)
         throw Error(error.message)
     }
-    
-
 }
 
 const skipInterval = (arr, interval) => {
@@ -109,9 +108,67 @@ const skipInterval = (arr, interval) => {
     return newArr
 }
 
+const getCryptoChartDaily = async (cryptoId) => {
+    try {
+        let escaped_cryptoId = validator.escape(cryptoId)
+        let get_usd_chart = await axios.get(`https://api.coingecko.com/api/v3/coins/${escaped_cryptoId}/market_chart?vs_currency=usd&days=1&interval=hourly`)
+    
+        let usd_chart_arr = get_usd_chart["data"]["prices"]
+
+        let objChart = {}
+        objChart["get_usd_chart_daily"] = usd_chart_arr
+        console.log(objChart)
+
+        return objChart
+    } catch (error) {
+        throw Error(error.message)
+    }
+
+}
+
+const getCryptoChartWeekly = async (cryptoId) => {
+    try {
+        // let escaped_cryptoId = validator.escape(cryptoId)
+        let get_usd_chart = await axios.get(`https://api.coingecko.com/api/v3/coins/${cryptoId}/market_chart?vs_currency=myr&days=14&interval=daily`)
+    
+        let usd_chart_arr = get_usd_chart["data"]["prices"]
+
+        let objChart = {}
+        objChart["get_usd_chart_weekly"] = usd_chart_arr
+        console.log(objChart)
+
+        return objChart
+    } catch (error) {
+        throw Error(error.message)
+    }
+
+}
+
+const getTrendingCrypto = async () => {
+    let results = await axios.get("https://api.coingecko.com/api/v3/search/trending")
+
+    let arr = []
+
+    results["data"]["coins"].forEach((data) => {
+        let obj = {}
+        obj["cryptoId"] = data["item"]["id"]
+        obj["name"] = data["item"]["name"]
+        obj["symbol"] = data["item"]["symbol"]
+        obj["image"] = data["item"]["large"]
+        arr.push(obj)
+    })
+
+    
+    console.log(arr)
+    return arr
+}
+
 
 module.exports = {
     getCrypto,
     getCryptoDetail,
     getCryptoChartMax,
+    getCryptoChartDaily,
+    getCryptoChartWeekly,
+    getTrendingCrypto
 }

@@ -1,3 +1,5 @@
 GET https://localhost:5000/api/exchange
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNjEyZTE1My1hMTlkLTRjYTYtODcxOC1mY2UyMGRkYTA5MjIiLCJpYXQiOjE2NjczNTc2MTksImV4cCI6MTY2NzQ0NDAxOX0.Fb7Q71PkHayIQZl9zmIWMuXSK404oo-q22rkV8ZZEVw
+
 
 ###

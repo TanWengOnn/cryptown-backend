@@ -1,7 +1,8 @@
 const express = require("express")
 const {
     getPost,
-    addPosts
+    addPosts,
+    addSubPosts
 } = require("../controllers/postController")
 const requireAuth = require('../middleware/requireAuth')
 
@@ -14,6 +15,10 @@ router.get('/getPosts', getPost)
 
 // POST new posts
 router.post('/addPost', addPosts)
+
+// POST new sub posts 
+router.post('/addSubPost', addSubPosts)
+
 
 
 

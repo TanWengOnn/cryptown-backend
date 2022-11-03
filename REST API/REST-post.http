@@ -1,11 +1,26 @@
 GET https://localhost:5000/api/post/getPosts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MTY4NjA5Ny0yODhiLTRkMjEtODBlYi04ZWEzNDY1M2ZhNDciLCJpYXQiOjE2Njc0NTM5MzMsImV4cCI6MTY2NzU0MDMzM30.N8YyWW_euXsRplxwjJIbDrYJHnr_787mviKN484snio
 
 ###
 
 POST https://localhost:5000/api/post/addPost
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiMDNkYzIxNS05NTBjLTQzOTYtYWM5MC1iY2IyODQ3MjFmOWMiLCJpYXQiOjE2NjczNTQxMjEsImV4cCI6MTY2NzQ0MDUyMX0.gnctDvRWZPkDbkOnGkBA6pxVHXsixIRppq-qbYu463s
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MTY4NjA5Ny0yODhiLTRkMjEtODBlYi04ZWEzNDY1M2ZhNDciLCJpYXQiOjE2Njc0NTM5MzMsImV4cCI6MTY2NzU0MDMzM30.N8YyWW_euXsRplxwjJIbDrYJHnr_787mviKN484snio
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkMzlmNWZmYS1iMzkzLTQ2MzItYWZhNy0wMTdjZjBkYTZjNjgiLCJpYXQiOjE2Njc0NTQ5NzksImV4cCI6MTY2NzU0MTM3OX0.Id2dQQEW3DRQa6H60Nx3pGDZjMeYHEc5zJ3SFAyBIYk 
 content-type: application/json
 
 {
-    "post": "This is a API test post 4 with special characters <>'!!!"
+    "post": "This is a post is from test1 !!!",
+    "dateTime": "2022-11-03T05:38:12.168Z"
 }   
+
+###
+POST https://localhost:5000/api/post/addSubPost
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MTY4NjA5Ny0yODhiLTRkMjEtODBlYi04ZWEzNDY1M2ZhNDciLCJpYXQiOjE2Njc0NTM5MzMsImV4cCI6MTY2NzU0MDMzM30.N8YyWW_euXsRplxwjJIbDrYJHnr_787mviKN484snio
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkMzlmNWZmYS1iMzkzLTQ2MzItYWZhNy0wMTdjZjBkYTZjNjgiLCJpYXQiOjE2Njc0NTQ5NzksImV4cCI6MTY2NzU0MTM3OX0.Id2dQQEW3DRQa6H60Nx3pGDZjMeYHEc5zJ3SFAyBIYk 
+content-type: application/json
+
+{
+    "postId": "c8b8508c-ee8c-4353-9830-0e3f1d3d38a0", 
+    "post": "Test 2 sub post!!!",
+    "dateTime": "2022-11-03T05:38:12.168Z"
+}  

@@ -20,5 +20,17 @@ CREATE TABLE IF NOT EXISTS cryptown.posts (
     userId varchar(255) NOT NULL,
     post text NOT NULL,
     postDateTime timestamp NOT NULL,
+    serverDateTime timestamp NOT NULL,
     PRIMARY KEY (postId)
+);
+
+
+CREATE TABLE IF NOT EXISTS cryptown.subposts (
+    subpostId varchar(255),
+    postId varchar(255),
+    userId varchar(255) NOT NULL,
+    subpost text NOT NULL,
+    subpostDateTime timestamp NOT NULL,
+    serverDateTime timestamp NOT NULL,
+    PRIMARY KEY (subpostId)
 );

@@ -115,11 +115,12 @@ const getCryptoChartDaily = async (cryptoId) => {
     
         let usd_chart_arr = get_usd_chart["data"]["prices"]
 
-        let objChart = {}
-        objChart["get_usd_chart_daily"] = usd_chart_arr
-        console.log(objChart)
+        // let objChart = {}
+        // objChart["get_usd_chart_daily"] = usd_chart_arr
+        // console.log(objChart)
 
-        return objChart
+        // return objChart
+        return usd_chart_arr
     } catch (error) {
         throw Error(error.message)
     }
@@ -129,15 +130,15 @@ const getCryptoChartDaily = async (cryptoId) => {
 const getCryptoChartWeekly = async (cryptoId) => {
     try {
         // let escaped_cryptoId = validator.escape(cryptoId)
-        let get_usd_chart = await axios.get(`https://api.coingecko.com/api/v3/coins/${cryptoId}/market_chart?vs_currency=myr&days=14&interval=daily`)
+        let get_usd_chart = await axios.get(`https://api.coingecko.com/api/v3/coins/${cryptoId}/market_chart?vs_currency=usd&days=14&interval=daily`)
     
         let usd_chart_arr = get_usd_chart["data"]["prices"]
 
-        let objChart = {}
-        objChart["get_usd_chart_weekly"] = usd_chart_arr
-        console.log(objChart)
+        // let objChart = {}
+        // objChart["get_usd_chart_weekly"] = usd_chart_arr
+        // console.log(objChart)
 
-        return objChart
+        return usd_chart_arr
     } catch (error) {
         throw Error(error.message)
     }

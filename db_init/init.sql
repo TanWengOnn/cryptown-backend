@@ -5,6 +5,8 @@ CREATE TABLE IF NOT EXISTS cryptown.users (
     username varchar(255) NOT NULL,
     email varchar(255) NOT NULL,
     password varchar(255) NOT NULL,
+    attempts integer NOT NULL, 
+    banDateTime timestamp,
     PRIMARY KEY (userId)
 );
 

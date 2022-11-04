@@ -43,10 +43,73 @@ const login = async function (email, password) {
         throw Error('Incorrect Email or Password')
     }
 
+    let currentDateTime = new Date()
+    let attempts = user["result"][0]["attempts"]
+    let banDateTime = user["result"][0]["bandatetime"]
+    let banDuration = currentDateTime - banDateTime
+
+    if (banDuration > 10000) {
+        let update = {
+            text: 
+            `
+                update cryptown.users set 
+                    attempts=$1,
+                    bandatetime=$2
+                where email=$3;
+            `,
+            values: [0, null, email]
+        }
+    
+        let updateDateTime = await queryDb(update)
+    
+        if (updateDateTime["error"] !== undefined) {
+            throw Error('Profile update ban datetime failed')
+        }
+    }
+
+    if (attempts >= 3) {
+        if (banDateTime === null) {
+            let update = {
+                text: 
+                `
+                    update cryptown.users set 
+                        bandatetime=$1
+                    where email=$2;
+                `,
+                values: [currentDateTime, email]
+            }
+        
+            let updateDateTime = await queryDb(update)
+        
+            if (updateDateTime["error"] !== undefined) {
+                throw Error('Profile update ban datetime failed')
+            }
+        }
+        throw Error("maximum attempts reach please try again in 5min")
+    }
+
     const match = await bcrypt.compare(password, user["result"][0]["password"])
 
+    
     if (!match) {
+        let update = {
+            text: 
+            `
+                update cryptown.users set 
+                    attempts=$1
+                where email=$2;
+            `,
+            values: [attempts+1, email]
+        }
+    
+        let updateAttempts = await queryDb(update)
+    
+        if (updateAttempts["error"] !== undefined) {
+            throw Error('Profile update attempts failed')
+        }
+
         throw Error('Incorrect Email or password')
+
     }
 
     return user["result"][0]
@@ -96,8 +159,8 @@ const signup = async function (email, username, password, confirm_password) {
 
     // Add user to database
     let addUser = {
-        text: "insert into cryptown.users (userid, email, username, password) values ($1, $2, $3, $4)",
-        values: [userId, email, validator.escape(username), passHash]
+        text: "insert into cryptown.users (userid, email, username, password, attempts) values ($1, $2, $3, $4, $5)",
+        values: [userId, email, validator.escape(username), passHash, 0]
       }
 
     let user = await queryDb(addUser)

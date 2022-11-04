@@ -48,7 +48,7 @@ const login = async function (email, password) {
     let banDateTime = user["result"][0]["bandatetime"]
     let banDuration = currentDateTime - banDateTime
 
-    if (banDuration > 10000) {
+    if (banDuration > 30000 && banDateTime !== null) {
         let update = {
             text: 
             `
@@ -61,37 +61,20 @@ const login = async function (email, password) {
         }
     
         let updateDateTime = await queryDb(update)
-    
+        attempts = 0;
         if (updateDateTime["error"] !== undefined) {
             throw Error('Profile update ban datetime failed')
         }
     }
 
     if (attempts >= 3) {
-        if (banDateTime === null) {
-            let update = {
-                text: 
-                `
-                    update cryptown.users set 
-                        bandatetime=$1
-                    where email=$2;
-                `,
-                values: [currentDateTime, email]
-            }
-        
-            let updateDateTime = await queryDb(update)
-        
-            if (updateDateTime["error"] !== undefined) {
-                throw Error('Profile update ban datetime failed')
-            }
-        }
-        throw Error("maximum attempts reach please try again in 5min")
+        throw Error("maximum attempts reach please try again in 30 seconds")
     }
-
+   
     const match = await bcrypt.compare(password, user["result"][0]["password"])
 
-    
     if (!match) {
+        let incrementAttempts = attempts + 1
         let update = {
             text: 
             `
@@ -99,7 +82,7 @@ const login = async function (email, password) {
                     attempts=$1
                 where email=$2;
             `,
-            values: [attempts+1, email]
+            values: [incrementAttempts, email]
         }
     
         let updateAttempts = await queryDb(update)
@@ -108,8 +91,45 @@ const login = async function (email, password) {
             throw Error('Profile update attempts failed')
         }
 
-        throw Error('Incorrect Email or password')
+        // console.log(incrementAttempts)
 
+        if (incrementAttempts >= 3) {
+            if (banDateTime === null) {
+                let update = {
+                    text: 
+                    `
+                        update cryptown.users set 
+                            bandatetime=$1
+                        where email=$2;
+                    `,
+                    values: [currentDateTime, email]
+                }
+            
+                let updateDateTime = await queryDb(update)
+            
+                if (updateDateTime["error"] !== undefined) {
+                    throw Error('Profile update ban datetime failed')
+                }
+                throw Error("maximum attempts reach please try again in 30 seconds")
+            }
+        }
+        throw Error('Incorrect Email or Password')
+    }
+
+    let update = {
+        text: 
+        `
+            update cryptown.users set 
+                attempts=$1
+            where email=$2;
+        `,
+        values: [0, email]
+    }
+
+    let updateAttempts = await queryDb(update)
+
+    if (updateAttempts["error"] !== undefined) {
+        throw Error('Profile update attempts failed')
     }
 
     return user["result"][0]

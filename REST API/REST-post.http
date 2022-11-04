@@ -1,26 +1,26 @@
 GET https://localhost:5000/api/post/getPosts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MTY4NjA5Ny0yODhiLTRkMjEtODBlYi04ZWEzNDY1M2ZhNDciLCJpYXQiOjE2Njc0NTM5MzMsImV4cCI6MTY2NzU0MDMzM30.N8YyWW_euXsRplxwjJIbDrYJHnr_787mviKN484snio
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkMzlmNWZmYS1iMzkzLTQ2MzItYWZhNy0wMTdjZjBkYTZjNjgiLCJpYXQiOjE2Njc1NDUwOTIsImV4cCI6MTY2NzYzMTQ5Mn0.f-bYJFw-yv6QE9ll-KGFAWojdPMvoaNWd3kdrQv4w24
 
 ###
 
 POST https://localhost:5000/api/post/addPost
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MTY4NjA5Ny0yODhiLTRkMjEtODBlYi04ZWEzNDY1M2ZhNDciLCJpYXQiOjE2Njc0NTM5MzMsImV4cCI6MTY2NzU0MDMzM30.N8YyWW_euXsRplxwjJIbDrYJHnr_787mviKN484snio
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkMzlmNWZmYS1iMzkzLTQ2MzItYWZhNy0wMTdjZjBkYTZjNjgiLCJpYXQiOjE2Njc1NDUwOTIsImV4cCI6MTY2NzYzMTQ5Mn0.f-bYJFw-yv6QE9ll-KGFAWojdPMvoaNWd3kdrQv4w24
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkMzlmNWZmYS1iMzkzLTQ2MzItYWZhNy0wMTdjZjBkYTZjNjgiLCJpYXQiOjE2Njc0NTQ5NzksImV4cCI6MTY2NzU0MTM3OX0.Id2dQQEW3DRQa6H60Nx3pGDZjMeYHEc5zJ3SFAyBIYk 
 content-type: application/json
 
 {
-    "post": "This is a post is from test1 !!!",
+    "post": "THIS IS A TEST MAIN POST 44444444!!!",
     "dateTime": "2022-11-03T05:38:12.168Z"
 }   
 
 ###
 POST https://localhost:5000/api/post/addSubPost
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MTY4NjA5Ny0yODhiLTRkMjEtODBlYi04ZWEzNDY1M2ZhNDciLCJpYXQiOjE2Njc0NTM5MzMsImV4cCI6MTY2NzU0MDMzM30.N8YyWW_euXsRplxwjJIbDrYJHnr_787mviKN484snio
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkMzlmNWZmYS1iMzkzLTQ2MzItYWZhNy0wMTdjZjBkYTZjNjgiLCJpYXQiOjE2Njc0NTQ5NzksImV4cCI6MTY2NzU0MTM3OX0.Id2dQQEW3DRQa6H60Nx3pGDZjMeYHEc5zJ3SFAyBIYk 
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkMzlmNWZmYS1iMzkzLTQ2MzItYWZhNy0wMTdjZjBkYTZjNjgiLCJpYXQiOjE2Njc1NDUwOTIsImV4cCI6MTY2NzYzMTQ5Mn0.f-bYJFw-yv6QE9ll-KGFAWojdPMvoaNWd3kdrQv4w24
 content-type: application/json
 
 {
-    "postId": "c8b8508c-ee8c-4353-9830-0e3f1d3d38a0", 
-    "post": "Test 2 sub post!!!",
+    "postId": "870b79fd-30ec-4b0c-a432-8cfe27cd056", 
+    "post": "THIS IS A TEST SUB POST 32q32421432!!!",
     "dateTime": "2022-11-03T05:38:12.168Z"
 }  

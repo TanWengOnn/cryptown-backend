@@ -2,8 +2,8 @@ require("dotenv").config()
 const express = require("express")
 
 // Https packages
-const https = require("https");
-const fs = require("fs");
+// const https = require("https");
+// const fs = require("fs");
 
 const helmet = require("helmet")
 const cors = require("cors")
@@ -20,10 +20,10 @@ const postRoutes = require("./routes/post")
 const app = express()
 
 // Setting up https
-let server = https.createServer({
-    key: fs.readFileSync("./certs/key.pem"),
-    cert: fs.readFileSync("./certs/cert.pem"),
-  },app)
+// let server = https.createServer({
+//     key: fs.readFileSync("./certs/key.pem"),
+//     cert: fs.readFileSync("./certs/cert.pem"),
+//   },app)
 
 
 app.use(cors({
@@ -62,13 +62,13 @@ app.use('/api/post', postRoutes)
 
 
 
-server.listen(process.env.PORT, ()=>{
-    console.log('server is runing at port', process.env.PORT)
-});
+// server.listen(process.env.PORT, ()=>{
+//     console.log('server is runing at port', process.env.PORT)
+// });
 
-// app.listen(process.env.PORT, () => {
-//     console.log("listening on port", process.env.PORT)
-// })
+app.listen(process.env.PORT, () => {
+    console.log("listening on port", process.env.PORT)
+})
 
 
 

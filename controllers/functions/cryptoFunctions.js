@@ -90,7 +90,7 @@ const getCryptoChartMax = async (cryptoId) => {
         let usd_chart_arr = get_usd_chart["data"]["prices"]
 
         let filtered_usd_chart_arr = skipInterval(usd_chart_arr, 183)
-        return filtered_usd_chart_arr
+        return filtered_usd_chart_arr.reverse()
     } catch (error) {
         // console.log(error.message)
         throw Error(error.message)

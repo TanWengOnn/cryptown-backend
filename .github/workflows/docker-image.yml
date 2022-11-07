@@ -17,9 +17,9 @@ jobs:
     - name: create .env file
       run: |
         touch .env
-        echo 'PORT=${{ PORT }}' >> .env
-        echo 'POSTGRES_PASS=${{ POSTGRES_PASS }}' >> .env
-        echo 'JWT_SECRET=${{ JWT_SECRET }}' >> .env
-        echo 'BING_NEWS_TOKEN=${{ BING_NEWS_TOKEN }}' >> .env
+        echo 'PORT=${{ secrets.PORT }}' >> .env
+        echo 'POSTGRES_PASS=${{ secrets.POSTGRES_PASS }}' >> .env
+        echo 'JWT_SECRET=${{ secrets.JWT_SECRET }}' >> .env
+        echo 'BING_NEWS_TOKEN=${{ secrets.BING_NEWS_TOKEN }}' >> .env
     - name: Build the Docker image
       run: docker compose --env-file .env up --build -d

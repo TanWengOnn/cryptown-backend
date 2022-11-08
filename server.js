@@ -27,7 +27,7 @@ const app = express()
 
 
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin: 'https://cryptown-besquare.one'
 }))
 app.use(helmet())
 app.use(express.json())

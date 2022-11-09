@@ -1,11 +1,9 @@
 // Get Crypto List
 GET http://localhost:5000/api/crypto/cryptoList 
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNjEyZTE1My1hMTlkLTRjYTYtODcxOC1mY2UyMGRkYTA5MjIiLCJpYXQiOjE2NjczNTc2MTksImV4cCI6MTY2NzQ0NDAxOX0.Fb7Q71PkHayIQZl9zmIWMuXSK404oo-q22rkV8ZZEVw
 
 ###
 // Get Crypto Detail
 POST http://localhost:5000/api/crypto/cryptoDetail
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNjEyZTE1My1hMTlkLTRjYTYtODcxOC1mY2UyMGRkYTA5MjIiLCJpYXQiOjE2NjczNTc2MTksImV4cCI6MTY2NzQ0NDAxOX0.Fb7Q71PkHayIQZl9zmIWMuXSK404oo-q22rkV8ZZEVw
 content-type: application/json
 
 {
@@ -14,7 +12,6 @@ content-type: application/json
 
 ###
 POST https://localhost:5000/api/crypto/cryptoChartDaily
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNjEyZTE1My1hMTlkLTRjYTYtODcxOC1mY2UyMGRkYTA5MjIiLCJpYXQiOjE2NjczNTc2MTksImV4cCI6MTY2NzQ0NDAxOX0.Fb7Q71PkHayIQZl9zmIWMuXSK404oo-q22rkV8ZZEVw
 content-type: application/json
 
 {
@@ -23,7 +20,6 @@ content-type: application/json
 
 ###
 POST https://localhost:5000/api/crypto/cryptoChartWeekly
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNjEyZTE1My1hMTlkLTRjYTYtODcxOC1mY2UyMGRkYTA5MjIiLCJpYXQiOjE2NjczNTc2MTksImV4cCI6MTY2NzQ0NDAxOX0.Fb7Q71PkHayIQZl9zmIWMuXSK404oo-q22rkV8ZZEVw
 content-type: application/json
 
 {
@@ -32,7 +28,6 @@ content-type: application/json
 
 ###
 POST https://localhost:5000/api/crypto/cryptoChartMax
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNjEyZTE1My1hMTlkLTRjYTYtODcxOC1mY2UyMGRkYTA5MjIiLCJpYXQiOjE2NjczNTc2MTksImV4cCI6MTY2NzQ0NDAxOX0.Fb7Q71PkHayIQZl9zmIWMuXSK404oo-q22rkV8ZZEVw
 content-type: application/json
 
 {
@@ -42,7 +37,6 @@ content-type: application/json
 ###
 
 GET https://localhost:5000/api/crypto/cryptoTrending
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNjEyZTE1My1hMTlkLTRjYTYtODcxOC1mY2UyMGRkYTA5MjIiLCJpYXQiOjE2NjczNTc2MTksImV4cCI6MTY2NzQ0NDAxOX0.Fb7Q71PkHayIQZl9zmIWMuXSK404oo-q22rkV8ZZEVw
 
 ###
 

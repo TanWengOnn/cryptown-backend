@@ -25,3 +25,5 @@ jobs:
       run: docker compose --env-file .env up --build -d
     - name: get runner groups
       run: id
+    - name: check file owner
+      run: ls -la

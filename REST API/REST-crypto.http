@@ -1,5 +1,5 @@
 // Get Crypto List
-GET http://localhost:5000/api/crypto/cryptoList 
+GET http://api.cryptown-besquare.one/api/crypto/cryptoList 
 
 ###
 // Get Crypto Detail

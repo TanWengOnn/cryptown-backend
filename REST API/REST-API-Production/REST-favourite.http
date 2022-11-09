@@ -1,0 +1,26 @@
+##-------------Favourite-------------##
+###
+GET https://api.cryptown-besquare.one/api/favourite/favourite-list
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNjEyZTE1My1hMTlkLTRjYTYtODcxOC1mY2UyMGRkYTA5MjIiLCJpYXQiOjE2NjczNTc2MTksImV4cCI6MTY2NzQ0NDAxOX0.Fb7Q71PkHayIQZl9zmIWMuXSK404oo-q22rkV8ZZEVw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZjIwMWRiNy00NWE1LTQyNzAtOTJjYS0yNzFmOTk3ODM3M2IiLCJpYXQiOjE2Njc5NjY4NTUsImV4cCI6MTY2ODA1MzI1NX0.8RZuHxdlpKsdta8Nw39awsdaQaRnIcZfcJIagrk9lK4
+
+
+###
+POST https://api.cryptown-besquare.one/api/favourite/favourite-add
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNjEyZTE1My1hMTlkLTRjYTYtODcxOC1mY2UyMGRkYTA5MjIiLCJpYXQiOjE2NjczNTc2MTksImV4cCI6MTY2NzQ0NDAxOX0.Fb7Q71PkHayIQZl9zmIWMuXSK404oo-q22rkV8ZZEVw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhZjIwMWRiNy00NWE1LTQyNzAtOTJjYS0yNzFmOTk3ODM3M2IiLCJpYXQiOjE2Njc5NjY4NTUsImV4cCI6MTY2ODA1MzI1NX0.8RZuHxdlpKsdta8Nw39awsdaQaRnIcZfcJIagrk9lK4
+content-type: application/json
+
+{
+    "cryptoId": "bitcoin"
+}
+
+###
+DELETE https://api.cryptown-besquare.one/api/favourite/favourite-delete
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNjEyZTE1My1hMTlkLTRjYTYtODcxOC1mY2UyMGRkYTA5MjIiLCJpYXQiOjE2NjczNTc2MTksImV4cCI6MTY2NzQ0NDAxOX0.Fb7Q71PkHayIQZl9zmIWMuXSK404oo-q22rkV8ZZEVw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MTY4NjA5Ny0yODhiLTRkMjEtODBlYi04ZWEzNDY1M2ZhNDciLCJpYXQiOjE2Njc0NTMzNjAsImV4cCI6MTY2NzUzOTc2MH0.InKm9MH0KMBOsL5NjxsGZ27URUn9Z6z6BWDn-BvUV5w
+content-type: application/json
+
+{
+    "favId": "1065f052-b071-4c1d-9bd3-e2f246d93ecb"
+}

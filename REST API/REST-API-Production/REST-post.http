@@ -1,5 +1,5 @@
-GET http://localhost:5000/api/post/getPosts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNzgzOWI2Yi1jNzFjLTQzYmEtYjg4NC0yZmIxZDBjZDk3YjgiLCJpYXQiOjE2Njc5NjY3NzgsImV4cCI6MTY2ODA1MzE3OH0.5VyV2tJM6FmknXN72zIxbPksXE9rzSXkrMZ2yiuNnQs
+GET https://localhost:5000/api/post/getPosts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkMzlmNWZmYS1iMzkzLTQ2MzItYWZhNy0wMTdjZjBkYTZjNjgiLCJpYXQiOjE2Njc1NDUwOTIsImV4cCI6MTY2NzYzMTQ5Mn0.f-bYJFw-yv6QE9ll-KGFAWojdPMvoaNWd3kdrQv4w24
 
 ###
 

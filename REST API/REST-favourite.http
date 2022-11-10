@@ -1,14 +1,14 @@
 ##-------------Favourite-------------##
 ###
-GET https://localhost:5000/api/favourite/favourite-list
+GET http://localhost:5000/api/favourite/favourite-list
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNjEyZTE1My1hMTlkLTRjYTYtODcxOC1mY2UyMGRkYTA5MjIiLCJpYXQiOjE2NjczNTc2MTksImV4cCI6MTY2NzQ0NDAxOX0.Fb7Q71PkHayIQZl9zmIWMuXSK404oo-q22rkV8ZZEVw
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MTY4NjA5Ny0yODhiLTRkMjEtODBlYi04ZWEzNDY1M2ZhNDciLCJpYXQiOjE2Njc0NTMzNjAsImV4cCI6MTY2NzUzOTc2MH0.InKm9MH0KMBOsL5NjxsGZ27URUn9Z6z6BWDn-BvUV5w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNzgzOWI2Yi1jNzFjLTQzYmEtYjg4NC0yZmIxZDBjZDk3YjgiLCJpYXQiOjE2Njc4Nzk2NDcsImV4cCI6MTY2Nzk2NjA0N30.1O19GC0zIDQ1G8PCTPvJgchdsWXreTLMfJT-PRzV1f8
 
 
 ###
-POST https://localhost:5000/api/favourite/favourite-add
+POST http://localhost:5000/api/favourite/favourite-add
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNjEyZTE1My1hMTlkLTRjYTYtODcxOC1mY2UyMGRkYTA5MjIiLCJpYXQiOjE2NjczNTc2MTksImV4cCI6MTY2NzQ0NDAxOX0.Fb7Q71PkHayIQZl9zmIWMuXSK404oo-q22rkV8ZZEVw
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MTY4NjA5Ny0yODhiLTRkMjEtODBlYi04ZWEzNDY1M2ZhNDciLCJpYXQiOjE2Njc0NTMzNjAsImV4cCI6MTY2NzUzOTc2MH0.InKm9MH0KMBOsL5NjxsGZ27URUn9Z6z6BWDn-BvUV5w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNzgzOWI2Yi1jNzFjLTQzYmEtYjg4NC0yZmIxZDBjZDk3YjgiLCJpYXQiOjE2Njc4Nzk2NDcsImV4cCI6MTY2Nzk2NjA0N30.1O19GC0zIDQ1G8PCTPvJgchdsWXreTLMfJT-PRzV1f8
 content-type: application/json
 
 {
@@ -16,11 +16,11 @@ content-type: application/json
 }
 
 ###
-DELETE https://localhost:5000/api/favourite/favourite-delete
+DELETE http://localhost:5000/api/favourite/favourite-delete
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIyNjEyZTE1My1hMTlkLTRjYTYtODcxOC1mY2UyMGRkYTA5MjIiLCJpYXQiOjE2NjczNTc2MTksImV4cCI6MTY2NzQ0NDAxOX0.Fb7Q71PkHayIQZl9zmIWMuXSK404oo-q22rkV8ZZEVw
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5MTY4NjA5Ny0yODhiLTRkMjEtODBlYi04ZWEzNDY1M2ZhNDciLCJpYXQiOjE2Njc0NTMzNjAsImV4cCI6MTY2NzUzOTc2MH0.InKm9MH0KMBOsL5NjxsGZ27URUn9Z6z6BWDn-BvUV5w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNzgzOWI2Yi1jNzFjLTQzYmEtYjg4NC0yZmIxZDBjZDk3YjgiLCJpYXQiOjE2Njc4Nzk2NDcsImV4cCI6MTY2Nzk2NjA0N30.1O19GC0zIDQ1G8PCTPvJgchdsWXreTLMfJT-PRzV1f8
 content-type: application/json
 
 {
-    "favId": "1065f052-b071-4c1d-9bd3-e2f246d93ecb"
+    "favId": "d6ae6997-bbba-45a5-ba83-d9bd11b930eb"
 }

@@ -4,8 +4,8 @@ POST https://api.cryptown-besquare.one/api/user/login
 content-type: application/json
 
 {
-    "email": "test2@gmail.com",
-    "password": "Test@12345"
+    "email": "test1@gmail.com",
+    "password": "Password@12345"
 }
 
 ###

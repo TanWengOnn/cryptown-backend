@@ -1,5 +1,9 @@
 const jwt = require('jsonwebtoken')
 const { queryDb }= require("../db_config/db")
+const fs   = require('fs');
+const path = require("path");
+
+const publicKEY  = fs.readFileSync(path.resolve(__dirname, "../jwt-self-sign-certs/cert.pem"), 'utf8');
 
 const requireAuth = async (req, res, next)  =>  {
 
@@ -15,7 +19,7 @@ const requireAuth = async (req, res, next)  =>  {
     const jwtToken = authorization.split(' ')[1]  // getting the token 
 
     try{
-        const { userId } = jwt.verify(jwtToken, process.env.JWT_SECRET)
+        const { userId } = jwt.verify(jwtToken, publicKEY, { algorithm: "RS256" })
 
         let query = {
             text: "select * from cryptown.users where userid=$1;",

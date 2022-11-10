@@ -1,28 +1,28 @@
 
 ##-------------Login/Register-------------##
-POST https://localhost:5000/api/user/login
+POST http://localhost:5000/api/user/login
 content-type: application/json
 
 {
-    "email": "test1@gmail.com",
+    "email": "test5@gmail.com",
     "password": "Password@12345"
 }
 
 ###
-POST https://localhost:5000/api/user/signup
+POST http://localhost:5000/api/user/signup
 content-type: application/json
 
 {
-    "email": "test1@gmail.com",
-    "username": "test1",
+    "email": "test5@gmail.com",
+    "username": "test5",
     "password": "Password@12345",
     "confirm_password": "Password@12345"
 }
 
 ##-------------Profile/Update-------------##
 ###
-GET https://localhost:5000/api/user/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNzgzOWI2Yi1jNzFjLTQzYmEtYjg4NC0yZmIxZDBjZDk3YjgiLCJpYXQiOjE2Njc1NDY2MDgsImV4cCI6MTY2NzYzMzAwOH0.BpeSaOYLhl8fKVBnbdyKBcfHoPIdjHUyBq0_Xl-YgGQ
+GET http://localhost:5000/api/user/profile
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5YTQ0NmU4Ny1iNjgwLTQ2ZDMtYTQ2ZS1hOGE1OWM0ODc2OWIiLCJpYXQiOjE2Njc5ODcwMjMsImV4cCI6MTY2ODA3MzQyM30.QZ8_BK4p3Dhih6ELL89ygaCW8ufZGIsBjndpN0W4KF2v8UkZDa9PwO9pgU38EVTNrJTxh5Crjps6QvYQbSfzxe0_gZwOJbFzwa-BQqcEgQcCc9uACAHiZ_RbG4PtwzWhcPlp1oJhPHKIp9NnoXVFaDlTEefj9ZR8UY20XS9mIPdofqPH1BkIx9XweFWiBGUfpBWwqNU70nGwbk0UGZmlQI1-JglWBDP-3c_mG1STNa1-R2KlN75WKrk4A742cInKDBfEREnxmy_dat7rxyQ1ANtNBCxgu4yDWCMj4PHSW8ImIzR5AvtD-cfBnz5vMeLbPrB1rb2pkQNsKlv0LdswkQ
 
 
 ###

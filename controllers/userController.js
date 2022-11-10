@@ -1,11 +1,14 @@
 const { queryDb }= require("../db_config/db")
 const jwt = require("jsonwebtoken")
 const { login, signup, profile, updateProfile } = require("./functions/userFunctions")
+const fs   = require('fs');
+const path = require("path");
 
+const privateKEY  = fs.readFileSync(path.resolve(__dirname, "../jwt-self-sign-certs/key.pem"), 'utf8');
 
 const createToken = (userId) => {
                 //    payload   secret              expiration time
-    return jwt.sign({userId}, process.env.JWT_SECRET, { expiresIn: '1d' })
+    return jwt.sign({userId}, privateKEY, { expiresIn: '1d', algorithm:  "RS256" })
 }
 
 // Get Crypto List

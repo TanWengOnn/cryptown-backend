@@ -1,2 +1,10 @@
 {"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto lists","outcome":"success","timestamp":"2022-11-10T09:00:29.634Z"}
 {"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto lists","outcome":"success","timestamp":"2022-11-10T09:13:42.090Z"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto lists","outcome":"success","timestamp":"2022-11-10T09:25:05.677Z"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto lists","outcome":"success","timestamp":"2022-11-10T09:25:30.319Z"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto details","outcome":"success","timestamp":"2022-11-10T09:25:31.804Z"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto daily chart","outcome":"success","timestamp":"2022-11-10T09:25:43.115Z"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto weekly chart","outcome":"success","timestamp":"2022-11-10T09:25:49.183Z"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto max chart","outcome":"success","timestamp":"2022-11-10T09:25:52.606Z"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto trending","outcome":"success","timestamp":"2022-11-10T09:25:56.320Z"}
+{"error":"Request failed with status code 404","ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"error","message":"Get crypto details","outcome":"failed","timestamp":"2022-11-10T09:26:16.175Z"}

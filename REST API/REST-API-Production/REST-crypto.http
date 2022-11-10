@@ -3,7 +3,7 @@ GET https://api.cryptown-besquare.one/api/crypto/cryptoList
 
 ###
 // Get Crypto Detail
-POST http://api.cryptown-besquare.one/api/crypto/cryptoDetail
+POST https://api.cryptown-besquare.one/api/crypto/cryptoDetail
 content-type: application/json
 
 {

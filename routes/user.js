@@ -6,8 +6,11 @@ const {
     updateUser,
 } = require("../controllers/userController")
 const requireAuth = require('../middleware/requireAuth')
+const { privateCache, noStoreCache } = require('../middleware/responseHeader')
 
 const router = express.Router()
+
+router.use(noStoreCache)
 
 // login route
 router.post('/login', loginUser)
@@ -17,6 +20,8 @@ router.post('/signup', signupUser)
 
 // Require authentication 
 router.use(requireAuth)
+
+router.use(privateCache)
 
 // View profile info 
 router.get('/profile', profileUser)

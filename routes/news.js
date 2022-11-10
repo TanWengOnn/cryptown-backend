@@ -3,10 +3,12 @@ const {
     getNewsList
 } = require("../controllers/newsController")
 const requireAuth = require('../middleware/requireAuth')
+const { publicCache } = require('../middleware/responseHeader')
+
 
 const router = express.Router()
 
-// router.use(requireAuth)
+router.use(publicCache)
 
 // GET Exchange List
 router.get('/', getNewsList)

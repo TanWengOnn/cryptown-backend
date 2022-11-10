@@ -5,10 +5,13 @@ const {
     addSubPosts
 } = require("../controllers/postController")
 const requireAuth = require('../middleware/requireAuth')
+const { privateCache } = require('../middleware/responseHeader')
 
 const router = express.Router()
 
 router.use(requireAuth)
+
+router.use(privateCache)
 
 // GET posts
 router.get('/getPosts', getPost)

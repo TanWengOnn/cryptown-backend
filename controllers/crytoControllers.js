@@ -1,3 +1,4 @@
+const logger = require("../logger/loggerConfig")
 const {
     getCrypto,
     getCryptoDetail,
@@ -14,6 +15,8 @@ const getCryptoList = async (req, res) => {
         let cryptoList = await getCrypto()
         // send a json response
         res.status(200).json({mssg: "GET Cryto Lists", cryptoList})
+
+        logger.info({ label:'Crypto API', message: 'Get crypto lists', outcome:'success', ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
             mssg: "Failed to fetch crypto list",

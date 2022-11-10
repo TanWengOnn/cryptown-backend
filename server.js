@@ -18,6 +18,7 @@ const postRoutes = require("./routes/post")
 
 
 const app = express()
+app.set('trust proxy', true)
 
 // Setting up https
 // let server = https.createServer({

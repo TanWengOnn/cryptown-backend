@@ -2,7 +2,7 @@ const axios = require("axios")
 const validator = require("validator")
 const logger = require("../../logger/loggerConfig")
 
-const getCrypto = async () => {
+const getCrypto = async (req) => {
     try {
         let results = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false")
 
@@ -32,7 +32,7 @@ const getCrypto = async () => {
 }
 
 
-const getCryptoDetail = async (cryptoId) => {
+const getCryptoDetail = async (cryptoId, req) => {
     try {
         let escaped_cryptoId = validator.escape(cryptoId)
         let result = await axios.get(`https://api.coingecko.com/api/v3/coins/${escaped_cryptoId}`)
@@ -43,6 +43,7 @@ const getCryptoDetail = async (cryptoId) => {
         let obj = {}
         let ath = {}
         let atl = {}
+        obj["cryptoId"] = data["id"]
         obj["symbol"] = data["symbol"]
         obj["name"] = data["name"]
         obj["market_cap_rank"] = data["market_cap_rank"]
@@ -91,7 +92,7 @@ const getCryptoDetail = async (cryptoId) => {
 }
 
 
-const getCryptoChartMax = async (cryptoId) => {
+const getCryptoChartMax = async (cryptoId, req) => {
     try {
         let escaped_cryptoId = validator.escape(cryptoId)
         let get_usd_chart = await axios.get(`https://api.coingecko.com/api/v3/coins/${escaped_cryptoId}/market_chart?vs_currency=usd&days=max&interval=daily`)
@@ -118,7 +119,7 @@ const skipInterval = (arr, interval) => {
     return newArr
 }
 
-const getCryptoChartDaily = async (cryptoId) => {
+const getCryptoChartDaily = async (cryptoId, req) => {
     try {
         let escaped_cryptoId = validator.escape(cryptoId)
         let get_usd_chart = await axios.get(`https://api.coingecko.com/api/v3/coins/${escaped_cryptoId}/market_chart?vs_currency=usd&days=1&interval=hourly`)
@@ -139,7 +140,7 @@ const getCryptoChartDaily = async (cryptoId) => {
 
 }
 
-const getCryptoChartWeekly = async (cryptoId) => {
+const getCryptoChartWeekly = async (cryptoId, req) => {
     try {
         // let escaped_cryptoId = validator.escape(cryptoId)
         let get_usd_chart = await axios.get(`https://api.coingecko.com/api/v3/coins/${cryptoId}/market_chart?vs_currency=usd&days=14&interval=daily`)
@@ -158,7 +159,7 @@ const getCryptoChartWeekly = async (cryptoId) => {
 
 }
 
-const getTrendingCrypto = async () => {
+const getTrendingCrypto = async (req) => {
     try {
         let results = await axios.get("https://api.coingecko.com/api/v3/search/trending")
 

@@ -12,7 +12,7 @@ const {
 const getCryptoList = async (req, res) => {
 
     try {
-        let cryptoList = await getCrypto()
+        let cryptoList = await getCrypto(req)
         // send a json response
         res.status(200).json({mssg: "GET Cryto Lists", cryptoList})
         logger.info({ label:'Crypto API', message: 'Get crypto lists', outcome:'success', ipAddress: req.ip })
@@ -30,7 +30,7 @@ const getCryptoDetails = async (req, res) => {
     const { cryptoId } = req.body
     console.log("CRYPTO:", cryptoId)
     try {
-        let cryptoDetails = await getCryptoDetail(cryptoId)
+        let cryptoDetails = await getCryptoDetail(cryptoId, req)
         // send a json response
         res.status(200).json({mssg: "POST Cryto Detail", cryptoDetails})
         logger.info({ label:'Crypto API', message: 'Get crypto details', outcome:'success', ipAddress: req.ip })
@@ -48,7 +48,7 @@ const getCryptoChartsDaily = async (req, res) => {
     const { cryptoId } = req.body
 
     try {
-        let cryptoChart = await getCryptoChartDaily(cryptoId)
+        let cryptoChart = await getCryptoChartDaily(cryptoId, req)
         // send a json response
         res.status(200).json({mssg: "POST Cryto daily chart", cryptoChart})
         logger.info({ label:'Crypto API', message: 'Get crypto daily chart', outcome:'success', ipAddress: req.ip })
@@ -66,7 +66,7 @@ const getCryptoChartsWeekly = async (req, res) => {
     const { cryptoId } = req.body
 
     try {
-        let cryptoChart = await getCryptoChartWeekly(cryptoId)
+        let cryptoChart = await getCryptoChartWeekly(cryptoId, req)
         // send a json response
         res.status(200).json({mssg: "POST Cryto weekly chart", cryptoChart})
         logger.info({ label:'Crypto API', message: 'Get crypto weekly chart', outcome:'success', ipAddress: req.ip })
@@ -84,7 +84,7 @@ const getCryptoChartsMax = async (req, res) => {
     const { cryptoId } = req.body
 
     try {
-        let cryptoChart = await getCryptoChartMax(cryptoId)
+        let cryptoChart = await getCryptoChartMax(cryptoId, req)
         // send a json response
         res.status(200).json({mssg: "POST Cryto Max chart", cryptoChart})
         logger.info({ label:'Crypto API', message: 'Get crypto max chart', outcome:'success', ipAddress: req.ip })
@@ -102,7 +102,7 @@ const getCryptoChartsMax = async (req, res) => {
 const getCryptoTrending = async (req, res) => {
 
     try {
-        let cryptoTrending = await getTrendingCrypto()
+        let cryptoTrending = await getTrendingCrypto(req)
         // send a json response
         res.status(200).json({mssg: "GET Cryto Trending", cryptoTrending})
         logger.info({ label:'Crypto API', message: 'Get crypto trending', outcome:'success', ipAddress: req.ip })

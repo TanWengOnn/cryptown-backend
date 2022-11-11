@@ -6,7 +6,8 @@ const path = require("path");
 
 const privateKEY  = fs.readFileSync(path.resolve(__dirname, "../jwt-self-sign-certs/key.pem"), 'utf8');
 
-const createToken = (userId) => {
+const createToken = (userId, req) => {
+    logger.info({ label:'Jwt Token', message: 'Create jwt token', outcome:'success', user: userId, ipAddress: req.ip})
                 //    payload   secret              expiration time
     return jwt.sign({userId}, privateKEY, { expiresIn: '1d', algorithm:  "RS256" })
 }
@@ -16,9 +17,9 @@ const loginUser = async (req, res) => {
     const { email, password } = req.body
 
     try {
-        let user = await login(email, password)
+        let user = await login(email, password, req)
 
-        let userJwt = createToken(user["userid"])
+        let userJwt = createToken(user["userid"], req)
 
         // send a json response
         res.status(200).json({
@@ -26,12 +27,13 @@ const loginUser = async (req, res) => {
             email,
             userJwt,
         })
-
+        logger.info({ label:'User API', message: `${user["userid"]} logged in`, outcome:'success', userId: user["userid"], ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
             mssg: "Login Failed",
             error: error.message
         })  
+        logger.error({ label:'User API', message: `${user["userid"]} login failed`, outcome:'failed', userId: user["userid"], ipAddress: req.ip, error: error.message })
     }
 }
 
@@ -39,7 +41,7 @@ const signupUser = async (req, res) => {
     const { email, username, password, confirm_password } = req.body
 
     try {
-        await signup(email, username, password, confirm_password)
+        await signup(email, username, password, confirm_password, req)
 
         let query = {
             text: "select * from cryptown.users where email=$1;",
@@ -50,25 +52,22 @@ const signupUser = async (req, res) => {
 
         userId = output["result"][0]["userid"]
 
-        let userJwt = createToken(userId)
+        let userJwt = createToken(userId, req)
 
         // send a json response
         res.status(200).json({
             mssg: "Sign Up Successful", 
             email, 
-            userJwt,
-            // bottom keys are for testing purposes 
             username, 
-            password, 
-            confirm_password,
-            userId
-            
+            userJwt,
         })
+        logger.info({ label:'User API', message: 'Sign up', outcome:'success', userId: userId, ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
             mssg: "Sign Up Failed",
             error: error.message
         })   
+        logger.error({ label:'User API', message: 'Sign up failed', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
     }
 
     
@@ -79,7 +78,7 @@ const profileUser = async (req, res) => {
     const userId  = req.userId
 
     try {
-        let user = await profile(userId)
+        let user = await profile(userId, req)
     
         // send a json response
         res.status(200).json({
@@ -88,11 +87,13 @@ const profileUser = async (req, res) => {
             email: user["email"],
             username: user["username"]
         })
+        logger.info({ label:'User API', message: 'Get profile information', outcome:'success', userId: userId, ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
             mssg: "Get Profile Failed", 
             error: error.message
         })
+        logger.error({ label:'User API', message: 'Sign up failed', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
     }
 
 }
@@ -103,7 +104,7 @@ const updateUser = async (req, res) => {
     const { username, password, confirm_password } = req.body
 
     try {
-        let user = await updateProfile(userId, username, password, confirm_password)
+        let user = await updateProfile(userId, username, password, confirm_password, req)
         // send a json response
         res.status(200).json({
             mssg: "Update Profile Successful", 
@@ -113,11 +114,13 @@ const updateUser = async (req, res) => {
             // remove the bottom key,it is for testing only 
             user
         })
+        logger.info({ label:'User API', message: 'Update profile information', outcome:'success', userId: userId, ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
             mssg: "Update Profile Failed", 
             error: error.message
         })
+        logger.error({ label:'User API', message: 'Update profile information', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
     }
 }
 

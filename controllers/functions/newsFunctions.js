@@ -1,6 +1,6 @@
 const axios = require("axios")
 
-const getBingNews = async () => {
+const getBingNews = async (req) => {
     try {
         let results = await axios.get("https://bing-news-search1.p.rapidapi.com/news/search", {
         params: {q: 'cryptocurrency', count: '16', freshness: 'Day', textFormat: 'Raw', safeSearch: 'Off'},
@@ -28,9 +28,10 @@ const getBingNews = async () => {
             arr.push(obj)
         })
 
-        console.log(arr)
+        logger.http({ label:'CoinGecko News API', message: 'Get CoinGecko news lists', outcome:'success', ipAddress: req.ip })
         return arr
     } catch (error) {
+        logger.error({ label:'CoinGecko News API', message: 'Get CoinGecko news lists', outcome:'failed', ipAddress: req.ip, error: error.message })
         throw Error(error.message)
     }
 }

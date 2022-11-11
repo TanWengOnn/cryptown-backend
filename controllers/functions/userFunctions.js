@@ -20,7 +20,7 @@ let password_requirement = {
 }
 
 // Login Function
-const login = async function (email, password) {
+const login = async function (email, password, req) {
     // validation 
     if (!email || !password) {
         throw Error("All Field must be filled")
@@ -137,7 +137,7 @@ const login = async function (email, password) {
 
 
 // Signup Function
-const signup = async function (email, username, password, confirm_password) {
+const signup = async function (email, username, password, confirm_password, req) {
 
     // validation 
     if (!email || !username || !password || !confirm_password) {
@@ -195,7 +195,7 @@ const signup = async function (email, username, password, confirm_password) {
 }
 
 
-const profile = async function(userId) {
+const profile = async function(userId, req) {
     let query = {
         text: "select * from cryptown.users where userid=$1",
         values: [userId]
@@ -213,7 +213,7 @@ const profile = async function(userId) {
 }
 
 
-const updateProfile = async function(userId, username, password, confirm_password) {
+const updateProfile = async function(userId, username, password, confirm_password, req) {
 
     // check if new password requirement is met
     if (!validator.isStrongPassword(password, password_requirement)) {

@@ -8,3 +8,5 @@
 {"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto max chart","outcome":"success","timestamp":"2022-11-10T09:25:52.606Z"}
 {"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto trending","outcome":"success","timestamp":"2022-11-10T09:25:56.320Z"}
 {"error":"Request failed with status code 404","ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"error","message":"Get crypto details","outcome":"failed","timestamp":"2022-11-10T09:26:16.175Z"}
+{"ipAddress":"::ffff:172.20.0.1","label":"Crypto API","level":"info","message":"Get crypto lists","outcome":"success","timestamp":"2022-11-11T03:00:51.866Z"}
+{"ipAddress":"::ffff:172.20.0.1","label":"Crypto API","level":"info","message":"Get crypto details","outcome":"success","timestamp":"2022-11-11T03:01:13.046Z"}

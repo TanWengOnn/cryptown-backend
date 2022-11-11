@@ -11,7 +11,7 @@ content-type: application/json
 }
 
 ###
-POST http://localhost:5000/api/crypto/cryptoChartDaily
+POST https://localhost:5000/api/crypto/cryptoChartDaily
 content-type: application/json
 
 {
@@ -19,7 +19,7 @@ content-type: application/json
 }
 
 ###
-POST http://localhost:5000/api/crypto/cryptoChartWeekly
+POST https://localhost:5000/api/crypto/cryptoChartWeekly
 content-type: application/json
 
 {
@@ -27,7 +27,7 @@ content-type: application/json
 }
 
 ###
-POST http://localhost:5000/api/crypto/cryptoChartMax
+POST https://localhost:5000/api/crypto/cryptoChartMax
 content-type: application/json
 
 {
@@ -36,7 +36,7 @@ content-type: application/json
 
 ###
 
-GET http://localhost:5000/api/crypto/cryptoTrending
+GET https://localhost:5000/api/crypto/cryptoTrending
 
 ###
 

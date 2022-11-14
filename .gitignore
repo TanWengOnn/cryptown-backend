@@ -4,4 +4,4 @@ node_modules
 # csr.pem
 # key.pem
 
-/logs
+logs

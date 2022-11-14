@@ -28,10 +28,10 @@ const getBingNews = async (req) => {
             arr.push(obj)
         })
 
-        logger.http({ label:'CoinGecko News API', message: 'Get CoinGecko news lists', outcome:'success', ipAddress: req.ip })
+        // logger.http({ label:'CoinGecko News API', message: 'Get CoinGecko news lists', outcome:'success', ipAddress: req.ip })
         return arr
     } catch (error) {
-        logger.error({ label:'CoinGecko News API', message: 'Get CoinGecko news lists', outcome:'failed', ipAddress: req.ip, error: error.message })
+        // logger.error({ label:'CoinGecko News API', message: 'Get CoinGecko news lists', outcome:'failed', ipAddress: req.ip, error: error.message })
         throw Error(error.message)
     }
 }

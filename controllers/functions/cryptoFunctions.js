@@ -22,10 +22,10 @@ const getCrypto = async (req) => {
             arr.push(obj)
         })
 
-        logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto lists', outcome:'success', ipAddress: req.ip })
+        // logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto lists', outcome:'success', ipAddress: req.ip })
         return arr
     } catch (error) {
-        logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto lists', outcome:'failed', ipAddress: req.ip, error: error.message })
+        // logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto lists', outcome:'failed', ipAddress: req.ip, error: error.message })
         throw Error(error.message)
     }
     
@@ -83,7 +83,7 @@ const getCryptoDetail = async (cryptoId, req) => {
 
         obj["description"] = data["description"]["en"]
 
-        logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto details', outcome:'success', ipAddress: req.ip })
+        // logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto details', outcome:'success', ipAddress: req.ip })
         return obj
     } catch (error) {
         logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto details', outcome:'failed', ipAddress: req.ip, error: error.message })
@@ -100,10 +100,10 @@ const getCryptoChartMax = async (cryptoId, req) => {
         let usd_chart_arr = get_usd_chart["data"]["prices"]
 
         let filtered_usd_chart_arr = skipInterval(usd_chart_arr, 183)
-        logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto max chart', outcome:'success', ipAddress: req.ip })
+        // logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto max chart', outcome:'success', ipAddress: req.ip })
         return filtered_usd_chart_arr.reverse()
     } catch (error) {
-        logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto max chart', outcome:'failed', ipAddress: req.ip, error: error.message })
+        // logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto max chart', outcome:'failed', ipAddress: req.ip, error: error.message })
         throw Error(error.message)
     }
 }
@@ -131,10 +131,10 @@ const getCryptoChartDaily = async (cryptoId, req) => {
         // console.log(objChart)
 
         // return objChart
-        logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto daily chart', outcome:'success', ipAddress: req.ip })
+        // logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto daily chart', outcome:'success', ipAddress: req.ip })
         return usd_chart_arr
     } catch (error) {
-        logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto daily chart', outcome:'failed', ipAddress: req.ip, error: error.message })
+        // logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto daily chart', outcome:'failed', ipAddress: req.ip, error: error.message })
         throw Error(error.message)
     }
 
@@ -150,10 +150,10 @@ const getCryptoChartWeekly = async (cryptoId, req) => {
         // let objChart = {}
         // objChart["get_usd_chart_weekly"] = usd_chart_arr
         // console.log(objChart)
-        logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto weekly chart', outcome:'success', ipAddress: req.ip })
+        // logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto weekly chart', outcome:'success', ipAddress: req.ip })
         return usd_chart_arr
     } catch (error) {
-        logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto weekly chart', outcome:'failed', ipAddress: req.ip, error: error.message })
+        // logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto weekly chart', outcome:'failed', ipAddress: req.ip, error: error.message })
         throw Error(error.message)
     }
 
@@ -174,10 +174,10 @@ const getTrendingCrypto = async (req) => {
             arr.push(obj)
         })
     
-        logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto trending', outcome:'success', ipAddress: req.ip })
+        // logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto trending', outcome:'success', ipAddress: req.ip })
         return arr
     } catch (error) {
-        logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto trending', outcome:'failed', ipAddress: req.ip, error: error.message })
+        // logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto trending', outcome:'failed', ipAddress: req.ip, error: error.message })
         throw Error(error.message)
     }
 }

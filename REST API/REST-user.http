@@ -5,34 +5,33 @@ content-type: application/json
 
 {
     "email": "test1@gmail.com",
-    "password": "Password@12345"
+    "password": "Test@1234"
 }
 
 ###
-POST https://localhost:5000/api/user/signup
+POST http://localhost:5000/api/user/signup
 content-type: application/json
 
 {
-    "email": "test1@gmail.com",
-    "username": "test1",
+    "email": "test6@gmail.com",
+    "username": "test6",
     "password": "Password@12345",
     "confirm_password": "Password@12345"
 }
 
 ##-------------Profile/Update-------------##
 ###
-GET https://localhost:5000/api/user/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNzgzOWI2Yi1jNzFjLTQzYmEtYjg4NC0yZmIxZDBjZDk3YjgiLCJpYXQiOjE2Njc1NDY2MDgsImV4cCI6MTY2NzYzMzAwOH0.BpeSaOYLhl8fKVBnbdyKBcfHoPIdjHUyBq0_Xl-YgGQ
-
+GET http://localhost:5000/api/user/profile
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNzgzOWI2Yi1jNzFjLTQzYmEtYjg4NC0yZmIxZDBjZDk3YjgiLCJpYXQiOjE2Njg0MTYyMTEsImV4cCI6MTY2ODUwMjYxMX0.WBPxdEh0AgvizAE4jhiHZdiHjGhaVLfhtqhaoOBhQy-IqSiWmWGXH6T0P_fyGtq40jfH5U4tsTBfkQUf_0h8Wvj3NjnaN_JrEgILqJQ5YTILeDU9UiDO5EUq0ZM0s-iuQzQXbF6pXVD9OXw8-rs8jDa3F9NgZIVwDvnysg_ehCDeR34GoDK75KWSPAXkpqq0a-3-UW9m-O_kd-Foo0SCalk2vI0LoyXkq3Jq5rNs8hfV5OsUKnoaoLEW-f0-piwCZ6NTOY7ncnJtVghWuRpEj59K81ys7iE9uQmdkfxVUEM0qu2TShc_XXPcD6Cz1OSgOsgy9_ZZK1Y6-MdxldZVhQ
 
 ###
 
-PATCH https://localhost:5000/api/user/update
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNzgzOWI2Yi1jNzFjLTQzYmEtYjg4NC0yZmIxZDBjZDk3YjgiLCJpYXQiOjE2Njc1NDY2MDgsImV4cCI6MTY2NzYzMzAwOH0.BpeSaOYLhl8fKVBnbdyKBcfHoPIdjHUyBq0_Xl-YgGQ
+PATCH http://localhost:5000/api/user/update
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNzgzOWI2Yi1jNzFjLTQzYmEtYjg4NC0yZmIxZDBjZDk3YjgiLCJpYXQiOjE2Njg0MTYyMTEsImV4cCI6MTY2ODUwMjYxMX0.WBPxdEh0AgvizAE4jhiHZdiHjGhaVLfhtqhaoOBhQy-IqSiWmWGXH6T0P_fyGtq40jfH5U4tsTBfkQUf_0h8Wvj3NjnaN_JrEgILqJQ5YTILeDU9UiDO5EUq0ZM0s-iuQzQXbF6pXVD9OXw8-rs8jDa3F9NgZIVwDvnysg_ehCDeR34GoDK75KWSPAXkpqq0a-3-UW9m-O_kd-Foo0SCalk2vI0LoyXkq3Jq5rNs8hfV5OsUKnoaoLEW-f0-piwCZ6NTOY7ncnJtVghWuRpEj59K81ys7iE9uQmdkfxVUEM0qu2TShc_XXPcD6Cz1OSgOsgy9_ZZK1Y6-MdxldZVhQ
 content-type: application/json
 
 {
     "username": "Test1",
-    "password": "Password@12345",
-    "confirm_password": "Password@12345"
+    "password": "Test@12345",
+    "confirm_password": "Test@12345"
 }

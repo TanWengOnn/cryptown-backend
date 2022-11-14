@@ -3,6 +3,8 @@ const { queryDb }= require("../../db_config/db")
 const bcrypt = require("bcrypt") 
 const validator = require("validator")
 const { v4: uuidv4 } = require('uuid');
+const logger = require("../../logger/loggerConfig")
+
 
 let password_requirement = { 
     minLength: 8, 
@@ -216,7 +218,7 @@ const profile = async function(userId, req) {
 const updateProfile = async function(userId, username, password, confirm_password, req) {
 
     // check if new password requirement is met
-    if (!validator.isStrongPassword(password, password_requirement)) {
+    if (!validator.isStrongPassword(password, password_requirement) && password !== "") {
         throw Error("Password is too weak")
     }
 
@@ -228,10 +230,13 @@ const updateProfile = async function(userId, username, password, confirm_passwor
     // escape username 
     let escapedUsername = validator.escape(username)
 
-    // Hashing new password
-    const salt = await bcrypt.genSalt(10)
-    const passHash = await bcrypt.hash(password, salt)
-
+    let passHash = ''
+    if (password !== '') {
+        // Hashing new password
+        const salt = await bcrypt.genSalt(10)
+        passHash = await bcrypt.hash(password, salt)
+    }
+    
     // SQL Query for conditional update
     // Reference: https://medium.com/developer-rants/conditional-update-in-postgresql-a27ddb5dd35 
     let update = {

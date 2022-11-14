@@ -19,7 +19,7 @@ services:
     command: [sh, -c, "npm install && npm install nodemon && npm run dev"]
     environment:
       - POSTGRES_PORT=5432
-      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=${POSTGRES_PASS}
       - POSTGRES_DB=cryptown_db
     container_name: cryptown_nodejs

@@ -1,0 +1,2 @@
+{"error":"Request failed with status code 404","ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"error","message":"Get crypto details","outcome":"failed","timestamp":"2022-11-10T09:26:16.175Z"}
+{"error":"Password is too weak","ipAddress":"::ffff:172.21.0.1","label":"User API","level":"error","message":"Update profile information","outcome":"failed","timestamp":"2022-11-14T08:57:31.175Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}

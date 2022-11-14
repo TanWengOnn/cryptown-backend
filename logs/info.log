@@ -1,2 +1,39 @@
 {"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto lists","outcome":"success","timestamp":"2022-11-10T09:00:29.634Z"}
 {"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto lists","outcome":"success","timestamp":"2022-11-10T09:13:42.090Z"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto lists","outcome":"success","timestamp":"2022-11-10T09:25:05.677Z"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto lists","outcome":"success","timestamp":"2022-11-10T09:25:30.319Z"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto details","outcome":"success","timestamp":"2022-11-10T09:25:31.804Z"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto daily chart","outcome":"success","timestamp":"2022-11-10T09:25:43.115Z"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto weekly chart","outcome":"success","timestamp":"2022-11-10T09:25:49.183Z"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto max chart","outcome":"success","timestamp":"2022-11-10T09:25:52.606Z"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"info","message":"Get crypto trending","outcome":"success","timestamp":"2022-11-10T09:25:56.320Z"}
+{"error":"Request failed with status code 404","ipAddress":"::ffff:172.21.0.1","label":"Crypto API","level":"error","message":"Get crypto details","outcome":"failed","timestamp":"2022-11-10T09:26:16.175Z"}
+{"ipAddress":"::ffff:172.20.0.1","label":"Crypto API","level":"info","message":"Get crypto lists","outcome":"success","timestamp":"2022-11-11T03:00:51.866Z"}
+{"ipAddress":"::ffff:172.20.0.1","label":"Crypto API","level":"info","message":"Get crypto details","outcome":"success","timestamp":"2022-11-11T03:01:13.046Z"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Jwt Token","level":"info","message":"Create jwt token","outcome":"success","timestamp":"2022-11-14T08:56:51.950Z","user":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"User API","level":"info","message":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8 logged in","outcome":"success","timestamp":"2022-11-14T08:56:51.958Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"error":"Password is too weak","ipAddress":"::ffff:172.21.0.1","label":"User API","level":"error","message":"Update profile information","outcome":"failed","timestamp":"2022-11-14T08:57:31.175Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"User API","level":"info","message":"Update profile information","outcome":"success","timestamp":"2022-11-14T08:59:00.748Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"User API","level":"info","message":"Update profile information","outcome":"success","timestamp":"2022-11-14T09:00:32.508Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Jwt Token","level":"info","message":"Create jwt token","outcome":"success","timestamp":"2022-11-14T09:00:37.272Z","user":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"User API","level":"info","message":"Update profile information","outcome":"success","timestamp":"2022-11-14T09:03:57.248Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"User API","level":"info","message":"Get profile information","outcome":"success","timestamp":"2022-11-14T09:04:16.717Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"User API","level":"info","message":"Update profile information","outcome":"success","timestamp":"2022-11-14T09:04:30.521Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"User API","level":"info","message":"Get profile information","outcome":"success","timestamp":"2022-11-14T09:04:35.700Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Jwt Token","level":"info","message":"Create jwt token","outcome":"success","timestamp":"2022-11-14T09:05:47.358Z","user":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"User API","level":"info","message":"Update profile information","outcome":"success","timestamp":"2022-11-14T09:08:13.159Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Jwt Token","level":"info","message":"Create jwt token","outcome":"success","timestamp":"2022-11-14T09:08:16.632Z","user":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"User API","level":"info","message":"Update profile information","outcome":"success","timestamp":"2022-11-14T09:08:32.178Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"User API","level":"info","message":"Get profile information","outcome":"success","timestamp":"2022-11-14T09:08:35.606Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Jwt Token","level":"info","message":"Create jwt token","outcome":"success","timestamp":"2022-11-14T09:08:40.472Z","user":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"User API","level":"info","message":"Update profile information","outcome":"success","timestamp":"2022-11-14T09:08:50.690Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Jwt Token","level":"info","message":"Create jwt token","outcome":"success","timestamp":"2022-11-14T09:08:57.497Z","user":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"User API","level":"info","message":"Update profile information","outcome":"success","timestamp":"2022-11-14T09:09:27.110Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"User API","level":"info","message":"Update profile information","outcome":"success","timestamp":"2022-11-14T09:09:43.639Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"User API","level":"info","message":"Get profile information","outcome":"success","timestamp":"2022-11-14T09:09:53.499Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Jwt Token","level":"info","message":"Create jwt token","outcome":"success","timestamp":"2022-11-14T09:09:59.068Z","user":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"User API","level":"info","message":"Update profile information","outcome":"success","timestamp":"2022-11-14T09:10:09.099Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Jwt Token","level":"info","message":"Create jwt token","outcome":"success","timestamp":"2022-11-14T09:10:11.186Z","user":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"User API","level":"info","message":"Update profile information","outcome":"success","timestamp":"2022-11-14T09:10:19.916Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"Jwt Token","level":"info","message":"Create jwt token","outcome":"success","timestamp":"2022-11-14T09:10:29.151Z","user":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}
+{"ipAddress":"::ffff:172.21.0.1","label":"User API","level":"info","message":"Update profile information","outcome":"success","timestamp":"2022-11-14T09:10:39.086Z","userId":"c7839b6b-c71c-43ba-b884-2fb1d0cd97b8"}

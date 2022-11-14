@@ -1,30 +1,38 @@
 const axios = require("axios")
 const validator = require("validator")
+const logger = require("../../logger/loggerConfig")
 
-const getCrypto = async () => {
-    let results = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false")
+const getCrypto = async (req) => {
+    try {
+        let results = await axios.get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false")
 
-    let arr = []
+        let arr = []
 
-    results["data"].forEach((data) => {
-        let obj = {}
-        obj["cryptoId"] = data["id"]
-        obj["symbol"] = data["symbol"]
-        obj["name"] = data["name"]
-        obj["current_price"] = data["current_price"]
-        obj["market_cap"] = data["market_cap"]
-        obj["market_cap_rank"] = data["market_cap_rank"]
-        obj["image"] = data["image"]
+        results["data"].forEach((data) => {
+            let obj = {}
+            obj["cryptoId"] = data["id"]
+            obj["symbol"] = data["symbol"]
+            obj["name"] = data["name"]
+            obj["current_price"] = data["current_price"]
+            obj["market_cap"] = data["market_cap"]
+            obj["market_cap_rank"] = data["market_cap_rank"]
+            obj["image"] = data["image"]
 
 
-        arr.push(obj)
-    })
+            arr.push(obj)
+        })
 
-    return arr
+        // logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto lists', outcome:'success', ipAddress: req.ip })
+        return arr
+    } catch (error) {
+        // logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto lists', outcome:'failed', ipAddress: req.ip, error: error.message })
+        throw Error(error.message)
+    }
+    
 }
 
 
-const getCryptoDetail = async (cryptoId) => {
+const getCryptoDetail = async (cryptoId, req) => {
     try {
         let escaped_cryptoId = validator.escape(cryptoId)
         let result = await axios.get(`https://api.coingecko.com/api/v3/coins/${escaped_cryptoId}`)
@@ -35,6 +43,7 @@ const getCryptoDetail = async (cryptoId) => {
         let obj = {}
         let ath = {}
         let atl = {}
+        obj["cryptoId"] = data["id"]
         obj["symbol"] = data["symbol"]
         obj["name"] = data["name"]
         obj["market_cap_rank"] = data["market_cap_rank"]
@@ -74,15 +83,16 @@ const getCryptoDetail = async (cryptoId) => {
 
         obj["description"] = data["description"]["en"]
 
-        console.log(obj)
+        // logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto details', outcome:'success', ipAddress: req.ip })
         return obj
     } catch (error) {
+        logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto details', outcome:'failed', ipAddress: req.ip, error: error.message })
         throw Error(error.message)
     }
 }
 
 
-const getCryptoChartMax = async (cryptoId) => {
+const getCryptoChartMax = async (cryptoId, req) => {
     try {
         let escaped_cryptoId = validator.escape(cryptoId)
         let get_usd_chart = await axios.get(`https://api.coingecko.com/api/v3/coins/${escaped_cryptoId}/market_chart?vs_currency=usd&days=max&interval=daily`)
@@ -90,9 +100,10 @@ const getCryptoChartMax = async (cryptoId) => {
         let usd_chart_arr = get_usd_chart["data"]["prices"]
 
         let filtered_usd_chart_arr = skipInterval(usd_chart_arr, 183)
+        // logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto max chart', outcome:'success', ipAddress: req.ip })
         return filtered_usd_chart_arr.reverse()
     } catch (error) {
-        // console.log(error.message)
+        // logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto max chart', outcome:'failed', ipAddress: req.ip, error: error.message })
         throw Error(error.message)
     }
 }
@@ -108,7 +119,7 @@ const skipInterval = (arr, interval) => {
     return newArr
 }
 
-const getCryptoChartDaily = async (cryptoId) => {
+const getCryptoChartDaily = async (cryptoId, req) => {
     try {
         let escaped_cryptoId = validator.escape(cryptoId)
         let get_usd_chart = await axios.get(`https://api.coingecko.com/api/v3/coins/${escaped_cryptoId}/market_chart?vs_currency=usd&days=1&interval=hourly`)
@@ -120,14 +131,16 @@ const getCryptoChartDaily = async (cryptoId) => {
         // console.log(objChart)
 
         // return objChart
+        // logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto daily chart', outcome:'success', ipAddress: req.ip })
         return usd_chart_arr
     } catch (error) {
+        // logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto daily chart', outcome:'failed', ipAddress: req.ip, error: error.message })
         throw Error(error.message)
     }
 
 }
 
-const getCryptoChartWeekly = async (cryptoId) => {
+const getCryptoChartWeekly = async (cryptoId, req) => {
     try {
         // let escaped_cryptoId = validator.escape(cryptoId)
         let get_usd_chart = await axios.get(`https://api.coingecko.com/api/v3/coins/${cryptoId}/market_chart?vs_currency=usd&days=14&interval=daily`)
@@ -137,31 +150,36 @@ const getCryptoChartWeekly = async (cryptoId) => {
         // let objChart = {}
         // objChart["get_usd_chart_weekly"] = usd_chart_arr
         // console.log(objChart)
-
+        // logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto weekly chart', outcome:'success', ipAddress: req.ip })
         return usd_chart_arr
     } catch (error) {
+        // logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto weekly chart', outcome:'failed', ipAddress: req.ip, error: error.message })
         throw Error(error.message)
     }
 
 }
 
-const getTrendingCrypto = async () => {
-    let results = await axios.get("https://api.coingecko.com/api/v3/search/trending")
+const getTrendingCrypto = async (req) => {
+    try {
+        let results = await axios.get("https://api.coingecko.com/api/v3/search/trending")
 
-    let arr = []
-
-    results["data"]["coins"].forEach((data) => {
-        let obj = {}
-        obj["cryptoId"] = data["item"]["id"]
-        obj["name"] = data["item"]["name"]
-        obj["symbol"] = data["item"]["symbol"]
-        obj["image"] = data["item"]["large"]
-        arr.push(obj)
-    })
-
+        let arr = []
     
-    console.log(arr)
-    return arr
+        results["data"]["coins"].forEach((data) => {
+            let obj = {}
+            obj["cryptoId"] = data["item"]["id"]
+            obj["name"] = data["item"]["name"]
+            obj["symbol"] = data["item"]["symbol"]
+            obj["image"] = data["item"]["large"]
+            arr.push(obj)
+        })
+    
+        // logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto trending', outcome:'success', ipAddress: req.ip })
+        return arr
+    } catch (error) {
+        // logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto trending', outcome:'failed', ipAddress: req.ip, error: error.message })
+        throw Error(error.message)
+    }
 }
 
 

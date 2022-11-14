@@ -5,7 +5,7 @@ const {
     favouriteDelete
 } = require("../controllers/favouriteController")
 const requireAuth = require('../middleware/requireAuth')
-const { privateCache } = require('../middleware/responseHeader')
+const { noStoreCache } = require('../middleware/responseHeader')
 
 const router = express.Router()
 
@@ -13,7 +13,8 @@ const router = express.Router()
 router.use(requireAuth)
 
 // cloudflare caching
-router.use(privateCache)
+// router.use(privateCache)
+router.use(noStoreCache)
 
 // Get user favourite list
 router.get('/favourite-list', favouriteList)

@@ -5,7 +5,7 @@ const publicCache = function (req, res, next) {
 }
 
 const privateCache = function (req, res, next) {
-    res.setHeader('Cache-Control', 'private, max-age=120, must-revalidate')
+    res.setHeader('Cache-Control', 'private, max-age=10, must-revalidate')
     next();
 }
 

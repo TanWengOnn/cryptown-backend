@@ -5,7 +5,7 @@ content-type: application/json
 
 {
     "email": "test1@gmail.com",
-    "password": "Test@1234"
+    "password": "Password@12345"
 }
 
 ###
@@ -13,8 +13,8 @@ POST http://localhost:5000/api/user/signup
 content-type: application/json
 
 {
-    "email": "test6@gmail.com",
-    "username": "test6",
+    "email": "test2@gmail.com",
+    "username": "test2",
     "password": "Password@12345",
     "confirm_password": "Password@12345"
 }
@@ -22,16 +22,16 @@ content-type: application/json
 ##-------------Profile/Update-------------##
 ###
 GET http://localhost:5000/api/user/profile
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNzgzOWI2Yi1jNzFjLTQzYmEtYjg4NC0yZmIxZDBjZDk3YjgiLCJpYXQiOjE2Njg0MTYyMTEsImV4cCI6MTY2ODUwMjYxMX0.WBPxdEh0AgvizAE4jhiHZdiHjGhaVLfhtqhaoOBhQy-IqSiWmWGXH6T0P_fyGtq40jfH5U4tsTBfkQUf_0h8Wvj3NjnaN_JrEgILqJQ5YTILeDU9UiDO5EUq0ZM0s-iuQzQXbF6pXVD9OXw8-rs8jDa3F9NgZIVwDvnysg_ehCDeR34GoDK75KWSPAXkpqq0a-3-UW9m-O_kd-Foo0SCalk2vI0LoyXkq3Jq5rNs8hfV5OsUKnoaoLEW-f0-piwCZ6NTOY7ncnJtVghWuRpEj59K81ys7iE9uQmdkfxVUEM0qu2TShc_XXPcD6Cz1OSgOsgy9_ZZK1Y6-MdxldZVhQ
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmZWZkNjU0Yi05ZGI4LTRkMDAtYTc3NS0yZWZmNDMzMzJjNDgiLCJpYXQiOjE2Njg0ODExMjgsImV4cCI6MTY2ODU2NzUyOH0.wbN3UOIh6qpsh8QaWPsvXhADTuA3xVl2NTUzgD0GtvdFNwl6zwD7M7VHEj4tIFlYfWtkNsxkU0mX0QRKP_eChAoYmJca3dU3TtS_ehfJfgaGTdtc8YzQLeG3jWmI2GrBR3_ee7fh0M6SnWCDxTaNcVS-h9l9P2WA6F-9hnw1YaxZ6bNl2i-eclH52mvNwmd4-6qO7nksIHRXeLUwIjinW_4WxAS-oQS6gHEDHUnT8PbUnsUiyXnp1MyHLdPveQn_eO6ugoTEfQ2c5BhY_oDffb3xjzxlrQrMW8aYwRMxRidhC0n9VyrWXR0J6yky9SFmnbRSTKn63w8V3dGSkq6c0Q
 
 ###
 
 PATCH http://localhost:5000/api/user/update
-Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNzgzOWI2Yi1jNzFjLTQzYmEtYjg4NC0yZmIxZDBjZDk3YjgiLCJpYXQiOjE2Njg0MTYyMTEsImV4cCI6MTY2ODUwMjYxMX0.WBPxdEh0AgvizAE4jhiHZdiHjGhaVLfhtqhaoOBhQy-IqSiWmWGXH6T0P_fyGtq40jfH5U4tsTBfkQUf_0h8Wvj3NjnaN_JrEgILqJQ5YTILeDU9UiDO5EUq0ZM0s-iuQzQXbF6pXVD9OXw8-rs8jDa3F9NgZIVwDvnysg_ehCDeR34GoDK75KWSPAXkpqq0a-3-UW9m-O_kd-Foo0SCalk2vI0LoyXkq3Jq5rNs8hfV5OsUKnoaoLEW-f0-piwCZ6NTOY7ncnJtVghWuRpEj59K81ys7iE9uQmdkfxVUEM0qu2TShc_XXPcD6Cz1OSgOsgy9_ZZK1Y6-MdxldZVhQ
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmZWZkNjU0Yi05ZGI4LTRkMDAtYTc3NS0yZWZmNDMzMzJjNDgiLCJpYXQiOjE2Njg0ODExMjgsImV4cCI6MTY2ODU2NzUyOH0.wbN3UOIh6qpsh8QaWPsvXhADTuA3xVl2NTUzgD0GtvdFNwl6zwD7M7VHEj4tIFlYfWtkNsxkU0mX0QRKP_eChAoYmJca3dU3TtS_ehfJfgaGTdtc8YzQLeG3jWmI2GrBR3_ee7fh0M6SnWCDxTaNcVS-h9l9P2WA6F-9hnw1YaxZ6bNl2i-eclH52mvNwmd4-6qO7nksIHRXeLUwIjinW_4WxAS-oQS6gHEDHUnT8PbUnsUiyXnp1MyHLdPveQn_eO6ugoTEfQ2c5BhY_oDffb3xjzxlrQrMW8aYwRMxRidhC0n9VyrWXR0J6yky9SFmnbRSTKn63w8V3dGSkq6c0Q
 content-type: application/json
 
 {
     "username": "Test1",
-    "password": "Test@12345",
-    "confirm_password": "Test@12345"
+    "password": "Password@12345",
+    "confirm_password": "Password@12345"
 }

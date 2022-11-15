@@ -1,5 +1,4 @@
 const env = process.env;
-
 const app_config = {
   db: {
     host: 'postgres',

@@ -57,9 +57,10 @@ const favouriteDelete = async (req, res) => {
     const { favId } = req.body
     
     try {
-        await deleteFavourite(userId, favId, req)
+        let deletedFavId = await deleteFavourite(userId, favId, req)
         res.status(200).json({
             mssg: "Delete from favourite successful", 
+            deletedFavId
         })  
         // logger.info({ label:'Favourite API', message: 'Delete favourite lists', outcome:'success', userId: userId, ipAddress: req.ip })
     } catch (error) {

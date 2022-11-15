@@ -85,8 +85,8 @@ const addFavourite = async function(userId, cryptoId, coinName, image_url, req) 
     // logger.http({ label:'Favourite API', message: `Successfully to add to favourite - ${escaped_coinName}`, outcome:'success', user: escaped_userId, ipAddress: req.ip })
     return {
         favId,
-        escaped_coinName,
-        escaped_cryptoId,
+        coinName: escaped_coinName,
+        cryptoId: escaped_cryptoId,
         image_url
     }
 }

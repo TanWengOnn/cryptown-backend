@@ -8,7 +8,6 @@ const favouriteList = async (req, res) => {
 
         if (favourites["favourites"].length === 0) {
             res.status(200).json({
-                userId,
                 mssg: `${favourites["username"]} has No Favorites`, 
             }) 
 
@@ -35,10 +34,10 @@ const favouriteList = async (req, res) => {
 
 const favouriteAdd = async (req, res) => {
     const userId = req.userId
-    const { cryptoId } = req.body
+    const { cryptoId, coinName, image_url } = req.body
 
     try {
-        await addFavourite(userId, cryptoId, req)
+        await addFavourite(userId, cryptoId, coinName, image_url, req)
         res.status(200).json({
             mssg: "Add to favourite successful", 
         })

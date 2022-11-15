@@ -17,9 +17,8 @@ const getFavouriteList = async function(userId, req) {
         throw Error('User does not exist')
     }
 
-    // insert into cryptown.favourite (favid, userid, coinname) values ('1', 'f019e744-cb2d-44e7-a52d-b7e1a4c4bfc5', 'Bitcoin')
     let getFavourites = {
-        text: "select favid, coinname from cryptown.favourite where userid=$1",
+        text: "select favid, coinname, image_url, cryptoid from cryptown.favourite where userid=$1",
         values: [escaped_userId]
     }
 
@@ -34,8 +33,9 @@ const getFavouriteList = async function(userId, req) {
 }
 
 
-const addFavourite = async function(userId, coinName, req) {
+const addFavourite = async function(userId, cryptoId, coinName, image_url, req) {
     let escaped_userId = validator.escape(userId)
+    let escaped_cryptoId = validator.escape(cryptoId)
     let escaped_coinName = validator.escape(coinName)
 
 
@@ -51,14 +51,14 @@ const addFavourite = async function(userId, coinName, req) {
         throw Error('User does not exist')
     }
 
-    let checkCoinName = {
-        text: "select * from cryptown.favourite where coinname=$1 and userid=$2;",
-        values: [escaped_coinName, escaped_userId]
+    let checkCryptoId = {
+        text: "select * from cryptown.favourite where cryptoid=$1 and userid=$2;",
+        values: [escaped_cryptoId, escaped_userId]
       }
 
-    let checkCoinNameOuput = await queryDb(checkCoinName)
+    let checkCryptoIdOuput = await queryDb(checkCryptoId)
 
-    if (checkCoinNameOuput["result"].length !== 0) {
+    if (checkCryptoIdOuput["result"].length !== 0) {
         // logger.http({ label:'Favourite API', message: `Coin already added - ${escaped_coinName}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
         throw Error('Coin Already Added')
     }
@@ -69,12 +69,12 @@ const addFavourite = async function(userId, coinName, req) {
     let addFavourites = {
         text: 
         `insert into cryptown.favourite 
-            (favid, userid, coinname) 
+            (favid, userid, coinname, cryptoId, image_url) 
             values 
-            ($1, $2, $3)`,
-        values: [favId, escaped_userId, escaped_coinName]
+            ($1, $2, $3, $4, $5)`,
+        values: [favId, escaped_userId, escaped_coinName, escaped_cryptoId, image_url]
     }
-    console.log(escaped_coinName)
+
     let favourites = await queryDb(addFavourites)
 
     if (favourites["error"] !== undefined) {

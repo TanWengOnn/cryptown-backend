@@ -20,7 +20,7 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZGZkZ
 content-type: application/json
 
 {
-    "postId": "870b79fd-30ec-4b0c-a432-8cfe27cd056", 
+    "postId": "56661cba-fb2f-447d-adf2-a25914c30a13", 
     "post": "THIS IS A TEST SUB POST 1!!!",
     "dateTime": "2022-11-03T05:38:12.168Z"
 }  

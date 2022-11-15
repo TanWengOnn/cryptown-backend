@@ -26,6 +26,7 @@ const loginUser = async (req, res) => {
         // send a json response
         res.status(200).json({
             mssg: "Logged In Successful", 
+            user: user["username"],
             email,
             userJwt,
         })
@@ -85,7 +86,6 @@ const profileUser = async (req, res) => {
         // send a json response
         res.status(200).json({
             mssg: "Get Profile Successful", 
-            userId,
             email: user["email"],
             username: user["username"]
         })
@@ -110,11 +110,8 @@ const updateUser = async (req, res) => {
         // send a json response
         res.status(200).json({
             mssg: "Update Profile Successful", 
-            userId,
             email: user["email"],
             username: user["username"],
-            // remove the bottom key,it is for testing only 
-            user
         })
         // logger.info({ label:'User API', message: 'Update profile information', outcome:'success', userId: userId, ipAddress: req.ip })
     } catch (error) {

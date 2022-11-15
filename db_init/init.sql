@@ -13,7 +13,9 @@ CREATE TABLE IF NOT EXISTS cryptown.users (
 CREATE TABLE IF NOT EXISTS cryptown.favourite (
     favId varchar(255),
     userId varchar(255) NOT NULL,
+    cryptoId varchar(255) NOT NULL,
     coinName varchar(255) NOT NULL,
+    image_url varchar(255),
     PRIMARY KEY (favId)
 );
 

@@ -4,7 +4,7 @@ POST https://api.cryptown-besquare.one/api/user/login
 content-type: application/json
 
 {
-    "email": "test1@gmail.com",
+    "email": "test2@gmail.com",
     "password": "Password@12345"
 }
 
@@ -13,8 +13,8 @@ POST https://api.cryptown-besquare.one/api/user/signup
 content-type: application/json
 
 {
-    "email": "test1@gmail.com",
-    "username": "test1",
+    "email": "test2@gmail.com",
+    "username": "test2",
     "password": "Password@12345",
     "confirm_password": "Password@12345"
 }
@@ -22,17 +22,17 @@ content-type: application/json
 ##-------------Profile/Update-------------##
 ###
 GET https://api.cryptown-besquare.one/api/user/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNzgzOWI2Yi1jNzFjLTQzYmEtYjg4NC0yZmIxZDBjZDk3YjgiLCJpYXQiOjE2Njc1NDY2MDgsImV4cCI6MTY2NzYzMzAwOH0.BpeSaOYLhl8fKVBnbdyKBcfHoPIdjHUyBq0_Xl-YgGQ
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTAzODc4Mi00YzY0LTRjYTItYjI3Mi0zOTkwNjY1NzU3ZDEiLCJpYXQiOjE2Njg0MTg1MTYsImV4cCI6MTY2ODUwNDkxNn0.UN320s3jg9jSZWhL_Y5fMCpdtJSCVBmpATSPHWrV-myLbitgnmeW5OuYRSrS247LWwU-u-ONqL3mJRQ17PPeLgrV6rn_Cx1xHFBukLguC0J4f_nGhrIDnwc0ATiZJ76ZRdJu2zzeE_yj1uvVJyIL3OYSMnjRMYMmheoRhpVDZSGthd_tGXfwCnkFI7sATVWuYnXu60aPNbbBT4RaINXsG9q_3WVTLu28grS6wSEJuzey5rMf3AczR5mQ-wQZ2CJH8ivbhIoP1isanu-6Vorw5U5U7jwiP27o0jvbvHf5AO81MDpI_4uEMOxgfpbrxhrVDkyQI5UJxJ72HzkRf6r1Wg
 
 
 ###
     
 PATCH https://api.cryptown-besquare.one/api/user/update
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjNzgzOWI2Yi1jNzFjLTQzYmEtYjg4NC0yZmIxZDBjZDk3YjgiLCJpYXQiOjE2Njc1NDY2MDgsImV4cCI6MTY2NzYzMzAwOH0.BpeSaOYLhl8fKVBnbdyKBcfHoPIdjHUyBq0_Xl-YgGQ
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTAzODc4Mi00YzY0LTRjYTItYjI3Mi0zOTkwNjY1NzU3ZDEiLCJpYXQiOjE2Njg0MTg1MTYsImV4cCI6MTY2ODUwNDkxNn0.UN320s3jg9jSZWhL_Y5fMCpdtJSCVBmpATSPHWrV-myLbitgnmeW5OuYRSrS247LWwU-u-ONqL3mJRQ17PPeLgrV6rn_Cx1xHFBukLguC0J4f_nGhrIDnwc0ATiZJ76ZRdJu2zzeE_yj1uvVJyIL3OYSMnjRMYMmheoRhpVDZSGthd_tGXfwCnkFI7sATVWuYnXu60aPNbbBT4RaINXsG9q_3WVTLu28grS6wSEJuzey5rMf3AczR5mQ-wQZ2CJH8ivbhIoP1isanu-6Vorw5U5U7jwiP27o0jvbvHf5AO81MDpI_4uEMOxgfpbrxhrVDkyQI5UJxJ72HzkRf6r1Wg
 content-type: application/json
 
 {
-    "username": "Test1",
+    "username": "Test2",
     "password": "Password@12345",
     "confirm_password": "Password@12345"
 }

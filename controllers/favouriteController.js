@@ -37,9 +37,10 @@ const favouriteAdd = async (req, res) => {
     const { cryptoId, coinName, image_url } = req.body
 
     try {
-        await addFavourite(userId, cryptoId, coinName, image_url, req)
+        let newFavourite = await addFavourite(userId, cryptoId, coinName, image_url, req)
         res.status(200).json({
             mssg: "Add to favourite successful", 
+            newFavourite
         })
         // logger.info({ label:'Favourite API', message: 'Add to favourite lists', outcome:'success', userId: userId, ipAddress: req.ip })
     } catch (error) {

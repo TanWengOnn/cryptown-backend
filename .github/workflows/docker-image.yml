@@ -16,12 +16,10 @@ jobs:
       run: |
         touch .env
         echo 'PORT=${{ secrets.PORT }}' >> .env
-        echo 'POSTGRES_PASS=${{ secrets.POSTGRES_PASS }}' >> .env
-        echo 'JWT_SECRET=${{ secrets.JWT_SECRET }}' >> .env
         echo 'BING_NEWS_TOKEN=${{ secrets.BING_NEWS_TOKEN }}' >> .env
+        echo 'POSTGRES_PASS=${{ secrets.POSTGRES_PASS }}' >> .env
+        echo 'POSTGRES_USER=${{ secrets.POSTGRES_USER }}' >> .env
+        echo 'POSTGRES_DB=${{ secrets.POSTGRES_DB }}' >> .env
+        echo 'POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}' >> .env
     - name: Build the Docker image
       run: docker compose --env-file .env up --build -d
-    - name: get runner groups
-      run: id
-    - name: check file owner
-      run: ls -la

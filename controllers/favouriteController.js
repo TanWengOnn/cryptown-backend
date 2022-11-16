@@ -9,7 +9,7 @@ const favouriteList = async (req, res) => {
         if (favourites["favourites"].length === 0) {
             res.status(200).json({
                 mssg: `${favourites["username"]} has No Favorites`, 
-                favourites: {}
+                favourites: []
             }) 
 
             // logger.info({ label:'Favourite API', message: 'Get favourite lists (user has no favourite)', outcome:'success', ipAddress: req.ip })

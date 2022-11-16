@@ -84,9 +84,9 @@ const addFavourite = async function(userId, cryptoId, coinName, image_url, req) 
     
     // logger.http({ label:'Favourite API', message: `Successfully to add to favourite - ${escaped_coinName}`, outcome:'success', user: escaped_userId, ipAddress: req.ip })
     return {
-        favId,
-        coinName: escaped_coinName,
-        cryptoId: escaped_cryptoId,
+        favid: favId,
+        coinname: escaped_coinName,
+        cryptoid: escaped_cryptoId,
         image_url
     }
 }
@@ -135,7 +135,7 @@ const deleteFavourite = async function(userId, favId, req) {
     
     // logger.http({ label:'Favourite API', message: `Successfully to delete favourite - ${escaped_coinName}`, outcome:'success', user: escaped_userId, ipAddress: req.ip })
     return {
-        favId: escaped_favId
+        favid: escaped_favId
     }
 
 }

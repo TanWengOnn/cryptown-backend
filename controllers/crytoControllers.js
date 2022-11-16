@@ -28,7 +28,7 @@ const getCryptoList = async (req, res) => {
 // Get Crypto Details
 const getCryptoDetails = async (req, res) => {
     const { cryptoId } = req.body
-    console.log("CRYPTO:", cryptoId)
+
     try {
         let cryptoDetails = await getCryptoDetail(cryptoId, req)
         // send a json response

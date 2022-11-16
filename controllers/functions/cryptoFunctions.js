@@ -70,6 +70,9 @@ const getCryptoDetail = async (cryptoId, req) => {
         atl["change_percentage_myr"] = data["market_data"]["atl_change_percentage"]["myr"]
         obj["atl"] = atl
 
+        obj["link"] = data["links"]["homepage"][0]
+        obj["image"] = data["image"]["large"]
+
         let exchange = data["tickers"].slice(0,3)
         let exchangeArr = []
         exchange.forEach((data) => {
@@ -86,7 +89,7 @@ const getCryptoDetail = async (cryptoId, req) => {
         // logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto details', outcome:'success', ipAddress: req.ip })
         return obj
     } catch (error) {
-        logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto details', outcome:'failed', ipAddress: req.ip, error: error.message })
+        // logger.error({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto details', outcome:'failed', ipAddress: req.ip, error: error.message })
         throw Error(error.message)
     }
 }

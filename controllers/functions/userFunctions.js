@@ -25,10 +25,12 @@ let password_requirement = {
 const login = async function (email, password, req) {
     // validation 
     if (!email || !password) {
+        // logger.warn({ label:'User API', message: `Login - Empty fields`, outcome:'failed', ipAddress: req.ip })
         throw Error("All Field must be filled")
     }
 
     if (/[^\w\d@.]/.test(email)) {
+        // logger.warn({ label:'User API', message: `Login - Email contain banned symbols - ${email}`, outcome:'failed', ipAddress: req.ip })
         throw Error("Please do not include special characters")
     } 
 
@@ -42,6 +44,7 @@ const login = async function (email, password, req) {
     let user = await queryDb(checkUser)
 
     if (user["result"].length === 0) {
+        // logger.warn({ label:'User API', message: `Login - Invalid email - ${email}`, outcome:'failed', ipAddress: req.ip })
         throw Error('Incorrect Email or Password')
     }
 
@@ -65,11 +68,13 @@ const login = async function (email, password, req) {
         let updateDateTime = await queryDb(update)
         attempts = 0;
         if (updateDateTime["error"] !== undefined) {
+            // logger.warn({ label:'User API', message: `Login - Fail reset login ban datetime - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip })
             throw Error('Profile update ban datetime failed')
         }
     }
 
     if (attempts >= 3) {
+        // logger.warn({ label:'User API', message: `Login - Maximum login attempts reached - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip })
         throw Error("maximum attempts reach please try again in 30 seconds")
     }
    

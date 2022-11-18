@@ -43,7 +43,7 @@ app.use(express.json())
 // })
 
 app.use((req, res, next) => {
-    console.log(req.ip, req.path, req.method, new Date())
+    console.log(req.path, req.method, new Date())
     next()
 })
 

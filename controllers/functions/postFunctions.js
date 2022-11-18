@@ -263,7 +263,7 @@ const deletePost = async function(userId, postId, req) {
     
     // logger.http({ label:'Favourite API', message: `Successfully to delete favourite - ${escaped_coinName}`, outcome:'success', user: escaped_userId, ipAddress: req.ip })
     return {
-        favid: escaped_postId
+        postid: escaped_postId
     }
 
 }

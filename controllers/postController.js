@@ -40,9 +40,9 @@ const addPosts = async (req, res) => {
     const userId = req.userId
     let { post, dateTime } = req.body 
     try {
-        await addPost(userId, post, dateTime, req)
+        let newPost = await addPost(userId, post, dateTime, req)
         // send a json response
-        res.status(200).json({mssg: "Add posts successful"})
+        res.status(200).json({mssg: "Add posts successful", newPost})
         // logger.info({ label:'Posts API', message: 'Add main posts', outcome:'success', userId: userId, ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({

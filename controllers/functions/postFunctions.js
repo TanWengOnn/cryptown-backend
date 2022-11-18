@@ -105,7 +105,7 @@ const addPost = async function(userId, post, dateTime, req) {
     getNewPost["result"][0]["replies"] = []
     
     // logger.http({ label:'Posts API', message: `Add main post - ${postId}`, outcome:'success', user: escaped_userId, ipAddress: req.ip })
-    return getNewPost["result"]
+    return getNewPost["result"][0]
 
 }
 

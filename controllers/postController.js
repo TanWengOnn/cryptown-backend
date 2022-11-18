@@ -11,8 +11,8 @@ const getPost = async (req, res) => {
 
     try {
         let result = await getPosts(userId, req)
-        let posts = result["getPost"]
-        let subPosts = result["getSubPost"]
+        let posts = result["getPost"].reverse()
+        let subPosts = result["getSubPost"].reverse()
         let postsObj={};
         for(const post of posts){
             postsObj[post.postid]=post;

@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS cryptown.posts (
 
 CREATE TABLE IF NOT EXISTS cryptown.subposts (
     subpostId varchar(255),
-    postId varchar(255),
+    postId varchar(255) NOT NULL references cryptown.posts on delete cascade,
     userId varchar(255) NOT NULL,
     subpost text NOT NULL,
     subpostDateTime timestamp NOT NULL,

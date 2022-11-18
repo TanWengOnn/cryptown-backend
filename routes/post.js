@@ -2,7 +2,9 @@ const express = require("express")
 const {
     getPost,
     addPosts,
-    addSubPosts
+    addSubPosts,
+    getUserPost,
+    postDelete
 } = require("../controllers/postController")
 const requireAuth = require('../middleware/requireAuth')
 const { privateCache } = require('../middleware/responseHeader')
@@ -21,6 +23,13 @@ router.post('/addPost', addPosts)
 
 // POST new sub posts 
 router.post('/addSubPost', addSubPosts)
+
+// GET user posts
+router.get('/getUserPosts', getUserPost)
+
+// DELETE user posts
+router.delete('/post-delete', postDelete)
+
 
 
 

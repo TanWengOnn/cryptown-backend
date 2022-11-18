@@ -83,9 +83,29 @@ const addPost = async function(userId, post, dateTime, req) {
         // logger.warn({ label:'Posts API', message: `Add main post - Failed to add main post - ${postId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
         throw Error("Failed to add post")
     }
+
+    let getNewPostQuery = {
+        text: `
+        select posts.postid, posts.post, posts.postdatetime, users.email, users.username 
+            from cryptown.posts as posts 
+        left join cryptown.users as users 
+            on posts.userid=users.userid 
+        where posts.userid=$1 and posts.postid=$2;
+        `,
+        values: [escaped_userId, postId]
+    }
+
+    let getNewPost = await queryDb(getNewPostQuery)
+
+    if (getNewPost["error"] !== undefined) {
+        // logger.warn({ label:'Posts API', message: `Add main post - get newly added posts - ${postId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        throw Error("Failed to get new post")
+    }
+
+    getNewPost["result"][0]["replies"] = []
     
     // logger.http({ label:'Posts API', message: `Add main post - ${postId}`, outcome:'success', user: escaped_userId, ipAddress: req.ip })
-    return true
+    return getNewPost["result"]
 
 }
 

@@ -165,8 +165,117 @@ const addSubPost = async function(userId, postId, post, dateTime, req) {
 
 }
 
+const getUserPosts = async function(userId, req) {
+    let escaped_userId = validator.escape(userId)
+
+    let checkUser = {
+        text: "select * from cryptown.users where userid=$1",
+        values: [escaped_userId]
+    }
+
+    let user = await queryDb(checkUser)
+
+    if (user["result"].length === 0) {
+        // logger.warn({ label:'Posts API', message: 'User does not exist', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        throw Error('User does not exist')
+    }
+
+    let getPostQuery = {
+        text: 
+        `select posts.postid, posts.post, posts.postdatetime, users.email, users.username from cryptown.posts as posts left join cryptown.users as users on posts.userid=users.userid where posts.userid=$1;`,
+        values: [escaped_userId]
+    }
+
+    let getPost = await queryDb(getPostQuery)
+
+    if (getPost["error"] !== undefined) {
+        // logger.warn({ label:'Posts API', message: 'Get all post - Failed to get main post', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        throw Error("Failed to get post")
+    }
+
+    if (getPost["result"].length === 0) {
+        // logger.warn({ label:'Posts API', message: 'Get all post - Failed to get main post', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        throw Error("User do not have any posts")
+    }
+
+    let getSubPostQuery = {
+        text: 
+        `select subposts.subpostid, subposts.postid, subposts.subpost, subposts.subpostdatetime, users.email, users.username from cryptown.subposts as subposts left join cryptown.users as users on subposts.userid=users.userid;`,
+        // values: [postId, escaped_userId, escaped_post, escaped_dateTime,server_datetime]
+    }
+
+    let getSubPost = await queryDb(getSubPostQuery)
+
+    if (getSubPost["error"] !== undefined) {
+        // logger.warn({ label:'Posts API', message: 'Get all post - Failed to get sub post', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        throw Error("Failed to get sub post")
+    }
+
+    // logger.http({ label:'Posts API', message: 'Get all post', outcome:'success', user: escaped_userId, ipAddress: req.ip })
+    return {getPost: getPost["result"], getSubPost: getSubPost["result"]}
+
+}
+
+
+const deletePost = async function(userId, postId, req) {
+    let escaped_userId = validator.escape(userId)
+    let escaped_postId = validator.escape(postId)
+
+    let checkUser = {
+        text: "select * from cryptown.users where userid=$1",
+        values: [escaped_userId]
+    }
+
+    let user = await queryDb(checkUser)
+
+    if (user["result"].length === 0) {
+        // logger.warn({ label:'Favourite API', message: 'User does not exist', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        throw Error('User does not exist')
+    }
+
+    let checkPostId = {
+        text: "select * from cryptown.posts where postid=$1 and userid=$2;",
+        values: [escaped_postId, escaped_userId]
+      }
+
+    let checkPostIdOuput = await queryDb(checkPostId)
+
+    if (checkPostIdOuput["result"].length === 0) {
+        // logger.warn({ label:'Favourite API', message: `Favourite coin does not exist - ${escaped_favId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        throw Error('Post Does Not Exist')
+    }
+
+    let deletePost = {
+        text: 
+        `
+            delete from cryptown.posts 
+                where postid=$1 and userid=$2;
+        `,
+        values: [escaped_postId, escaped_userId]
+    }
+
+    let posts = await queryDb(deletePost)
+
+    if (posts["error"] !== undefined) {
+        // logger.warn({ label:'Favourite API', message: `Failed to delete favourite - ${escaped_favId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        throw Error("Failed to delete post")
+    }
+    
+    // logger.http({ label:'Favourite API', message: `Successfully to delete favourite - ${escaped_coinName}`, outcome:'success', user: escaped_userId, ipAddress: req.ip })
+    return {
+        favid: escaped_postId
+    }
+
+}
+
+
+
+// delete from cryptown.posts where postid='aeb2a942-3d01-4fc7-acb9-0361dc43fadf' and userid='cf749c13-6ec0-431f-aeb0-1a8cc832f7df';
+
 module.exports = {
     getPosts,
     addPost,
-    addSubPost
+    addSubPost,
+    getUserPosts,
+    deletePost
 }

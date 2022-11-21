@@ -276,10 +276,54 @@ const updateProfile = async function(userId, username, password, confirm_passwor
     return user["result"][0]
 }
 
+const logout = async function(userId, jwt, req) {
+
+    let checkUser = {
+        text: "select * from cryptown.users where userid=$1",
+        values: [userId]
+    }
+
+    let user = await queryDb(checkUser)
+
+    if (user["result"].length === 0) {
+        // logger.warn({ label:'Favourite API', message: 'User does not exist', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        throw Error('User does not exist')
+    }
+
+    let checkJwtId = {
+        text: "select * from cryptown.jwt where jwt=$1 and userid=$2;",
+        values: [jwt, userId]
+      }
+
+    let checkJwtIdOuput = await queryDb(checkJwtId)
+
+    if (checkJwtIdOuput["result"].length === 0) {
+        // logger.warn({ label:'Favourite API', message: `Favourite coin does not exist - ${escaped_favId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        throw Error('Jwt Token Does Not Exist')
+    }
+
+    let deleteJwt = {
+        text: 
+        `delete from cryptown.jwt where jwt=$1 and userid=$2;`,
+        values: [jwt, userId]
+    }
+
+    let deleteJwtOutput = await queryDb(deleteJwt)
+
+    if (deleteJwtOutput["error"] !== undefined) {
+        // logger.warn({ label:'Favourite API', message: `Failed to delete favourite - ${escaped_favId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        throw Error("Failed to delete jwt")
+    }
+    
+    // logger.http({ label:'Favourite API', message: `Successfully to delete favourite - ${escaped_coinName}`, outcome:'success', user: escaped_userId, ipAddress: req.ip })
+    return true
+}
+
 
 module.exports = {
     login,
     signup,
     profile,
-    updateProfile
+    updateProfile,
+    logout
 }

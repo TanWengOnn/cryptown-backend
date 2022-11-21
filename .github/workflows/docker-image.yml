@@ -21,5 +21,6 @@ jobs:
         echo 'POSTGRES_USER=${{ secrets.POSTGRES_USER }}' >> .env
         echo 'POSTGRES_DB=${{ secrets.POSTGRES_DB }}' >> .env
         echo 'POSTGRES_PORT=${{ secrets.POSTGRES_PORT }}' >> .env
+        echo 'AES_PASS=${{ secrets.AES_PASS }}' >> .env
     - name: Build the Docker image
       run: docker compose --env-file .env up --build -d

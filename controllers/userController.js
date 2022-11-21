@@ -4,14 +4,33 @@ const { login, signup, profile, updateProfile } = require("./functions/userFunct
 const fs   = require('fs');
 const path = require("path");
 const logger = require("../logger/loggerConfig")
+const { aesEncrypt } = require("../encryption/aesEncryption")
+const validator = require("validator")
+const { v4: uuidv4 } = require('uuid');
 
 
 const privateKEY  = fs.readFileSync(path.resolve(__dirname, "../jwt-self-sign-certs/key.pem"), 'utf8');
 
-const createToken = (userId, req) => {
+const createToken = async (userId, req) => {
     // logger.info({ label:'Jwt Token', message: 'Create jwt token', outcome:'success', user: userId, ipAddress: req.ip})
-                //    payload   secret              expiration time
-    return jwt.sign({userId}, privateKEY, { expiresIn: '1d', algorithm:  "RS256" })
+                             //    payload   secret              expiration time
+    let createJwt =  jwt.sign({userId}, privateKEY, { expiresIn: '1d', algorithm:  "RS256" })
+
+    let encryptedJwt = aesEncrypt(createJwt, process.env.AES_PASS)
+
+    let addJwt = {
+        text: "insert into cryptown.jwt (jwtid, userid, jwt, serverdatetime) values ($1, $2, $3, $4)",
+        values: [uuidv4(), userId, createJwt, new Date()]
+      }
+
+    let addJwtOutput = await queryDb(addJwt)
+
+    // Error when adding user to database
+    if (addJwtOutput["error"] !== undefined) {
+        throw Error("Fail to create JWT")
+    }
+
+    return encryptedJwt
 }
 
 // Get Crypto List
@@ -21,7 +40,7 @@ const loginUser = async (req, res) => {
     try {
         let user = await login(email, password, req)
 
-        let userJwt = createToken(user["userid"], req)
+        let userJwt = await createToken(user["userid"], req)
 
         // send a json response
         res.status(200).json({
@@ -45,17 +64,18 @@ const signupUser = async (req, res) => {
 
     try {
         await signup(email, username, password, confirm_password, req)
-
+        
+        let escaped_email = validator.escape(email)
         let query = {
             text: "select * from cryptown.users where email=$1;",
-            values: [email]
+            values: [escaped_email]
         }
 
         let output = await queryDb(query)
 
         userId = output["result"][0]["userid"]
 
-        let userJwt = createToken(userId, req)
+        let userJwt = await createToken(userId, req)
 
         // send a json response
         res.status(200).json({
@@ -123,11 +143,73 @@ const updateUser = async (req, res) => {
     }
 }
 
+const logoutUser = async (req, res) => { 
+    const userId = req.userId
+    const jwtToken = req.jwtToken
 
+    try {
+        let user = await logout(userId, jwtToken, req)
+        // send a json response
+        res.status(200).json({
+            mssg: "Log out Successful", 
+        })
+        // logger.info({ label:'User API', message: 'Update profile information', outcome:'success', userId: userId, ipAddress: req.ip })
+    } catch (error) {
+        res.status(400).json({
+            mssg: "Log out Failed", 
+            error: error.message
+        })
+        // logger.error({ label:'User API', message: 'Update profile information', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
+    }
+}
+
+const logout = async function(userId, jwt, req) {
+
+    let checkUser = {
+        text: "select * from cryptown.users where userid=$1",
+        values: [userId]
+    }
+
+    let user = await queryDb(checkUser)
+
+    if (user["result"].length === 0) {
+        // logger.warn({ label:'Favourite API', message: 'User does not exist', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        throw Error('User does not exist')
+    }
+
+    let checkJwtId = {
+        text: "select * from cryptown.jwt where jwt=$1 and userid=$2;",
+        values: [jwt, userId]
+      }
+
+    let checkJwtIdOuput = await queryDb(checkJwtId)
+
+    if (checkJwtIdOuput["result"].length === 0) {
+        // logger.warn({ label:'Favourite API', message: `Favourite coin does not exist - ${escaped_favId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        throw Error('Jwt Token Does Not Exist')
+    }
+
+    let deleteJwt = {
+        text: 
+        `delete from cryptown.jwt where jwt=$1 and userid=$2;`,
+        values: [jwt, userId]
+    }
+
+    let deleteJwtOutput = await queryDb(deleteJwt)
+
+    if (deleteJwtOutput["error"] !== undefined) {
+        // logger.warn({ label:'Favourite API', message: `Failed to delete favourite - ${escaped_favId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        throw Error("Failed to delete jwt")
+    }
+    
+    // logger.http({ label:'Favourite API', message: `Successfully to delete favourite - ${escaped_coinName}`, outcome:'success', user: escaped_userId, ipAddress: req.ip })
+    return true
+}
 
 module.exports = {
     loginUser,
     signupUser,
     profileUser,
-    updateUser
+    updateUser,
+    logoutUser
 }

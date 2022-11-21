@@ -4,6 +4,7 @@ const {
     signupUser,
     profileUser,
     updateUser,
+    logoutUser
 } = require("../controllers/userController")
 const requireAuth = require('../middleware/requireAuth')
 const { privateCache, noStoreCache } = require('../middleware/responseHeader')
@@ -21,6 +22,9 @@ router.post('/signup', signupUser)
 // Require authentication 
 router.use(requireAuth)
 
+// Log out user 
+router.delete('/logout', logoutUser)
+
 router.use(privateCache)
 
 // View profile info 
@@ -28,6 +32,7 @@ router.get('/profile', profileUser)
 
 // Update profile info 
 router.patch('/update', updateUser)
+
 
 
 

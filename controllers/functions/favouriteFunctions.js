@@ -133,7 +133,7 @@ const deleteFavourite = async function(userId, favId, req) {
         throw Error("Failed to delete favourite")
     }
     
-    // logger.http({ label:'Favourite API', message: `Successfully to delete favourite - ${escaped_coinName}`, outcome:'success', user: escaped_userId, ipAddress: req.ip })
+    // logger.http({ label:'Favourite API', message: `Successfully to delete favourite - ${escaped_favId}`, outcome:'success', user: escaped_userId, ipAddress: req.ip })
     return {
         favid: escaped_favId
     }

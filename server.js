@@ -1,9 +1,6 @@
 require("dotenv").config()
 const express = require("express")
 
-// Https packages
-// const https = require("https");
-// const fs = require("fs");
 
 const helmet = require("helmet")
 const cors = require("cors")
@@ -15,16 +12,12 @@ const newsRoutes = require("./routes/news")
 const userRoutes = require("./routes/user")
 const favouriteRoutes = require("./routes/favourite")
 const postRoutes = require("./routes/post")
+const miscRoutes = require("./routes/misc")
+
 
 
 const app = express()
 app.set('trust proxy', true)
-
-// Setting up https
-// let server = https.createServer({
-//     key: fs.readFileSync("./certs/key.pem"),
-//     cert: fs.readFileSync("./certs/cert.pem"),
-//   },app)
 
 
 app.use(cors({
@@ -59,6 +52,9 @@ app.use('/api/exchange', exchangeRoutes)
 app.use('/api/news', newsRoutes) 
 
 app.use('/api/post', postRoutes) 
+
+app.use('/api/misc', miscRoutes) 
+
 
 
 

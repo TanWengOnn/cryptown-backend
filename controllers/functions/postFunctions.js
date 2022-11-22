@@ -11,7 +11,7 @@ const getPosts = async function(userId, req) {
     }
 
     let user = await queryDb(checkUser)
-    logger
+    
     if (user["result"].length === 0) {
         // logger.warn({ label:'Posts API', message: 'User does not exist', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
         throw Error('User does not exist')

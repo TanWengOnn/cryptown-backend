@@ -16,6 +16,7 @@ const getCrypto = async (req) => {
             obj["current_price"] = data["current_price"]
             obj["market_cap"] = data["market_cap"]
             obj["market_cap_rank"] = data["market_cap_rank"]
+            obj["total_volume"] = data["total_volume"]
             obj["image"] = data["image"]
 
 
@@ -52,6 +53,10 @@ const getCryptoDetail = async (cryptoId, req) => {
         obj["current_price_myr"] = data["market_data"]["current_price"]["myr"]
         obj["market_cap_usd"] = data["market_data"]["market_cap"]["usd"]
         obj["market_cap_myr"] = data["market_data"]["market_cap"]["myr"]
+        obj["total_volume_usd"] = data["market_data"]["total_volume"]["usd"]
+        obj["total_volume_myr"] = data["market_data"]["total_volume"]["myr"]
+        obj["fully_diluted_valuation_usd"] = data["market_data"]["fully_diluted_valuation"]["usd"]
+        obj["fully_diluted_valuation_myr"] = data["market_data"]["fully_diluted_valuation"]["myr"]
         obj["total_supply"] = data["market_data"]["total_supply"]
         obj["max_supply"] = data["market_data"]["max_supply"]
         obj["circulating_supply"] = data["market_data"]["circulating_supply"]

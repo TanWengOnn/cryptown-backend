@@ -95,6 +95,7 @@ const login = async function (email, password, req) {
         let updateAttempts = await queryDb(update)
     
         if (updateAttempts["error"] !== undefined) {
+            // logger.warn({ label:'User API', message: `Login - Fail to update login attempts - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip })
             throw Error('Profile update attempts failed')
         }
 
@@ -115,11 +116,14 @@ const login = async function (email, password, req) {
                 let updateDateTime = await queryDb(update)
             
                 if (updateDateTime["error"] !== undefined) {
+                    // logger.warn({ label:'User API', message: `Login - Fail to update login attempts datetime - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip })
                     throw Error('Profile update ban datetime failed')
                 }
+                // logger.warn({ label:'User API', message: `Login - Maximum attempts reached - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip })
                 throw Error("maximum attempts reach please try again in 30 seconds")
             }
         }
+        // logger.warn({ label:'User API', message: `Login - Invalid Password - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip })
         throw Error('Incorrect Email or Password')
     }
 
@@ -136,6 +140,7 @@ const login = async function (email, password, req) {
     let updateAttempts = await queryDb(update)
 
     if (updateAttempts["error"] !== undefined) {
+        // logger.warn({ label:'User API', message: `Login - Fail to reset login attempts - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip })
         throw Error('Profile update attempts failed')
     }
 

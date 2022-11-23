@@ -32,7 +32,7 @@ const getPosts = async function(userId, req) {
 
     let getSubPostQuery = {
         text: 
-        `select subposts.subpostid, subposts.postid, subposts.subpost, subposts.subpostdatetime, users.email, users.username from cryptown.subposts as subposts left join cryptown.users as users on subposts.userid=users.userid order by subpostdatetime desc;`,
+        `select subposts.subpostid, subposts.postid, subposts.subpost, subposts.subpostdatetime, users.email, users.username from cryptown.subposts as subposts left join cryptown.users as users on subposts.userid=users.userid order by subpostdatetime asc;`,
         // values: [postId, escaped_userId, escaped_post, escaped_dateTime,server_datetime]
     }
 
@@ -200,7 +200,7 @@ const getUserPosts = async function(userId, req) {
 
     let getSubPostQuery = {
         text: 
-        `select subposts.subpostid, subposts.postid, subposts.subpost, subposts.subpostdatetime, users.email, users.username from cryptown.subposts as subposts left join cryptown.users as users on subposts.userid=users.userid order by subpostdatetime desc;`,
+        `select subposts.subpostid, subposts.postid, subposts.subpost, subposts.subpostdatetime, users.email, users.username from cryptown.subposts as subposts left join cryptown.users as users on subposts.userid=users.userid order by subpostdatetime asc;`,
         // values: [postId, escaped_userId, escaped_post, escaped_dateTime,server_datetime]
     }
 

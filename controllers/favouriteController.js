@@ -7,7 +7,7 @@ const favouriteList = async (req, res) => {
         let favourites = await getFavouriteList(userId, req)
 
         if (favourites["favourites"].length === 0) {
-            res.status(200).json({
+            res.status(400).json({
                 mssg: `${favourites["username"]} has No Favorites`, 
                 favourites: []
             }) 

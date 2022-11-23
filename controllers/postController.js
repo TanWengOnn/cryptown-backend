@@ -13,7 +13,7 @@ const getPost = async (req, res) => {
 
     try {
         let result = await getPosts(userId, req)
-        let posts = result["getPost"].reverse()
+        let posts = result["getPost"]
         let subPosts = result["getSubPost"]
         let postsObj={};
         for(const post of posts){
@@ -77,7 +77,7 @@ const getUserPost = async (req, res) => {
 
     try {
         let result = await getUserPosts(userId, req)
-        let posts = result["getPost"].reverse()
+        let posts = result["getPost"]
         let subPosts = result["getSubPost"]
         let postsObj={};
         for(const post of posts){

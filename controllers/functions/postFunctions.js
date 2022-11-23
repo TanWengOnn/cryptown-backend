@@ -200,7 +200,7 @@ const getUserPosts = async function(userId, req) {
 
     let getSubPostQuery = {
         text: 
-        `select subposts.subpostid, subposts.postid, subposts.subpost, subposts.subpostdatetime, users.email, users.username from cryptown.subposts as subposts left join cryptown.users as users on subposts.userid=users.userid order by postdatetime desc;`,
+        `select subposts.subpostid, subposts.postid, subposts.subpost, subposts.subpostdatetime, users.email, users.username from cryptown.subposts as subposts left join cryptown.users as users on subposts.userid=users.userid order by subpostdatetime desc;`,
         // values: [postId, escaped_userId, escaped_post, escaped_dateTime,server_datetime]
     }
 

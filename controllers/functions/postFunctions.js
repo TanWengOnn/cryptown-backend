@@ -19,7 +19,7 @@ const getPosts = async function(userId, req) {
 
     let getPostQuery = {
         text: 
-        `select posts.postid, posts.post, posts.postdatetime, users.email, users.username from cryptown.posts as posts left join cryptown.users as users on posts.userid=users.userid;`,
+        `select posts.postid, posts.post, posts.postdatetime, users.email, users.username from cryptown.posts as posts left join cryptown.users as users on posts.userid=users.userid order by postdatetime desc;`,
         // values: [postId, escaped_userId, escaped_post, escaped_dateTime,server_datetime]
     }
 
@@ -32,7 +32,7 @@ const getPosts = async function(userId, req) {
 
     let getSubPostQuery = {
         text: 
-        `select subposts.subpostid, subposts.postid, subposts.subpost, subposts.subpostdatetime, users.email, users.username from cryptown.subposts as subposts left join cryptown.users as users on subposts.userid=users.userid;`,
+        `select subposts.subpostid, subposts.postid, subposts.subpost, subposts.subpostdatetime, users.email, users.username from cryptown.subposts as subposts left join cryptown.users as users on subposts.userid=users.userid order by postdatetime desc;`,
         // values: [postId, escaped_userId, escaped_post, escaped_dateTime,server_datetime]
     }
 
@@ -182,7 +182,7 @@ const getUserPosts = async function(userId, req) {
 
     let getPostQuery = {
         text: 
-        `select posts.postid, posts.post, posts.postdatetime, users.email, users.username from cryptown.posts as posts left join cryptown.users as users on posts.userid=users.userid where posts.userid=$1;`,
+        `select posts.postid, posts.post, posts.postdatetime, users.email, users.username from cryptown.posts as posts left join cryptown.users as users on posts.userid=users.userid where posts.userid=$1 order by postdatetime desc;`,
         values: [escaped_userId]
     }
 
@@ -200,7 +200,7 @@ const getUserPosts = async function(userId, req) {
 
     let getSubPostQuery = {
         text: 
-        `select subposts.subpostid, subposts.postid, subposts.subpost, subposts.subpostdatetime, users.email, users.username from cryptown.subposts as subposts left join cryptown.users as users on subposts.userid=users.userid;`,
+        `select subposts.subpostid, subposts.postid, subposts.subpost, subposts.subpostdatetime, users.email, users.username from cryptown.subposts as subposts left join cryptown.users as users on subposts.userid=users.userid order by postdatetime desc;`,
         // values: [postId, escaped_userId, escaped_post, escaped_dateTime,server_datetime]
     }
 

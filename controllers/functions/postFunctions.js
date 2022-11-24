@@ -56,6 +56,10 @@ const addPost = async function(userId, post, dateTime, req) {
     let server_datetime = new Date();
     let postId = uuidv4()
 
+    if (!post) {
+        throw Error("Post Can't Be Empty")
+    }
+
     let checkUser = {
         text: "select * from cryptown.users where userid=$1",
         values: [escaped_userId]
@@ -117,6 +121,10 @@ const addSubPost = async function(userId, postId, post, dateTime, req) {
     let escaped_dataTime = validator.escape(dateTime)
     let server_datetime = new Date();
     let subPostId = uuidv4()
+
+    if (!post) {
+        throw Error("Post Can't Be Empty")
+    }
 
     // check if that user exists 
     let checkUser = {

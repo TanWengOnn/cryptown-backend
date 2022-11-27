@@ -1,4 +1,5 @@
 const { getFavouriteList, addFavourite, deleteFavourite } = require("./functions/favouriteFunctions")
+const logger = require("../logger/loggerConfig")
 
 const favouriteList = async (req, res) => {
     const userId = req.userId
@@ -12,7 +13,7 @@ const favouriteList = async (req, res) => {
                 favourites: []
             }) 
 
-            // logger.info({ label:'Favourite API', message: 'Get favourite lists (user has no favourite)', outcome:'success', ipAddress: req.ip })
+            logger.info({ label:'Favourite API', message: 'Get favourite lists (user has no favourite)', outcome:'success', ipAddress: req.ip })
             return
         }
     
@@ -20,14 +21,14 @@ const favouriteList = async (req, res) => {
             mssg: "Get Favourite List Successful", 
             favourites: favourites["favourites"]
         })  
-        // logger.info({ label:'Favourite API', message: 'Get favourite lists', outcome:'success', userId: userId, ipAddress: req.ip })
+        logger.info({ label:'Favourite API', message: 'Get favourite lists', outcome:'success', userId: userId, ipAddress: req.ip })
 
     } catch (error) {
         res.status(400).json({
             mssg: "Get Favourite List Failed", 
             error: error.message
         })
-        // logger.error({ label:'Favourite API', message: 'Get favourite lists', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
+        logger.error({ label:'Favourite API', message: 'Get favourite lists', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
     }
      
 }
@@ -43,13 +44,13 @@ const favouriteAdd = async (req, res) => {
             mssg: "Add to favourite successful", 
             newFavourite
         })
-        // logger.info({ label:'Favourite API', message: 'Add to favourite lists', outcome:'success', userId: userId, ipAddress: req.ip })
+        logger.info({ label:'Favourite API', message: 'Add to favourite lists', outcome:'success', userId: userId, ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
             mssg: "Add to favourite failed", 
             error: error.message
         })
-        // logger.error({ label:'Favourite API', message: 'Add to favourite lists', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
+        logger.error({ label:'Favourite API', message: 'Add to favourite lists', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
     }
 }
 
@@ -63,13 +64,13 @@ const favouriteDelete = async (req, res) => {
             mssg: "Delete from favourite successful", 
             deletedFavId
         })  
-        // logger.info({ label:'Favourite API', message: 'Delete favourite lists', outcome:'success', userId: userId, ipAddress: req.ip })
+        logger.info({ label:'Favourite API', message: 'Delete favourite lists', outcome:'success', userId: userId, ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
             mssg: "Delete from favourite failed", 
             error: error.message
         })
-        // logger.error({ label:'Favourite API', message: 'Delete favourite lists', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
+        logger.error({ label:'Favourite API', message: 'Delete favourite lists', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
     }
 }
 

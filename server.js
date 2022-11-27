@@ -4,6 +4,7 @@ const express = require("express")
 
 const helmet = require("helmet")
 const cors = require("cors")
+const logger = require("./logger/loggerConfig")
 const csrf = require("csurf")
 
 const cryptoRoutes = require("./routes/crypto")
@@ -36,6 +37,11 @@ app.use(express.json())
 // })
 
 app.use((req, res, next) => {
+    logger.http({ 
+        label:'API Route', 
+        message: `API Route - ${req.ip} ${req.path} ${req.method} ${new Date()}`, 
+        ipAddress: req.ip
+    })
     console.log(req.path, req.method, new Date())
     next()
 })

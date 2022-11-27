@@ -1,4 +1,5 @@
 const axios = require("axios")
+const logger = require("../../logger/loggerConfig")
 
 const getExchange = async (req) => {
     try {
@@ -19,10 +20,10 @@ const getExchange = async (req) => {
         
             arr.push(obj)
         })    
-        // logger.http({ label:'CoinGecko Exchange API', message: 'Get CoinGecko exchange lists', outcome:'success', ipAddress: req.ip })
+        logger.http({ label:'CoinGecko Exchange API', message: 'Get CoinGecko exchange lists', outcome:'success', ipAddress: req.ip })
         return arr
     } catch (error) {
-        // logger.error({ label:'CoinGecko Exchange API', message: 'Get CoinGecko exchange lists', outcome:'failed', ipAddress: req.ip, error: error.message })
+        logger.error({ label:'CoinGecko Exchange API', message: 'Get CoinGecko exchange lists', outcome:'failed', ipAddress: req.ip, error: error.message })
         throw Error(error.message)
     }
 }

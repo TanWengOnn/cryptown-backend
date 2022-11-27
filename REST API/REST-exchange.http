@@ -1,4 +1,4 @@
-GET https://localhost:5000/api/exchange
+GET http://localhost:5000/api/exchange
 
 
 ###

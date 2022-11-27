@@ -1,6 +1,7 @@
 const { queryDb }= require("../../db_config/db")
 const validator = require("validator")
 const { v4: uuidv4 } = require('uuid');
+const logger = require("../../logger/loggerConfig")
 
 const getPosts = async function(userId, req) {
     let escaped_userId = validator.escape(userId)
@@ -13,7 +14,14 @@ const getPosts = async function(userId, req) {
     let user = await queryDb(checkUser)
     
     if (user["result"].length === 0) {
-        // logger.warn({ label:'Posts API', message: 'User does not exist', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.warn({ 
+            label:'Posts API', 
+            message: 'Get all post - User does not exist', 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: 'User does not exist'
+        })
         throw Error('User does not exist')
     }
 
@@ -26,7 +34,14 @@ const getPosts = async function(userId, req) {
     let getPost = await queryDb(getPostQuery)
 
     if (getPost["error"] !== undefined) {
-        // logger.warn({ label:'Posts API', message: 'Get all post - Failed to get main post', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.error({ 
+            label:'Posts API', 
+            message: 'Get all post - Failed to get main post', 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: getPost["error"]
+        })
         throw Error("Failed to get post")
     }
 
@@ -39,11 +54,24 @@ const getPosts = async function(userId, req) {
     let getSubPost = await queryDb(getSubPostQuery)
 
     if (getSubPost["error"] !== undefined) {
-        // logger.warn({ label:'Posts API', message: 'Get all post - Failed to get sub post', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.error({ 
+            label:'Posts API', 
+            message: 'Get all post - Failed to get sub post', 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: getSubPost["error"]
+        })
         throw Error("Failed to get sub post")
     }
 
-    // logger.http({ label:'Posts API', message: 'Get all post', outcome:'success', user: escaped_userId, ipAddress: req.ip })
+    logger.http({ 
+        label:'Posts API', 
+        message: 'Get all post - Get all post successful', 
+        outcome:'success', 
+        user: escaped_userId, 
+        ipAddress: req.ip 
+    })
     return {getPost: getPost["result"], getSubPost: getSubPost["result"]}
 
 }
@@ -56,10 +84,6 @@ const addPost = async function(userId, post, dateTime, req) {
     let server_datetime = new Date();
     let postId = uuidv4()
 
-    if (!post) {
-        throw Error("Post Can't Be Empty")
-    }
-
     let checkUser = {
         text: "select * from cryptown.users where userid=$1",
         values: [escaped_userId]
@@ -68,8 +92,27 @@ const addPost = async function(userId, post, dateTime, req) {
     let user = await queryDb(checkUser)
 
     if (user["result"].length === 0) {
-        // logger.warn({ label:'Posts API', message: 'User does not exist', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.warn({ 
+            label:'Posts API', 
+            message: 'Add main post - User does not exist', 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: 'User does not exist'
+        })
         throw Error('User does not exist')
+    }
+
+    if (!post) {
+        logger.http({ 
+            label:'Posts API', 
+            message: "Add main post - Post Can't Be Empty", 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: "Post Can't Be Empty"
+        })
+        throw Error("Post Can't Be Empty")
     }
 
     let addPost = {
@@ -84,7 +127,14 @@ const addPost = async function(userId, post, dateTime, req) {
     let postQuery = await queryDb(addPost)
 
     if (postQuery["error"] !== undefined) {
-        // logger.warn({ label:'Posts API', message: `Add main post - Failed to add main post - ${postId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.error({ 
+            label:'Posts API', 
+            message: `Add main post - Failed to add main post - ${postId}`, 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: postQuery["error"]
+        })
         throw Error("Failed to add post")
     }
 
@@ -102,13 +152,26 @@ const addPost = async function(userId, post, dateTime, req) {
     let getNewPost = await queryDb(getNewPostQuery)
 
     if (getNewPost["error"] !== undefined) {
-        // logger.warn({ label:'Posts API', message: `Add main post - get newly added posts - ${postId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.error({ 
+            label:'Posts API', 
+            message: `Add main post - get newly added posts - ${postId}`, 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: getNewPost["error"]
+        })
         throw Error("Failed to get new post")
     }
 
     getNewPost["result"][0]["replies"] = []
     
-    // logger.http({ label:'Posts API', message: `Add main post - ${postId}`, outcome:'success', user: escaped_userId, ipAddress: req.ip })
+    logger.http({ 
+        label:'Posts API', 
+        message: `Add main post - ${postId}`, 
+        outcome:'success', 
+        user: escaped_userId, 
+        ipAddress: req.ip 
+    })
     return getNewPost["result"][0]
 
 }
@@ -122,10 +185,6 @@ const addSubPost = async function(userId, postId, post, dateTime, req) {
     let server_datetime = new Date();
     let subPostId = uuidv4()
 
-    if (!post) {
-        throw Error("Post Can't Be Empty")
-    }
-
     // check if that user exists 
     let checkUser = {
         text: "select * from cryptown.users where userid=$1",
@@ -135,8 +194,27 @@ const addSubPost = async function(userId, postId, post, dateTime, req) {
     let user = await queryDb(checkUser)
 
     if (user["result"].length === 0) {
-        // logger.warn({ label:'Posts API', message: 'Add sub post - User does not exist', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.warn({ 
+            label:'Posts API', 
+            message: 'Add sub post - User does not exist', 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: 'User does not exist'
+        })
         throw Error('User does not exist')
+    }
+
+    if (!post) {
+        logger.warn({ 
+            label:'Posts API', 
+            message: "Add sub post - Post Can't Be Empty", 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: "Post Can't Be Empty"
+        })
+        throw Error("Post Can't Be Empty")
     }
 
     // check if the main post exists
@@ -148,7 +226,14 @@ const addSubPost = async function(userId, postId, post, dateTime, req) {
     let mainPost = await queryDb(checkMainPost)
 
     if (mainPost["result"].length === 0) {
-        // logger.warn({ label:'Posts API', message: `Add sub post - main post does not exist - ${escaped_postId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip })
+        logger.warn({ 
+            label:'Posts API', 
+            message: `Add sub post - main post does not exist - ${escaped_postId}`, 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error:'Main post does not exist'
+        })
         throw Error('Post does not exist')
     }
 
@@ -164,11 +249,24 @@ const addSubPost = async function(userId, postId, post, dateTime, req) {
     let postQuery = await queryDb(addPost)
 
     if (postQuery["error"] !== undefined) {
-        // logger.warn({ label:'Posts API', message: `Add sub post - Failed to add sub post db - ${escaped_postId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip })
+        logger.error({ 
+            label:'Posts API', 
+            message: `Add sub post - Failed to add sub post db - ${escaped_postId}`, 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: postQuery["error"]
+        })
         throw Error("Failed to add sub post db")
     }
     
-    // logger.http({ label:'Posts API', message: `Add sub post - ${escaped_postId}`, outcome:'success', user: escaped_userId, ipAddress: req.ip })
+    logger.http({ 
+        label:'Posts API', 
+        message: `Add sub post - ${escaped_postId}`, 
+        outcome:'success', 
+        user: escaped_userId, 
+        ipAddress: req.ip 
+    })
     return true
 
 }
@@ -184,7 +282,14 @@ const getUserPosts = async function(userId, req) {
     let user = await queryDb(checkUser)
 
     if (user["result"].length === 0) {
-        // logger.warn({ label:'Posts API', message: 'User does not exist', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.warn({ 
+            label:'Posts API', 
+            message: 'Get user posts - User does not exist', 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: 'User does not exist'
+        })
         throw Error('User does not exist')
     }
 
@@ -197,12 +302,26 @@ const getUserPosts = async function(userId, req) {
     let getPost = await queryDb(getPostQuery)
 
     if (getPost["error"] !== undefined) {
-        // logger.warn({ label:'Posts API', message: 'Get all post - Failed to get main post', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.error({ 
+            label:'Posts API', 
+            message: 'Get user posts - Failed to get user post', 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: getPost["error"]
+        })
         throw Error("Failed to get post")
     }
 
     if (getPost["result"].length === 0) {
-        // logger.warn({ label:'Posts API', message: 'Get all post - Failed to get main post', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.http({ 
+            label:'Posts API', 
+            message: 'Get user posts - Failed to get user post', 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: "User do not have any posts"
+        })
         throw Error("User do not have any posts")
     }
 
@@ -215,11 +334,24 @@ const getUserPosts = async function(userId, req) {
     let getSubPost = await queryDb(getSubPostQuery)
 
     if (getSubPost["error"] !== undefined) {
-        // logger.warn({ label:'Posts API', message: 'Get all post - Failed to get sub post', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.error({ 
+            label:'Posts API', 
+            message: 'Get user posts - Failed to get sub post', 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: getSubPost["error"]
+        })
         throw Error("Failed to get sub post")
     }
 
-    // logger.http({ label:'Posts API', message: 'Get all post', outcome:'success', user: escaped_userId, ipAddress: req.ip })
+    logger.http({ 
+        label:'Posts API', 
+        message: 'Get user posts - Get all user posts successful', 
+        outcome:'success', 
+        user: escaped_userId, 
+        ipAddress: req.ip 
+    })
     return {getPost: getPost["result"], getSubPost: getSubPost["result"]}
 
 }
@@ -237,7 +369,13 @@ const deletePost = async function(userId, postId, req) {
     let user = await queryDb(checkUser)
 
     if (user["result"].length === 0) {
-        // logger.warn({ label:'Post API', message: 'User does not exist', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.warn({ 
+            label:'Post API', 
+            message: 'Delete post - User does not exist', 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip
+        })
         throw Error('User does not exist')
     }
 
@@ -249,7 +387,14 @@ const deletePost = async function(userId, postId, req) {
     let checkPostIdOuput = await queryDb(checkPostId)
 
     if (checkPostIdOuput["result"].length === 0) {
-        // logger.warn({ label:'Post API', message: `Post does not exist - ${escaped_postId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.warn({ 
+            label:'Post API', 
+            message: `Delete post - Post does not exist - ${escaped_postId}`, 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: 'Post Does Not Exist'
+        })
         throw Error('Post Does Not Exist')
     }
 
@@ -265,11 +410,24 @@ const deletePost = async function(userId, postId, req) {
     let posts = await queryDb(deletePost)
 
     if (posts["error"] !== undefined) {
-        // logger.warn({ label:'Post API', message: `Failed to delete post - ${escaped_postId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.error({ 
+            label:'Post API', 
+            message: `Delete post - Failed to delete post - ${escaped_postId}`, 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: posts["error"]
+        })
         throw Error("Failed to delete post")
     }
     
-    // logger.http({ label:'Post API', message: `Successfully to delete post - ${escaped_postId}`, outcome:'success', user: escaped_userId, ipAddress: req.ip })
+    logger.http({ 
+        label:'Post API', 
+        message: `Delete post - Successfully to delete post - ${escaped_postId}`, 
+        outcome:'success', 
+        user: escaped_userId, 
+        ipAddress: req.ip 
+    })
     return {
         postid: escaped_postId
     }

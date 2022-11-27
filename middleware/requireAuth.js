@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken')
 const { queryDb }= require("../db_config/db")
 const validator = require("validator")
 const { aesDecrypt } = require("../encryption/aesEncryption")
+const logger = require("../logger/loggerConfig")
 const fs   = require('fs');
 const path = require("path");
 
@@ -13,6 +14,13 @@ const requireAuth = async (req, res, next)  =>  {
     const { authorization } = req.headers
 
     if (!authorization) {
+        logger.warn({ 
+                        label:'Authorization', 
+                        message: 'No authorization header', 
+                        outcome:'failed', 
+                        ipAddress: req.ip, 
+                        error: 'Authorization token required'
+                    })
         return res.status(401).json({ error: 'Authorization token required' })
     }
 
@@ -35,7 +43,7 @@ const requireAuth = async (req, res, next)  =>  {
         let output = await queryDb(query)
 
         if (output["result"].length === 0) {
-            throw Error() 
+            throw Error("user does not exist") 
         }
         
         let jwtQuery = {
@@ -46,7 +54,7 @@ const requireAuth = async (req, res, next)  =>  {
         let jwtOutput = await queryDb(jwtQuery)
 
         if (jwtOutput["result"].length === 0) {
-            throw Error() 
+            throw Error("Jwt does not exist in database") 
         }
 
         req.userId = output["result"][0]["userid"]
@@ -80,12 +88,25 @@ const requireAuth = async (req, res, next)  =>  {
                 let deleteJwtOutput = await queryDb(deleteJwt)
             
                 if (deleteJwtOutput["error"] !== undefined) {
-                    // logger.warn({ label:'Favourite API', message: `Failed to delete favourite - ${escaped_favId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+                    logger.error({ 
+                        label:'Authorization', 
+                        message: "Failed to delete jwt", 
+                        outcome:'failed', 
+                        ipAddress: req.ip, 
+                        error: deleteJwtOutput["error"]
+                    })
                     throw Error("Failed to delete jwt")
                 }
             }
         }
-        
+
+        logger.warn({ 
+            label:'Authorization', 
+            message: 'Request is not authorized', 
+            outcome:'failed', 
+            ipAddress: req.ip, 
+            error: error.message
+        })
         res.status(401).json({ error: 'Request is not authorized' })
     }
 

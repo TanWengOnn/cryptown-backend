@@ -1,6 +1,7 @@
 const { queryDb }= require("../../db_config/db")
 const validator = require("validator")
 const { v4: uuidv4 } = require('uuid');
+const logger = require("../../logger/loggerConfig")
 
 const getFavouriteList = async function(userId, req) {
     let escaped_userId = validator.escape(userId)
@@ -13,7 +14,14 @@ const getFavouriteList = async function(userId, req) {
     let user = await queryDb(checkUser)
 
     if (user["result"].length === 0) {
-        logger.warn({ label:'Favourite API', message: 'User does not exist', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.warn({ 
+            label:'Favourite API', 
+            message: 'Get Favourite - User does not exist', 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: "User does not exist"
+        })
         throw Error('User does not exist')
     }
 
@@ -24,7 +32,13 @@ const getFavouriteList = async function(userId, req) {
 
     let favourites = await queryDb(getFavourites)
     
-    // logger.http({ label:'Favourite API', message: 'Query favourite list', outcome:'success', user: escaped_userId, ipAddress: req.ip })
+    logger.http({ 
+        label:'Favourite API', 
+        message: 'Get Favourite - Query favourite list', 
+        outcome:'success', 
+        user: escaped_userId, 
+        ipAddress: req.ip 
+    })
     return {
         favourites: favourites["result"],
         username: user["result"][0]["username"],
@@ -47,7 +61,14 @@ const addFavourite = async function(userId, cryptoId, coinName, image_url, req) 
     let user = await queryDb(checkUser)
 
     if (user["result"].length === 0) {
-        // logger.warn({ label:'Favourite API', message: 'User does not exist', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.warn({ 
+            label:'Favourite API', 
+            message: 'Add Favourite - User does not exist', 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: "User does not exist"
+        })
         throw Error('User does not exist')
     }
 
@@ -59,7 +80,14 @@ const addFavourite = async function(userId, cryptoId, coinName, image_url, req) 
     let checkCryptoIdOuput = await queryDb(checkCryptoId)
 
     if (checkCryptoIdOuput["result"].length !== 0) {
-        // logger.http({ label:'Favourite API', message: `Coin already added - ${escaped_coinName}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.http({ 
+            label:'Favourite API', 
+            message: `Add Favourite - Coin already added - ${escaped_coinName}`, 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: "Coin Already Added"
+        })
         throw Error('Coin Already Added')
     }
 
@@ -78,11 +106,24 @@ const addFavourite = async function(userId, cryptoId, coinName, image_url, req) 
     let favourites = await queryDb(addFavourites)
 
     if (favourites["error"] !== undefined) {
-        // logger.warn({ label:'Favourite API', message: `Failed to add to favourite - ${escaped_coinName}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.warn({ 
+            label:'Favourite API', 
+            message: `Add Favourite - Failed to add to favourite - ${escaped_coinName}`, 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: favourites["error"]
+        })
         throw Error("Failed to add to favourite")
     }
     
-    // logger.http({ label:'Favourite API', message: `Successfully to add to favourite - ${escaped_coinName}`, outcome:'success', user: escaped_userId, ipAddress: req.ip })
+    logger.http({ 
+        label:'Favourite API', 
+        message: `Add Favourite - Successfully to add to favourite - ${escaped_coinName}`, 
+        outcome:'success', 
+        user: escaped_userId, 
+        ipAddress: req.ip 
+    })
     return {
         favid: favId,
         coinname: escaped_coinName,
@@ -104,7 +145,14 @@ const deleteFavourite = async function(userId, favId, req) {
     let user = await queryDb(checkUser)
 
     if (user["result"].length === 0) {
-        // logger.warn({ label:'Favourite API', message: 'User does not exist', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.warn({ 
+            label:'Favourite API', 
+            message: 'Delete Favourite - User does not exist', 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: 'User does not exist'
+        })
         throw Error('User does not exist')
     }
 
@@ -116,7 +164,14 @@ const deleteFavourite = async function(userId, favId, req) {
     let checkFavIdOuput = await queryDb(checkFavId)
 
     if (checkFavIdOuput["result"].length === 0) {
-        // logger.warn({ label:'Favourite API', message: `Favourite coin does not exist - ${escaped_favId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.warn({ 
+            label:'Favourite API', 
+            message: `Delete Favourite - Favourite coin does not exist - ${escaped_favId}`, 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: 'Favourite Coin Does Not Exist'
+        })
         throw Error('Favourite Coin Does Not Exist')
     }
 
@@ -129,11 +184,24 @@ const deleteFavourite = async function(userId, favId, req) {
     let favourites = await queryDb(deleteFavourites)
 
     if (favourites["error"] !== undefined) {
-        // logger.warn({ label:'Favourite API', message: `Failed to delete favourite - ${escaped_favId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.warn({ 
+            label:'Favourite API', 
+            message: `Delete Favourite - Failed to delete favourite - ${escaped_favId}`, 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: favourites["error"]
+        })
         throw Error("Failed to delete favourite")
     }
     
-    // logger.http({ label:'Favourite API', message: `Successfully to delete favourite - ${escaped_favId}`, outcome:'success', user: escaped_userId, ipAddress: req.ip })
+    logger.http({ 
+        label:'Favourite API', 
+        message: `Delete Favourite - Successfully to delete favourite - ${escaped_favId}`, 
+        outcome:'success', 
+        user: escaped_userId, 
+        ipAddress: req.ip 
+    })
     return {
         favid: escaped_favId
     }

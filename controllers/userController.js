@@ -49,13 +49,13 @@ const loginUser = async (req, res) => {
             email,
             userJwt,
         })
-        // logger.info({ label:'User API', message: `${user["userid"]} logged in`, outcome:'success', userId: user["userid"], ipAddress: req.ip })
+        logger.info({ label:'User API', message: `${user["userid"]} logged in`, outcome:'success', userId: user["userid"], ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
             mssg: "Login Failed",
             error: error.message
         })  
-        // logger.error({ label:'User API', message: `${user["userid"]} login failed`, outcome:'failed', userId: user["userid"], ipAddress: req.ip, error: error.message })
+        logger.error({ label:'User API', message: `${email} login failed`, outcome:'failed', ipAddress: req.ip, error: error.message })
     }
 }
 
@@ -84,13 +84,13 @@ const signupUser = async (req, res) => {
             username, 
             userJwt,
         })
-        // logger.info({ label:'User API', message: 'Sign up', outcome:'success', userId: userId, ipAddress: req.ip })
+        logger.info({ label:'User API', message: 'Sign up', outcome:'success', userId: userId, ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
             mssg: "Sign Up Failed",
             error: error.message
         })   
-        // logger.error({ label:'User API', message: 'Sign up failed', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
+        logger.error({ label:'User API', message: `Sign up failed - ${email}`, outcome:'failed', ipAddress: req.ip, error: error.message })
     }
 
     
@@ -109,13 +109,13 @@ const profileUser = async (req, res) => {
             email: user["email"],
             username: user["username"]
         })
-        // logger.info({ label:'User API', message: 'Get profile information', outcome:'success', userId: userId, ipAddress: req.ip })
+        logger.info({ label:'User API', message: 'Get profile information', outcome:'success', userId: userId, ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
             mssg: "Get Profile Failed", 
             error: error.message
         })
-        // logger.error({ label:'User API', message: 'Sign up failed', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
+        logger.error({ label:'User API', message: 'Get Profile Failed', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
     }
 
 }
@@ -133,13 +133,13 @@ const updateUser = async (req, res) => {
             email: user["email"],
             username: user["username"],
         })
-        // logger.info({ label:'User API', message: 'Update profile information', outcome:'success', userId: userId, ipAddress: req.ip })
+        logger.info({ label:'User API', message: 'Update profile information', outcome:'success', userId: userId, ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
             mssg: "Update Profile Failed", 
             error: error.message
         })
-        // logger.error({ label:'User API', message: 'Update profile information', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
+        logger.error({ label:'User API', message: 'Update profile information', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
     }
 }
 
@@ -153,13 +153,13 @@ const logoutUser = async (req, res) => {
         res.status(200).json({
             mssg: "Log out Successful", 
         })
-        // logger.info({ label:'User API', message: 'Update profile information', outcome:'success', userId: userId, ipAddress: req.ip })
+        logger.info({ label:'User API', message: 'Log out Successful', outcome:'success', userId: userId, ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
             mssg: "Log out Failed", 
             error: error.message
         })
-        // logger.error({ label:'User API', message: 'Update profile information', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
+        logger.error({ label:'User API', message: 'Log out Failed', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
     }
 }
 

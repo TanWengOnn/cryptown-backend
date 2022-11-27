@@ -25,12 +25,12 @@ let password_requirement = {
 const login = async function (email, password, req) {
     // validation 
     if (!email || !password) {
-        // logger.warn({ label:'User API', message: `Login - Empty fields`, outcome:'failed', ipAddress: req.ip })
+        logger.warn({ label:'User API', message: `Login - Empty fields`, outcome:'failed', ipAddress: req.ip, error: "All Field must be filled"})
         throw Error("All Field must be filled")
     }
 
     if (/[^\w\d@.]/.test(email)) {
-        // logger.warn({ label:'User API', message: `Login - Email contain banned symbols - ${email}`, outcome:'failed', ipAddress: req.ip })
+        logger.warn({ label:'User API', message: `Login - Email contain banned symbols - ${email}`, outcome:'failed', ipAddress: req.ip, error: "Please do not include special characters" })
         throw Error("Please do not include special characters")
     } 
 
@@ -44,7 +44,7 @@ const login = async function (email, password, req) {
     let user = await queryDb(checkUser)
 
     if (user["result"].length === 0) {
-        // logger.warn({ label:'User API', message: `Login - Invalid email - ${email}`, outcome:'failed', ipAddress: req.ip })
+        logger.warn({ label:'User API', message: `Login - Invalid email - ${email}`, outcome:'failed', ipAddress: req.ip, error: 'Incorrect Email or Password' })
         throw Error('Incorrect Email or Password')
     }
 
@@ -68,13 +68,13 @@ const login = async function (email, password, req) {
         let updateDateTime = await queryDb(update)
         attempts = 0;
         if (updateDateTime["error"] !== undefined) {
-            // logger.warn({ label:'User API', message: `Login - Fail reset login ban datetime - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip })
+            logger.error({ label:'User API', message: `Login - Fail reset login ban datetime - ${email}`, outcome:'failed', user: user["result"][0]["userid"], ipAddress: req.ip, error: 'Profile update ban datetime failed' })
             throw Error('Profile update ban datetime failed')
         }
     }
 
     if (attempts >= 3) {
-        // logger.warn({ label:'User API', message: `Login - Maximum login attempts reached - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip })
+        logger.warn({ label:'User API', message: `Login - Maximum login attempts reached - ${email}`, outcome:'failed', user: user["result"][0]["userid"], ipAddress: req.ip, error: "maximum attempts reach please try again in 30 seconds" })
         throw Error("maximum attempts reach please try again in 30 seconds")
     }
    
@@ -95,7 +95,7 @@ const login = async function (email, password, req) {
         let updateAttempts = await queryDb(update)
     
         if (updateAttempts["error"] !== undefined) {
-            // logger.warn({ label:'User API', message: `Login - Fail to update login attempts - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip })
+            logger.error({ label:'User API', message: `Login - Fail to update login attempts - ${email}`, outcome:'failed', user: user["result"][0]["userid"], ipAddress: req.ip, error: updateAttempts["error"] })
             throw Error('Profile update attempts failed')
         }
 
@@ -116,14 +116,14 @@ const login = async function (email, password, req) {
                 let updateDateTime = await queryDb(update)
             
                 if (updateDateTime["error"] !== undefined) {
-                    // logger.warn({ label:'User API', message: `Login - Fail to update login attempts datetime - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip })
+                    logger.error({ label:'User API', message: `Login - Fail to update login attempts datetime - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip, error: updateDateTime["error"] })
                     throw Error('Profile update ban datetime failed')
                 }
-                // logger.warn({ label:'User API', message: `Login - Maximum attempts reached - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip })
+                logger.warn({ label:'User API', message: `Login - Maximum attempts reached - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip, error: "maximum attempts reach please try again in 30 seconds" })
                 throw Error("maximum attempts reach please try again in 30 seconds")
             }
         }
-        // logger.warn({ label:'User API', message: `Login - Invalid Password - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip })
+        logger.warn({ label:'User API', message: `Login - Invalid Password - ${email}`, outcome:'failed', user: user["result"][0]["userid"], ipAddress: req.ip, error: 'Incorrect Email or Password' })
         throw Error('Incorrect Email or Password')
     }
 
@@ -140,10 +140,11 @@ const login = async function (email, password, req) {
     let updateAttempts = await queryDb(update)
 
     if (updateAttempts["error"] !== undefined) {
-        // logger.warn({ label:'User API', message: `Login - Fail to reset login attempts - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip })
+        logger.error({ label:'User API', message: `Login - Fail to reset login attempts - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip, error: updateAttempts["error"] })
         throw Error('Profile update attempts failed')
     }
 
+    logger.http({ label:'User API', message: `Login - Login Successfully - ${email}`, outcome:'success', user: user["result"][0]["userid"], ipAddress: req.ip })
     return user["result"][0]
 }
 
@@ -153,20 +154,24 @@ const signup = async function (email, username, password, confirm_password, req)
 
     // validation 
     if (!email || !username || !password || !confirm_password) {
+        logger.warn({ label:'User API', message: `Signup - Empty Fields`, outcome:'failed', ipAddress: req.ip, error: "All Field must be filled"})
         throw Error("All Field must be filled")
     }
     // check if the email is valid and checks for special symbols except '@' and '.'
     if (!validator.isEmail(email) || /[^\w\d@.]/.test(email)) {
+        logger.warn({ label:'User API', message: `Signup - Invalid email - ${email}`, outcome:'failed', ipAddress: req.ip, error: "Email is not valid"})
         throw Error("Email is not valid")
     }
 
     // check if password is requirement is met
     if (!validator.isStrongPassword(password, password_requirement)) {
+        logger.http({ label:'User API', message: `Signup - Weak password - ${password}`, outcome:'failed', ipAddress: req.ip, error: "Password is too weak" })
         throw Error("Password is too weak")
     }
 
     // chekc is password and confirm password is the same
     if (password !== confirm_password) {
+        logger.http({ label:'User API', message: `Signup - Password not the same password`, outcome:'failed', ipAddress: req.ip, error: "Password not the same" })
         throw Error("Password not the same")
     }
 
@@ -179,6 +184,7 @@ const signup = async function (email, username, password, confirm_password, req)
     let emailOutput = await queryDb(checkEmail)
 
     if (emailOutput["result"].length !== 0) {
+        logger.warn({ label:'User API', message: `Signup - Email already in used - ${email}`, user: emailOutput["result"][0]["userid"], outcome:'failed', ipAddress: req.ip, error: 'Email already in use' })
         throw Error('Email already in use')
     }
 
@@ -199,10 +205,12 @@ const signup = async function (email, username, password, confirm_password, req)
 
     // Error when adding user to database
     if (user["error"] !== undefined) {
+        logger.error({ label:'User API', message: `Signup - Fail to add new user to database - ${email}`, outcome:'failed', ipAddress: req.ip, error: user["error"] })
         return false
     }
     
     // Successfully added user to database
+    logger.http({ label:'User API', message: `Signup - New user created successful - ${email}`, user: userId, outcome:'success', ipAddress: req.ip })
     return true
 }
 
@@ -216,11 +224,11 @@ const profile = async function(userId, req) {
     let user = await queryDb(query)
 
     if (user["result"].length === 0) {
+        logger.warn({ label:'User API', message: `Profile - User does not exist - ${userId}`, outcome:'failed', ipAddress: req.ip, error: 'User does not exist' })
         throw Error('User does not exist')
     }
 
-
-
+    logger.http({ label:'User API', message: `Profile - Get profile successful - ${user["result"][0]["email"]}`, user: user["result"][0]["userid"], outcome:'success', ipAddress: req.ip })
     return user["result"][0]
 }
 
@@ -229,11 +237,13 @@ const updateProfile = async function(userId, username, password, confirm_passwor
 
     // check if new password requirement is met
     if (!validator.isStrongPassword(password, password_requirement) && password !== "") {
+        logger.http({ label:'User API', message: `Update - New password too weak - ${password}`, userId: userId, outcome:'failed', ipAddress: req.ip, error: "Password is too weak" })
         throw Error("Password is too weak")
     }
 
     // check if new password and confirm password is the same
     if (password !== confirm_password) {
+        logger.http({ label:'User API', message: `Update - Password not the same`, user: userId, outcome:'failed', ipAddress: req.ip, error: "Password not the same" })
         throw Error("Password not the same")
     }
 
@@ -263,6 +273,7 @@ const updateProfile = async function(userId, username, password, confirm_passwor
     let updateUser = await queryDb(update)
 
     if (updateUser["error"] !== undefined) {
+        logger.error({ label:'User API', message: `Update - Failed to update profile`, user: userId, outcome:'failed', ipAddress: req.ip, error: updateUser["error"]})
         throw Error('Profile Update Failed')
     }
 
@@ -274,10 +285,11 @@ const updateProfile = async function(userId, username, password, confirm_passwor
     let user = await queryDb(getUpdatedUser)
 
     if (user["result"].length === 0) {
+        logger.warn({ label:'User API', message: `Update - Failed to update profile`, user: userId, outcome:'failed', ipAddress: req.ip, error: 'User does not exist'})
         throw Error('User does not exist')
     }
 
-
+    logger.http({ label:'User API', message: `Update - Update profile successful`, user: userId, outcome:'success', ipAddress: req.ip,})
     return user["result"][0]
 }
 
@@ -291,7 +303,7 @@ const logout = async function(userId, jwt, req) {
     let user = await queryDb(checkUser)
 
     if (user["result"].length === 0) {
-        // logger.warn({ label:'Favourite API', message: 'User does not exist', outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.warn({ label:'User API', message: 'Logout - User does not exist', outcome:'failed', user: userId, ipAddress: req.ip, error: 'User does not exist'})
         throw Error('User does not exist')
     }
 
@@ -303,7 +315,7 @@ const logout = async function(userId, jwt, req) {
     let checkJwtIdOuput = await queryDb(checkJwtId)
 
     if (checkJwtIdOuput["result"].length === 0) {
-        // logger.warn({ label:'Favourite API', message: `Favourite coin does not exist - ${escaped_favId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.warn({ label:'User API', message: `Logout - Invalid JWT Token - ${jwt}`, outcome:'failed', user: userId, ipAddress: req.ip, error: 'Jwt Token Does Not Exist'})
         throw Error('Jwt Token Does Not Exist')
     }
 
@@ -316,11 +328,11 @@ const logout = async function(userId, jwt, req) {
     let deleteJwtOutput = await queryDb(deleteJwt)
 
     if (deleteJwtOutput["error"] !== undefined) {
-        // logger.warn({ label:'Favourite API', message: `Failed to delete favourite - ${escaped_favId}`, outcome:'failed', user: escaped_userId, ipAddress: req.ip})
+        logger.error({ label:'User API', message: `Logout - Failed to delete jwt token - ${jwt}`, outcome:'failed', user: userId, ipAddress: req.ip, error: deleteJwtOutput["error"]})
         throw Error("Failed to delete jwt")
     }
     
-    // logger.http({ label:'Favourite API', message: `Successfully to delete favourite - ${escaped_coinName}`, outcome:'success', user: escaped_userId, ipAddress: req.ip })
+    logger.http({ label:'User API', message: `Logout - Successfully to delete jwt token - ${jwt}`, outcome:'success', user: userId, ipAddress: req.ip })
     return true
 }
 

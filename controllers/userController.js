@@ -46,7 +46,7 @@ const loginUser = async (req, res) => {
         res.status(200).json({
             mssg: "Logged In Successful", 
             user: user["username"],
-            email,
+            email: validator.escape(email),
             userJwt,
         })
         logger.info({ label:'User API', message: `${user["userid"]} logged in`, outcome:'success', userId: user["userid"], ipAddress: req.ip })

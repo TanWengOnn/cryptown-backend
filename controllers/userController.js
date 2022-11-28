@@ -132,7 +132,7 @@ const updateUser = async (req, res) => {
         res.status(200).json({
             mssg: "Update Profile Successful", 
             email: user["email"],
-            user: user["username"],
+            username: user["username"],
         })
         logger.info({ label:'User API', message: 'Update profile information', outcome:'success', userId: userId, ipAddress: req.ip })
     } catch (error) {

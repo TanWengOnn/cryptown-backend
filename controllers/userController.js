@@ -65,6 +65,7 @@ const signupUser = async (req, res) => {
     try {
         await signup(email, username, password, confirm_password, req)
         
+        let escaped_username = validator.escape(username)
         let escaped_email = validator.escape(email)
         let query = {
             text: "select * from cryptown.users where email=$1;",
@@ -80,8 +81,8 @@ const signupUser = async (req, res) => {
         // send a json response
         res.status(200).json({
             mssg: "Sign Up Successful", 
-            email, 
-            username, 
+            email: escaped_email, 
+            user: escaped_username, 
             userJwt,
         })
         logger.info({ label:'User API', message: 'Sign up', outcome:'success', userId: userId, ipAddress: req.ip })

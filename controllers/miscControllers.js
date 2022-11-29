@@ -14,12 +14,27 @@ const getUserCount = async (req, res) => {
           }
     
         let activeUserCount = await queryDb(activeUsers)
+
+        let posts = {
+            text: "select postid from cryptown.posts;",
+          }
+    
+        let postsCount = await queryDb(posts)
+
+        let subPosts = {
+            text: "select subpostid from cryptown.subposts;",
+          }
+    
+        let subPostsCount = await queryDb(subPosts)
+
+        let totalPosts = postsCount["result"].length + subPostsCount["result"].length
         
         // send a json response
         res.status(200).json({
             mssg: "Get Registered Users Successful",
             userCount: userCount["result"].length, 
-            activeUserCount: activeUserCount["result"].length
+            activeUserCount: activeUserCount["result"].length, 
+            postsCount: totalPosts
         })
         logger.info({ label:'Miscellaneous API', message: `Get User count`, outcome:'success', ipAddress: req.ip })
     } catch (error) {

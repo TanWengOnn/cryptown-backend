@@ -11,7 +11,7 @@ Authorization: Bearer d7d85bd29012ea4f163f31ed8c7cda551f3285c70628f774c7f28df116
 content-type: application/json
 
 {
-    "post": "test empty posts",
+    "post": "test post length",
     "dateTime": "2022-11-18T05:32:22.329Z"
 }   
 
@@ -22,8 +22,8 @@ Authorization: Bearer d7d85bd29012ea4f163f31ed8c7cda551f3285c70628f774c7f28df116
 content-type: application/json
 
 {
-    "postId": "548c814-430d-45b7-831f-eeb945b53883", 
-    "post": "test subpost 1",
+    "postId": "49b77bdb-ec6c-4a74-826b-59f8dd486702", 
+    "post": "test sub post lenght",
     "dateTime": "2022-11-03T05:38:12.168Z"
 }  
 

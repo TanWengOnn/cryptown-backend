@@ -21,18 +21,19 @@ const getCryptoList = async (req, res) => {
             mssg: "Failed to fetch crypto list",
             error: error.message
         })
+        console.log(error)
         logger.error({ label:'Crypto API', message: 'Failed Get crypto lists', outcome:'failed', ipAddress: req.ip, error: error.message })
     }
 }
 
 // Get Crypto Details
 const getCryptoDetails = async (req, res) => {
-    const { cryptoId } = req.body
+    const cryptoId = req.params.cryptoId
 
     try {
         let cryptoDetails = await getCryptoDetail(cryptoId, req)
         // send a json response
-        res.status(200).json({mssg: "POST Cryto Detail", cryptoDetails})
+        res.status(200).json({mssg: "GET Crypto Detail", cryptoDetails})
         logger.info({ label:'Crypto API', message: 'Get crypto details', outcome:'success', ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
@@ -45,7 +46,7 @@ const getCryptoDetails = async (req, res) => {
 }
 
 const getCryptoChartsDaily = async (req, res) => {
-    const { cryptoId } = req.body
+    const cryptoId = req.params.cryptoId
 
     try {
         let cryptoChart = await getCryptoChartDaily(cryptoId, req)
@@ -63,7 +64,7 @@ const getCryptoChartsDaily = async (req, res) => {
 }
 
 const getCryptoChartsWeekly = async (req, res) => {
-    const { cryptoId } = req.body
+    const cryptoId = req.params.cryptoId
 
     try {
         let cryptoChart = await getCryptoChartWeekly(cryptoId, req)
@@ -81,7 +82,7 @@ const getCryptoChartsWeekly = async (req, res) => {
 }
 
 const getCryptoChartsMax = async (req, res) => {
-    const { cryptoId } = req.body
+    const cryptoId = req.params.cryptoId
 
     try {
         let cryptoChart = await getCryptoChartMax(cryptoId, req)

@@ -3,36 +3,24 @@ GET https://api.cryptown-besquare.one/api/crypto/cryptoList
 
 ###
 // Get Crypto Detail
-POST https://api.cryptown-besquare.one/api/crypto/cryptoDetail
+GET https://api.cryptown-besquare.one/api/crypto/cryptoDetail/bitcoin
 content-type: application/json
 
-{
-    "cryptoId": "bitcoin"
-}
 
 ###
-POST https://api.cryptown-besquare.one/api/crypto/cryptoChartDaily
+GET https://api.cryptown-besquare.one/api/crypto/cryptoChartDaily/arpa
 content-type: application/json
 
-{
-    "cryptoId": "arpa"
-}
 
 ###
-POST https://api.cryptown-besquare.one/api/crypto/cryptoChartWeekly
+GET https://api.cryptown-besquare.one/api/crypto/cryptoChartWeekly/arpa
 content-type: application/json
 
-{
-    "cryptoId": "arpa"
-}
 
 ###
-POST https://api.cryptown-besquare.one/api/crypto/cryptoChartMax
+GET https://api.cryptown-besquare.one/api/crypto/cryptoChartMax/bitcoin
 content-type: application/json
 
-{
-    "cryptoId": "bitcoin"
-}
 
 ###
 

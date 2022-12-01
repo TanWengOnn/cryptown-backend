@@ -3,36 +3,24 @@ GET http://localhost:5000/api/crypto/cryptoList
 
 ###
 // Get Crypto Detail
-POST http://localhost:5000/api/crypto/cryptoDetail
+GET http://localhost:5000/api/crypto/cryptoDetail/bitcoin
 content-type: application/json
 
-{
-    "cryptoId": "bitcoin"
-}
 
 ###
-POST http://localhost:5000/api/crypto/cryptoChartDaily
+GET http://localhost:5000/api/crypto/cryptoChartDaily/arpa
 content-type: application/json
 
-{
-    "cryptoId": "arpa"
-}
 
 ###
-POST http://localhost:5000/api/crypto/cryptoChartWeekly
+GET http://localhost:5000/api/crypto/cryptoChartWeekly/arpa
 content-type: application/json
 
-{
-    "cryptoId": "arpa"
-}
 
 ###
-POST http://localhost:5000/api/crypto/cryptoChartMax
+GET http://localhost:5000/api/crypto/cryptoChartMax/bitcoin
 content-type: application/json
 
-{
-    "cryptoId": "bitcoin"
-}
 
 ###
 

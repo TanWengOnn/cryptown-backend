@@ -10,13 +10,13 @@ services:
       - backend
     ports: 
       - "5000:5000"
-    volumes: 
-    # use "COPY" in dockerfile will be better for real scenario
-    # as it allows the developer to to control the versions based on the changes
-      # - /home/tan/Desktop/besquare-drc/cryptown-backend:/usr/src/app
-      - .:/usr/src/app
+    # volumes: 
+    # # use "COPY" in dockerfile will be better for real scenario
+    # # as it allows the developer to to control the versions based on the changes
+    #   # - /home/tan/Desktop/besquare-drc/cryptown-backend:/usr/src/app
+    #   - .:/usr/src/app
     # tty: true
-    command: [sh, -c, "npm install && npm install nodemon && npm run dev && echo ${POSTGRES_PORT}"]
+    command: [sh, -c, "npm start && echo ${POSTGRES_PORT}"]
     environment:
       - POSTGRES_PORT=${POSTGRES_PORT}
       - POSTGRES_USER=${POSTGRES_USER}

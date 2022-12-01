@@ -103,7 +103,7 @@ const addPost = async function(userId, post, dateTime, req) {
         throw Error('User does not exist')
     }
 
-    if (!post) {
+    if (post.trim().length === 0) {
         logger.http({ 
             label:'Posts API', 
             message: "Add main post - Post Can't Be Empty", 
@@ -114,6 +114,19 @@ const addPost = async function(userId, post, dateTime, req) {
         })
         throw Error("Post Can't Be Empty")
     }
+
+    if (post.trim().length > 500) {
+        logger.http({ 
+            label:'Posts API', 
+            message: "Add post - Posts can't exceed 500 characters", 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: `Posts exceed 500 characters - ${post.trim().length} characters`
+        })
+        throw Error("Posts can't exceed 500 characters")
+    }
+
 
     let addPost = {
         text: 
@@ -205,8 +218,8 @@ const addSubPost = async function(userId, postId, post, dateTime, req) {
         throw Error('User does not exist')
     }
 
-    if (!post) {
-        logger.warn({ 
+    if (post.trim().length === 0) {
+        logger.http({ 
             label:'Posts API', 
             message: "Add sub post - Post Can't Be Empty", 
             outcome:'failed', 
@@ -215,6 +228,18 @@ const addSubPost = async function(userId, postId, post, dateTime, req) {
             error: "Post Can't Be Empty"
         })
         throw Error("Post Can't Be Empty")
+    }
+
+    if (post.trim().length > 500) {
+        logger.http({ 
+            label:'Posts API', 
+            message: "Add sub post - Posts can't exceed 500 characters", 
+            outcome:'failed', 
+            user: escaped_userId, 
+            ipAddress: req.ip,
+            error: `Posts exceed 500 characters - ${post.trim().length} characters`
+        })
+        throw Error("Posts can't exceed 500 characters")
     }
 
     // check if the main post exists

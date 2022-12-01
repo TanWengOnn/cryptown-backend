@@ -107,7 +107,8 @@ const getCryptoChartMax = async (cryptoId, req) => {
     
         let usd_chart_arr = get_usd_chart["data"]["prices"]
 
-        let filtered_usd_chart_arr = skipInterval(usd_chart_arr, 183)
+        // let filtered_usd_chart_arr = skipInterval(usd_chart_arr, 183)
+        let filtered_usd_chart_arr = skipInterval(usd_chart_arr, 30)
         logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto max chart', outcome:'success', ipAddress: req.ip })
         return filtered_usd_chart_arr.reverse()
     } catch (error) {

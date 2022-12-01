@@ -21,16 +21,16 @@ router.use(publicCache);
 router.get('/cryptoList', getCryptoList)
 
 // POST Crypto Details
-router.post('/cryptoDetail', getCryptoDetails)
+router.get('/cryptoDetail/:cryptoId', getCryptoDetails)
 
 // POST Crypto Charts Dailt
-router.post('/cryptoChartDaily', getCryptoChartsDaily)
+router.get('/cryptoChartDaily/:cryptoId', getCryptoChartsDaily)
 
 // POST Crypto Charts Weekly
-router.post('/cryptoChartWeekly', getCryptoChartsWeekly)
+router.get('/cryptoChartWeekly/:cryptoId', getCryptoChartsWeekly)
 
 // POST Crypto Charts Yearly
-router.post('/cryptoChartMax', getCryptoChartsMax)
+router.get('/cryptoChartMax/:cryptoId', getCryptoChartsMax)
 
 // GET Crypto Trending
 router.get('/cryptoTrending', getCryptoTrending)

@@ -10,11 +10,11 @@ services:
       - backend
     ports: 
       - "5000:5000"
-    # volumes: 
+    volumes: 
     # # use "COPY" in dockerfile will be better for real scenario
     # # as it allows the developer to to control the versions based on the changes
     #   # - /home/tan/Desktop/besquare-drc/cryptown-backend:/usr/src/app
-    #   - .:/usr/src/app
+      - ./logs:/usr/src/app/logs
     # tty: true
     command: [sh, -c, "npm start && echo ${POSTGRES_PORT}"]
     environment:

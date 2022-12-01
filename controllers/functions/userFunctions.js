@@ -24,9 +24,25 @@ let password_requirement = {
 // Login Function
 const login = async function (email, password, req) {
     // validation 
-    if (!email || !password) {
+    if (email.trim().length === 0 || !password) {
         logger.warn({ label:'User API', message: `Login - Empty fields`, outcome:'failed', ipAddress: req.ip, error: "All Field must be filled"})
         throw Error("All Field must be filled")
+    }
+
+    if (!validator.isEmail(email)) {
+        logger.warn({ label:'User API', message: `Login - Invalid email format - ${email}`, outcome:'failed', ipAddress: req.ip, error: "Invalid Email Format" })
+        throw Error("Invalid Email Format")
+    }
+
+    if (email.trim().length > 100) {
+        logger.http({ 
+            label:'User API', 
+            message: "Login - Email can't exceed 100 characters", 
+            outcome:'failed', 
+            ipAddress: req.ip,
+            error: `Email exceed 100 characters - ${email.trim().length} characters`
+        })
+        throw Error("Email can't exceed 100 characters")
     }
 
     if (/[^\w\d@.]/.test(email)) {
@@ -161,6 +177,34 @@ const signup = async function (email, username, password, confirm_password, req)
     if (!validator.isEmail(email) || /[^\w\d@.]/.test(email)) {
         logger.warn({ label:'User API', message: `Signup - Invalid email - ${email}`, outcome:'failed', ipAddress: req.ip, error: "Email is not valid"})
         throw Error("Email is not valid")
+    }
+
+    if (email.trim().length > 100) {
+        logger.http({ 
+            label:'User API', 
+            message: `Signup - Email can't exceed 100 characters - ${email}`, 
+            outcome:'failed', 
+            ipAddress: req.ip,
+            error: `Email exceed 100 characters - ${email.trim().length} characters`
+        })
+        throw Error("Email can't exceed 100 characters")
+    }
+
+    if (username.trim().length > 10) {
+        logger.http({ 
+            label:'User API', 
+            message: `Signup - Username can't exceed 50 characters - ${username}`, 
+            outcome:'failed', 
+            ipAddress: req.ip,
+            error: `Username exceed 50 characters - ${username.trim().length} characters`
+        })
+        throw Error("Username can't exceed 50 characters")
+    }
+
+    // check if the username has special symbols
+    if (/[^\w\d]/.test(username)) {
+        logger.warn({ label:'User API', message: `Signup - Invalid username - ${username}`, outcome:'failed', ipAddress: req.ip, error: "User is not valid"})
+        throw Error("Username is not valid")
     }
 
     // check if password is requirement is met

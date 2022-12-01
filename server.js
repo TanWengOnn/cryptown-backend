@@ -5,7 +5,6 @@ const express = require("express")
 const helmet = require("helmet")
 const cors = require("cors")
 const logger = require("./logger/loggerConfig")
-const csrf = require("csurf")
 
 const cryptoRoutes = require("./routes/crypto")
 const exchangeRoutes = require("./routes/exchange")
@@ -26,15 +25,6 @@ app.use(cors({
 }))
 app.use(helmet())
 app.use(express.json())
-
-// const csrfProtection = csrf({
-//     cookie: true
-// })
-// app.use(csrfProtection)
-
-// app.get('/api/getCSRFToken', (req, res) => {
-//     res.json({ CSRFtoken: req.CSRFToken() })
-// })
 
 app.use((req, res, next) => {
     logger.http({ 

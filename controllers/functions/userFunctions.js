@@ -291,6 +291,13 @@ const updateProfile = async function(userId, username, password, confirm_passwor
         throw Error("Password not the same")
     }
 
+
+    // check if the username has special symbols
+    if (/[^\w\d]/.test(username)) {
+        logger.warn({ label:'User API', message: `Update - Invalid username - ${username}`, outcome:'failed', ipAddress: req.ip, error: "User is not valid"})
+        throw Error("Username is not valid")
+    }
+
     // escape username 
     let escapedUsername = validator.escape(username)
 

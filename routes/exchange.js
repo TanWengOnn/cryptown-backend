@@ -2,11 +2,11 @@ const express = require("express")
 const {
     getExchangeList
 } = require("../controllers/exchangeController")
-const requireAuth = require('../middleware/requireAuth')
 const { publicCache } = require('../middleware/responseHeader')
 
 const router = express.Router()
 
+// cloudflare caching
 router.use(publicCache)
 
 // GET Exchange List

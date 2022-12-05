@@ -28,7 +28,6 @@ const getPosts = async function(userId, req) {
     let getPostQuery = {
         text: 
         `select posts.postid, posts.post, posts.postdatetime, users.email, users.username from cryptown.posts as posts left join cryptown.users as users on posts.userid=users.userid order by postdatetime desc;`,
-        // values: [postId, escaped_userId, escaped_post, escaped_dateTime,server_datetime]
     }
 
     let getPost = await queryDb(getPostQuery)
@@ -48,7 +47,6 @@ const getPosts = async function(userId, req) {
     let getSubPostQuery = {
         text: 
         `select subposts.subpostid, subposts.postid, subposts.subpost, subposts.subpostdatetime, users.email, users.username from cryptown.subposts as subposts left join cryptown.users as users on subposts.userid=users.userid order by subpostdatetime asc;`,
-        // values: [postId, escaped_userId, escaped_post, escaped_dateTime,server_datetime]
     }
 
     let getSubPost = await queryDb(getSubPostQuery)
@@ -353,7 +351,6 @@ const getUserPosts = async function(userId, req) {
     let getSubPostQuery = {
         text: 
         `select subposts.subpostid, subposts.postid, subposts.subpost, subposts.subpostdatetime, users.email, users.username from cryptown.subposts as subposts left join cryptown.users as users on subposts.userid=users.userid order by subpostdatetime asc;`,
-        // values: [postId, escaped_userId, escaped_post, escaped_dateTime,server_datetime]
     }
 
     let getSubPost = await queryDb(getSubPostQuery)
@@ -399,7 +396,8 @@ const deletePost = async function(userId, postId, req) {
             message: 'Delete post - User does not exist', 
             outcome:'failed', 
             user: escaped_userId, 
-            ipAddress: req.ip
+            ipAddress: req.ip,
+            error: 'User does not exist'
         })
         throw Error('User does not exist')
     }
@@ -414,7 +412,7 @@ const deletePost = async function(userId, postId, req) {
     if (checkPostIdOuput["result"].length === 0) {
         logger.warn({ 
             label:'Post API', 
-            message: `Delete post - Post does not exist - ${escaped_postId}`, 
+            message: `Delete post - Post does not exist for this user - ${escaped_postId}`, 
             outcome:'failed', 
             user: escaped_userId, 
             ipAddress: req.ip,

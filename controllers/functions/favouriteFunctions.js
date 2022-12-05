@@ -92,8 +92,7 @@ const addFavourite = async function(userId, cryptoId, coinName, image_url, req) 
     }
 
     let favId = uuidv4()
-    // let escapedCoinName = validator.escape(coinName)
-    // insert into cryptown.favourite (favid, userid, coinname) values ('1', 'f019e744-cb2d-44e7-a52d-b7e1a4c4bfc5', 'Bitcoin')
+    
     let addFavourites = {
         text: 
         `insert into cryptown.favourite 
@@ -106,7 +105,7 @@ const addFavourite = async function(userId, cryptoId, coinName, image_url, req) 
     let favourites = await queryDb(addFavourites)
 
     if (favourites["error"] !== undefined) {
-        logger.warn({ 
+        logger.error({ 
             label:'Favourite API', 
             message: `Add Favourite - Failed to add to favourite - ${escaped_coinName}`, 
             outcome:'failed', 
@@ -184,7 +183,7 @@ const deleteFavourite = async function(userId, favId, req) {
     let favourites = await queryDb(deleteFavourites)
 
     if (favourites["error"] !== undefined) {
-        logger.warn({ 
+        logger.error({ 
             label:'Favourite API', 
             message: `Delete Favourite - Failed to delete favourite - ${escaped_favId}`, 
             outcome:'failed', 

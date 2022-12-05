@@ -107,7 +107,6 @@ const getCryptoChartMax = async (cryptoId, req) => {
     
         let usd_chart_arr = get_usd_chart["data"]["prices"]
 
-        // let filtered_usd_chart_arr = skipInterval(usd_chart_arr, 183)
         let filtered_usd_chart_arr = skipInterval(usd_chart_arr, 30)
         logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto max chart', outcome:'success', ipAddress: req.ip })
         return filtered_usd_chart_arr.reverse()
@@ -135,11 +134,6 @@ const getCryptoChartDaily = async (cryptoId, req) => {
     
         let usd_chart_arr = get_usd_chart["data"]["prices"]
 
-        // let objChart = {}
-        // objChart["get_usd_chart_daily"] = usd_chart_arr
-        // console.log(objChart)
-
-        // return objChart
         logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto daily chart', outcome:'success', ipAddress: req.ip })
         return usd_chart_arr
     } catch (error) {
@@ -151,14 +145,10 @@ const getCryptoChartDaily = async (cryptoId, req) => {
 
 const getCryptoChartWeekly = async (cryptoId, req) => {
     try {
-        // let escaped_cryptoId = validator.escape(cryptoId)
         let get_usd_chart = await axios.get(`https://api.coingecko.com/api/v3/coins/${cryptoId}/market_chart?vs_currency=usd&days=14&interval=daily`)
     
         let usd_chart_arr = get_usd_chart["data"]["prices"]
 
-        // let objChart = {}
-        // objChart["get_usd_chart_weekly"] = usd_chart_arr
-        // console.log(objChart)
         logger.http({ label:'CoinGecko Crypto API', message: 'Get CoinGecko crypto weekly chart', outcome:'success', ipAddress: req.ip })
         return usd_chart_arr
     } catch (error) {

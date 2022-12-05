@@ -29,7 +29,6 @@ const getUserCount = async (req, res) => {
 
         let totalPosts = postsCount["result"].length + subPostsCount["result"].length
         
-        // send a json response
         res.status(200).json({
             mssg: "Get Registered Users Successful",
             userCount: userCount["result"].length, 

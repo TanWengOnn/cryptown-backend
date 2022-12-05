@@ -61,7 +61,7 @@ const addSubPosts = async (req, res) => {
         await addSubPost(userId, postId, post, dateTime, req)
 
         res.status(200).json({mssg: "Add sub post succesful"})
-        logger.info({ label:'Posts API', message: 'Add sub posts', outcome:'success', userId: user, ipAddress: req.ip })
+        logger.info({ label:'Posts API', message: 'Add sub posts', outcome:'success', user: userId, ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
             mssg: "Failed to add sub post",
@@ -92,7 +92,7 @@ const getUserPost = async (req, res) => {
     
         res.status(200).json({mssg: "GET user posts successful", postsObj})
         logger.info({ label:'Posts API', message: 'Get user posts and subposts', outcome:'success', user: userId, ipAddress: req.ip })
-    } catch (error) {
+        } catch (error) {
         res.status(400).json({
             mssg: "Failed to get Post",
             error: error.message

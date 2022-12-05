@@ -21,7 +21,7 @@ app.set('trust proxy', true)
 // Cross Origin Resource Sharing Policy, only allow "https://cryptown-besquare.one" and "http://localhost:3000"
 app.use(cors({
     origin: ['https://cryptown-besquare.one', 'http://localhost:3000'],
-    methods: ['GET','POST','DELETE', 'PATCH']
+    // methods: ['GET','POST','DELETE', 'PATCH']
 }))
 
 // modify response header

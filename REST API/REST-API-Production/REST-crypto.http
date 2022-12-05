@@ -4,22 +4,18 @@ GET https://api.cryptown-besquare.one/api/crypto/cryptoList
 ###
 // Get Crypto Detail
 GET https://api.cryptown-besquare.one/api/crypto/cryptoDetail/bitcoin
-content-type: application/json
 
 
 ###
 GET https://api.cryptown-besquare.one/api/crypto/cryptoChartDaily/arpa
-content-type: application/json
 
 
 ###
 GET https://api.cryptown-besquare.one/api/crypto/cryptoChartWeekly/arpa
-content-type: application/json
 
 
 ###
 GET https://api.cryptown-besquare.one/api/crypto/cryptoChartMax/bitcoin
-content-type: application/json
 
 
 ###

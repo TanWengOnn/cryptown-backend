@@ -1,5 +1,4 @@
 const { queryDb }= require("../../db_config/db")
-// const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt") 
 const validator = require("validator")
 const { v4: uuidv4 } = require('uuid');
@@ -21,7 +20,6 @@ let password_requirement = {
     pointsForContainingSymbol: 10 
 }
 
-// Login Function
 const login = async function (email, password, req) {
     // validation 
     if (email.trim().length === 0 || !password) {
@@ -50,7 +48,6 @@ const login = async function (email, password, req) {
         throw Error("Please do not include special characters")
     } 
 
-
     // Check if the user exist 
     let checkUser = {
         text: "select * from cryptown.users where email=$1;",
@@ -64,6 +61,7 @@ const login = async function (email, password, req) {
         throw Error('Incorrect Email or Password')
     }
 
+    // Maximum Login Attempts
     let currentDateTime = new Date()
     let attempts = user["result"][0]["attempts"]
     let banDateTime = user["result"][0]["bandatetime"]
@@ -115,8 +113,6 @@ const login = async function (email, password, req) {
             throw Error('Profile update attempts failed')
         }
 
-        // console.log(incrementAttempts)
-
         if (incrementAttempts >= 3) {
             if (banDateTime === null) {
                 let update = {
@@ -132,10 +128,10 @@ const login = async function (email, password, req) {
                 let updateDateTime = await queryDb(update)
             
                 if (updateDateTime["error"] !== undefined) {
-                    logger.error({ label:'User API', message: `Login - Fail to update login attempts datetime - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip, error: updateDateTime["error"] })
+                    logger.error({ label:'User API', message: `Login - Fail to update login attempts datetime - ${email}`, outcome:'failed', user: user["result"][0]["userid"], ipAddress: req.ip, error: updateDateTime["error"] })
                     throw Error('Profile update ban datetime failed')
                 }
-                logger.warn({ label:'User API', message: `Login - Maximum attempts reached - ${email}`, outcome:'failed', userId: user["result"][0]["userid"], ipAddress: req.ip, error: "maximum attempts reach please try again in 30 seconds" })
+                logger.warn({ label:'User API', message: `Login - Maximum attempts reached - ${email}`, outcome:'failed', user: user["result"][0]["userid"], ipAddress: req.ip, error: "maximum attempts reach please try again in 30 seconds" })
                 throw Error("maximum attempts reach please try again in 30 seconds")
             }
         }
@@ -165,7 +161,6 @@ const login = async function (email, password, req) {
 }
 
 
-// Signup Function
 const signup = async function (email, username, password, confirm_password, req) {
 
     // validation 
@@ -203,7 +198,7 @@ const signup = async function (email, username, password, confirm_password, req)
 
     // check if the username has special symbols
     if (/[^\w\d]/.test(username)) {
-        logger.warn({ label:'User API', message: `Signup - Invalid username - ${username}`, outcome:'failed', ipAddress: req.ip, error: "User is not valid"})
+        logger.warn({ label:'User API', message: `Signup - Invalid username - ${username}`, outcome:'failed', ipAddress: req.ip, error: "Username is not valid"})
         throw Error("Username is not valid")
     }
 
@@ -281,7 +276,7 @@ const updateProfile = async function(userId, username, password, confirm_passwor
 
     // check if new password requirement is met
     if (!validator.isStrongPassword(password, password_requirement) && password !== "") {
-        logger.http({ label:'User API', message: `Update - New password too weak - ${password}`, userId: userId, outcome:'failed', ipAddress: req.ip, error: "Password is too weak" })
+        logger.http({ label:'User API', message: `Update - New password too weak - ${password}`, user: userId, outcome:'failed', ipAddress: req.ip, error: "Password is too weak" })
         throw Error("Password is too weak")
     }
 
@@ -294,7 +289,7 @@ const updateProfile = async function(userId, username, password, confirm_passwor
 
     // check if the username has special symbols
     if (/[^\w\d]/.test(username)) {
-        logger.warn({ label:'User API', message: `Update - Invalid username - ${username}`, outcome:'failed', ipAddress: req.ip, error: "User is not valid"})
+        logger.warn({ label:'User API', message: `Update - Invalid username - ${username}`, user: userId, outcome:'failed', ipAddress: req.ip, error: "Username is not valid"})
         throw Error("Username is not valid")
     }
 
@@ -309,7 +304,6 @@ const updateProfile = async function(userId, username, password, confirm_passwor
     }
     
     // SQL Query for conditional update
-    // Reference: https://medium.com/developer-rants/conditional-update-in-postgresql-a27ddb5dd35 
     let update = {
         text: 
         `
@@ -336,7 +330,7 @@ const updateProfile = async function(userId, username, password, confirm_passwor
     let user = await queryDb(getUpdatedUser)
 
     if (user["result"].length === 0) {
-        logger.warn({ label:'User API', message: `Update - Failed to update profile`, user: userId, outcome:'failed', ipAddress: req.ip, error: 'User does not exist'})
+        logger.warn({ label:'User API', message: `Update - User does not exist - ${userId}`, outcome:'failed', ipAddress: req.ip, error: 'User does not exist'})
         throw Error('User does not exist')
     }
 
@@ -354,7 +348,7 @@ const logout = async function(userId, jwt, req) {
     let user = await queryDb(checkUser)
 
     if (user["result"].length === 0) {
-        logger.warn({ label:'User API', message: 'Logout - User does not exist', outcome:'failed', user: userId, ipAddress: req.ip, error: 'User does not exist'})
+        logger.warn({ label:'User API', message: `Logout - User does not exist - ${userId}`, outcome:'failed', ipAddress: req.ip, error: 'User does not exist'})
         throw Error('User does not exist')
     }
 

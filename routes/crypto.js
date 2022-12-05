@@ -7,14 +7,12 @@ const {
     getCryptoChartsMax,
     getCryptoTrending
 } = require("../controllers/crytoControllers")
-const requireAuth = require('../middleware/requireAuth')
 const { publicCache } = require('../middleware/responseHeader')
 
 
 const router = express.Router()
 
-// router.use(requireAuth)
-
+// cloudflare caching
 router.use(publicCache);
 
 // GET Crypto List

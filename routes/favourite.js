@@ -14,7 +14,6 @@ router.use(requireAuth)
 
 // cloudflare caching
 router.use(privateCache)
-// router.use(noStoreCache)
 
 // Get user favourite list
 router.get('/favourite-list', favouriteList)

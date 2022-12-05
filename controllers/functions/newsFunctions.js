@@ -29,10 +29,10 @@ const getBingNews = async (req) => {
             arr.push(obj)
         })
 
-        logger.http({ label:'Bing News API', message: 'Get CoinGecko news lists', outcome:'success', ipAddress: req.ip })
+        logger.http({ label:'Bing News API', message: 'Get Bing news lists', outcome:'success', ipAddress: req.ip })
         return arr
     } catch (error) {
-        logger.error({ label:'Bing News API', message: 'Get CoinGecko news lists', outcome:'failed', ipAddress: req.ip, error: error.message })
+        logger.error({ label:'Bing News API', message: 'Get Bing news lists', outcome:'failed', ipAddress: req.ip, error: error.message })
         throw Error(error.message)
     }
 }

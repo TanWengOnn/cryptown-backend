@@ -12,8 +12,7 @@ const { v4: uuidv4 } = require('uuid');
 const privateKEY  = fs.readFileSync(path.resolve(__dirname, "../jwt-self-sign-certs/key.pem"), 'utf8');
 
 const createToken = async (userId, req) => {
-    // logger.info({ label:'Jwt Token', message: 'Create jwt token', outcome:'success', user: userId, ipAddress: req.ip})
-                             //    payload   secret              expiration time
+                        //    payload   secret              expiration time and algoritm
     let createJwt =  jwt.sign({userId}, privateKEY, { expiresIn: '12h', algorithm:  "RS256" })
 
     let encryptedJwt = aesEncrypt(createJwt, process.env.AES_PASS)
@@ -25,7 +24,6 @@ const createToken = async (userId, req) => {
 
     let addJwtOutput = await queryDb(addJwt)
 
-    // Error when adding user to database
     if (addJwtOutput["error"] !== undefined) {
         throw Error("Fail to create JWT")
     }
@@ -33,7 +31,6 @@ const createToken = async (userId, req) => {
     return encryptedJwt
 }
 
-// Get Crypto List
 const loginUser = async (req, res) => {
     const { email, password } = req.body
 
@@ -42,14 +39,13 @@ const loginUser = async (req, res) => {
 
         let userJwt = await createToken(user["userid"], req)
 
-        // send a json response
         res.status(200).json({
             mssg: "Logged In Successful", 
             user: user["username"],
             email: validator.escape(email),
             userJwt,
         })
-        logger.info({ label:'User API', message: `${user["userid"]} logged in`, outcome:'success', userId: user["userid"], ipAddress: req.ip })
+        logger.info({ label:'User API', message: `${user["userid"]} logged in`, outcome:'success', user: user["userid"], ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
             mssg: "Login Failed",
@@ -78,14 +74,13 @@ const signupUser = async (req, res) => {
 
         let userJwt = await createToken(userId, req)
 
-        // send a json response
         res.status(200).json({
             mssg: "Sign Up Successful", 
             email: escaped_email, 
             user: escaped_username, 
             userJwt,
         })
-        logger.info({ label:'User API', message: 'Sign up', outcome:'success', userId: userId, ipAddress: req.ip })
+        logger.info({ label:'User API', message: 'Sign up Successful', outcome:'success', user: userId, ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
             mssg: "Sign Up Failed",
@@ -104,19 +99,18 @@ const profileUser = async (req, res) => {
     try {
         let user = await profile(userId, req)
     
-        // send a json response
         res.status(200).json({
             mssg: "Get Profile Successful", 
             email: user["email"],
             username: user["username"]
         })
-        logger.info({ label:'User API', message: 'Get profile information', outcome:'success', userId: userId, ipAddress: req.ip })
+        logger.info({ label:'User API', message: 'Get profile information', outcome:'success', user: userId, ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
             mssg: "Get Profile Failed", 
             error: error.message
         })
-        logger.error({ label:'User API', message: 'Get Profile Failed', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
+        logger.error({ label:'User API', message: 'Get Profile Failed', outcome:'failed', user: userId, ipAddress: req.ip, error: error.message })
     }
 
 }
@@ -128,19 +122,19 @@ const updateUser = async (req, res) => {
 
     try {
         let user = await updateProfile(userId, username, password, confirm_password, req)
-        // send a json response
+
         res.status(200).json({
             mssg: "Update Profile Successful", 
             email: user["email"],
             username: user["username"],
         })
-        logger.info({ label:'User API', message: 'Update profile information', outcome:'success', userId: userId, ipAddress: req.ip })
+        logger.info({ label:'User API', message: 'Update profile information', outcome:'success', user: userId, ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
             mssg: "Update Profile Failed", 
             error: error.message
         })
-        logger.error({ label:'User API', message: 'Update profile information', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
+        logger.error({ label:'User API', message: 'Update profile information', outcome:'failed', user: userId, ipAddress: req.ip, error: error.message })
     }
 }
 
@@ -150,17 +144,17 @@ const logoutUser = async (req, res) => {
 
     try {
         let user = await logout(userId, jwtToken, req)
-        // send a json response
+
         res.status(200).json({
             mssg: "Log out Successful", 
         })
-        logger.info({ label:'User API', message: 'Log out Successful', outcome:'success', userId: userId, ipAddress: req.ip })
+        logger.info({ label:'User API', message: 'Log out Successful', outcome:'success', user: userId, ipAddress: req.ip })
     } catch (error) {
         res.status(400).json({
             mssg: "Log out Failed", 
             error: error.message
         })
-        logger.error({ label:'User API', message: 'Log out Failed', outcome:'failed', userId: userId, ipAddress: req.ip, error: error.message })
+        logger.error({ label:'User API', message: 'Log out Failed', outcome:'failed', user: userId, ipAddress: req.ip, error: error.message })
     }
 }
 

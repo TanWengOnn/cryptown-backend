@@ -7,10 +7,10 @@ const { publicCache } = require('../middleware/responseHeader')
 
 const router = express.Router()
 
-
+// cloudflare caching
 router.use(publicCache);
 
-// GET Registered and Active User Count
+// GET Registered, Active User and Post Count
 router.get('/userCount', getUserCount)
 
 

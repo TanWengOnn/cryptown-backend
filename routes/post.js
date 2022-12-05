@@ -11,8 +11,10 @@ const { privateCache } = require('../middleware/responseHeader')
 
 const router = express.Router()
 
+// Require authentication 
 router.use(requireAuth)
 
+// cloudflare caching
 router.use(privateCache)
 
 // GET posts

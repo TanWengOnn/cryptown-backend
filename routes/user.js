@@ -11,6 +11,7 @@ const { privateCache, noStoreCache } = require('../middleware/responseHeader')
 
 const router = express.Router()
 
+// cloudflare caching
 router.use(noStoreCache)
 
 // login route
@@ -25,6 +26,7 @@ router.use(requireAuth)
 // Log out user 
 router.delete('/logout', logoutUser)
 
+// cloudflare caching
 router.use(privateCache)
 
 // View profile info 

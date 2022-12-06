@@ -22,7 +22,7 @@ content-type: application/json
 
 {
     "postId": "de3a77e3-b8d2-4044-a78d-2311b27827da", 
-    "post": "test sub post lenght",
+    "post": "test sub post lenght 5",
     "dateTime": "2022-11-03T05:38:12.168Z"
 }  
 

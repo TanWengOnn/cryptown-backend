@@ -27,7 +27,7 @@
 <img src="images/Backend.drawio.png"  width="280" height="420">  
 
 ## ERD Diagram
-<img src="images/Backend-ERD.png"  width="280" height="420">  
+<img src="images/Backend-ERD.png"  width="420" height="420">  
 
 # DevOps
-<img src="images/DevOps-Diagram.drawio.png"  width="280" height="420">  
+<img src="images/DevOps-Diagram.drawio.png"  width="420" height="320">  

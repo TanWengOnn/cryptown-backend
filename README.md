@@ -24,4 +24,10 @@
 
 # Backend 
 ## Architecture 
-<img src="images/Backend.drawio.png">  
+<img src="images/Backend.drawio.png"  width="280" height="420">  
+
+## ERD Diagram
+<img src="images/Backend-ERD.png"  width="280" height="420">  
+
+# DevOps
+<img src="images/DevOps-Diagram.drawio.png"  width="280" height="420">  

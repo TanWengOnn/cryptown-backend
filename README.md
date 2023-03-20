@@ -44,3 +44,7 @@ Tools  and Services:
  - Cloudflare Page Rules
 
 <img src="images/DevOps-Diagram.drawio.png"  width="820" height="320">  
+
+# Presentation Slides
+https://www.canva.com/design/DAFT9D18trE/vsgfOAZ6GSTPaPIfD9e6EQ/edit
+

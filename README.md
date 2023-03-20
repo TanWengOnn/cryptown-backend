@@ -30,4 +30,17 @@
 <img src="images/Backend-ERD.png"  width="420" height="420">  
 
 # DevOps
+Tools  and Services:
+ - DNS registrar: NameCheap
+ - DNS Nameserver: Cloudflare 
+ - Docker/Docker Compose 
+ - Nginx
+ - AWS EC2
+ - AWS CloudWatch 
+ - GitHub Action 
+ - Cloudflare WAF
+ - Cloudflare Caching 
+ - Cloudflare SSL/TLS
+ - Cloudflare Page Rules
+
 <img src="images/DevOps-Diagram.drawio.png"  width="820" height="320">  

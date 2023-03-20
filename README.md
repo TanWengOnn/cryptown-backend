@@ -30,4 +30,4 @@
 <img src="images/Backend-ERD.png"  width="420" height="420">  
 
 # DevOps
-<img src="images/DevOps-Diagram.drawio.png"  width="420" height="320">  
+<img src="images/DevOps-Diagram.drawio.png"  width="820" height="320">  

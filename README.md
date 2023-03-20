@@ -1,11 +1,14 @@
 # Cryptown
-1. https://cryptown-besquare.one
-
 ## Setups
 1. Create a ".env" file in the project's root directory
     ```
         PORT=5000
-        POSTGRES_PASS='changeThisPassword'
+        POSTGRES_PASS='ChangeThis'
+        POSTGRES_USER='ChangeThis'
+        POSTGRES_DB='ChangeThis'
+        POSTGRES_PORT='5432'
+        BING_NEWS_TOKEN='ChangeThis'
+        AES_PASS='ChangeThis'
     ```
 2. Start up dockers by running the following commands in the project's root directory
     ```
@@ -19,13 +22,6 @@
     # docker exec -it \<docker name\> sh    // use to access docker shell 
 ```
 
-### Generate Self-Signed Cert for JWT (Additional)
-```
-    # openssl genrsa -out key.pem
-    # openssl req -new -key key.pem -out csr.pem
-    # openssl x509 -req -days 9999 -in csr.pem -signkey key.pem -out cert.pem   
-
-    ### Reference ###
-    https://adamtheautomator.com/https-nodejs/
-```
-
+# Backend 
+## Architecture 
+<img src="images/Backend.drawio.png">  
